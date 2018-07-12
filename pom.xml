@@ -69,12 +69,18 @@
     <!-- Project configuration -->
     <properties>
         <!-- Java project configuration -->
+        <start-class>com.oakinvest.cerise.Application</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <!-- gitflow -->
         <!-- https://mvnrepository.com/artifact/com.amashchenko.maven.plugin/gitflow-maven-plugin -->
         <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
+        <!-- Maven plugins -->
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
+        <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
     </properties>
     <!-- =========================================================================================================== -->
 
@@ -123,9 +129,30 @@
     <!-- Build configuration -->
     <build>
         <!-- Project final name -->
-        <finalName>${project.finalName}</finalName>
+        <finalName>${project.name}</finalName>
         <!-- Plugins -->
 		<plugins>
+            <!-- Checkstyle -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>**/mapper/**/*</excludes>
+                    <consoleOutput>true</consoleOutput>
+                    <configLocation>${project.basedir}/checkstyle_configuration.xml</configLocation>
+                    <failOnViolation>true</failOnViolation>
+                    <violationSeverity>warning</violationSeverity>
+                </configuration>
+            </plugin>
             <!-- Spring boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
