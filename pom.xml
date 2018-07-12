@@ -81,6 +81,8 @@
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+        <maven-jar-plugin>3.1.0</maven-jar-plugin>
     </properties>
     <!-- =========================================================================================================== -->
 
@@ -160,6 +162,19 @@
                 <configuration>
                     <executable>true</executable>
                     <addResources>true</addResources>
+                </configuration>
+            </plugin>
+            <!-- Jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <!-- Release plugin -->
