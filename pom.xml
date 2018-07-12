@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <!-- =========================================================================================================== -->
+    <!-- Project information -->
+	<groupId>com.oakinvest</groupId>
+	<artifactId>cerise</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>cerise</name>
+	<description>Currency &amp; Exchange Rate Information SErver for Bitcoin (BIP-0171)</description>
+    <licenses>
+        <license>
+            <name>GNU General Public License, Version 3.0</name>
+            <url>https://raw.githubusercontent.com/straumat/master/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Organization -->
+    <organization>
+        <name>Oak Invest</name>
+        <url>http://www.oak-invest.com</url>
+    </organization>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Developers -->
+    <developers>
+        <!-- Stéphane Traumat (straumat) -->
+        <developer>
+            <id>straumat</id>
+            <name>Stéphane Traumat</name>
+            <email>stephane.traumat@gmail.com</email>
+            <url>https://about.me/straumat</url>
+            <organization>Oak Invest</organization>
+            <organizationUrl>http://www.oak-invest.com</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/Paris</timezone>
+        </developer>
+    </developers>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Source Code Management -->
+    <scm>
+        <connection>scm:git:git@github.com:straumat/cerise.git</connection>
+        <url>scm:git:git@github.com:straumat/cerise.git</url>
+        <developerConnection>scm:git:git@github.com:straumat/cerise.git</developerConnection>
+    </scm>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Issue management -->
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/straumat/cerise/issues</url>
+    </issueManagement>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Project configuration -->
+    <properties>
+        <!-- Java project configuration -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!-- gitflow -->
+        <!-- https://mvnrepository.com/artifact/com.amashchenko.maven.plugin/gitflow-maven-plugin -->
+        <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
+    </properties>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Spring boot -->
+    <parent>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.3.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Dependencies configuration -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- Build configuration -->
+    <build>
+        <!-- Project final name -->
+        <finalName>${project.finalName}</finalName>
+        <!-- Plugins -->
+		<plugins>
+            <!-- Spring boot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+            <!-- Release plugin -->
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>${gitflow-maven-plugin.version}</version>
+                <configuration>
+                    <gitFlowConfig>
+                        <developmentBranch>development</developmentBranch>
+                    </gitFlowConfig>
+                    <commitMessages>
+                        <featureStartMessage>update versions for feature branch</featureStartMessage>
+                        <featureFinishMessage>update versions for development branch</featureFinishMessage>
+                        <hotfixStartMessage>update versions for hotfix</hotfixStartMessage>
+                        <hotfixFinishMessage>update for next development version</hotfixFinishMessage>
+                        <releaseStartMessage>update versions for release</releaseStartMessage>
+                        <releaseFinishMessage>update for next development version</releaseFinishMessage>
+                        <tagHotfixMessage>tag hotfix</tagHotfixMessage>
+                        <tagReleaseMessage>tag release</tagReleaseMessage>
+                    </commitMessages>
+                </configuration>
+             </plugin>
+		</plugins>
+	</build>
+    <!-- =========================================================================================================== -->
+
+</project>
