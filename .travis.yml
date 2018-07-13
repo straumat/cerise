@@ -1,0 +1,10 @@
+language: java
+addons:
+  artifacts:
+    paths:
+    - $(git ls-files -o | grep -v lib | grep -v wrapper | grep -e cerise.jar$ | tr "\n" ":")
+cache:
+  directories:
+  - $HOME/.m2
+script:
+- mvn package
