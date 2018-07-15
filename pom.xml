@@ -85,6 +85,11 @@
         <maven-jar-plugin>3.1.0</maven-jar-plugin>
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
+        <!-- Java -->
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+        <swagger.version>2.9.2</swagger.version>
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+        <swagger-ui.version>2.9.2</swagger-ui.version>
     </properties>
     <!-- =========================================================================================================== -->
 
@@ -102,6 +107,7 @@
     <!-- =========================================================================================================== -->
     <!-- Dependencies configuration -->
 	<dependencies>
+        <!-- Spring -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -121,11 +127,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <!-- Swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger-ui.version}</version>
+        </dependency>
 	</dependencies>
     <!-- =========================================================================================================== -->
 

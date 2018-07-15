@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Application.
+ *
+ * @author straumat
  */
 @SuppressWarnings({"PMD", "checkstyle:hideutilityclassconstructor"})
 @SpringBootApplication
