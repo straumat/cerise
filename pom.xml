@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
     <!-- =========================================================================================================== -->
     <!-- Project information -->
-	<groupId>com.oakinvest</groupId>
-	<artifactId>cerise</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>cerise</name>
-	<description>Currency &amp; Exchange Rate Information SErver for Bitcoin (BIP-0171)</description>
+    <groupId>com.oakinvest</groupId>
+    <artifactId>cerise</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>cerise</name>
+    <description>Currency &amp; Exchange Rate Information SErver for Bitcoin (BIP-0171)</description>
     <licenses>
         <license>
             <name>GNU General Public License, Version 3.0</name>
@@ -106,27 +106,22 @@
 
     <!-- =========================================================================================================== -->
     <!-- Dependencies configuration -->
-	<dependencies>
+    <dependencies>
         <!-- Spring -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -138,7 +133,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger-ui.version}</version>
         </dependency>
-	</dependencies>
+    </dependencies>
     <!-- =========================================================================================================== -->
 
     <!-- =========================================================================================================== -->
@@ -147,7 +142,7 @@
         <!-- Project final name -->
         <finalName>${project.name}</finalName>
         <!-- Plugins -->
-		<plugins>
+        <plugins>
             <!-- Checkstyle -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -242,9 +237,9 @@
                         <tagReleaseMessage>tag release</tagReleaseMessage>
                     </commitMessages>
                 </configuration>
-             </plugin>
-		</plugins>
-	</build>
+            </plugin>
+        </plugins>
+    </build>
     <!-- =========================================================================================================== -->
 
 </project>

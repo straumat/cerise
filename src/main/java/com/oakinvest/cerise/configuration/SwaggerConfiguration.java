@@ -46,8 +46,8 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Currency/exchange rate information API")
-                .description("A common interface for requesting currency exchange rate information from a server (BIP171)")
+                .title("Cerise (BIP171)")
+                .description("A common interface for requesting currency exchange rate information from a server - BIP171 implementation")
                 .version("0.1")
                 .license("BSD 2-Clause License")
                 .licenseUrl("https://raw.githubusercontent.com/straumat/cerise/master/LICENSE")
@@ -59,7 +59,6 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
     protected final void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
-
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
