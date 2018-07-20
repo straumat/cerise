@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/")
 @Api(tags = "Enumerating supported currency-pair tokens", description = " ")
 @SuppressWarnings("magicnumber")
-public interface SupportedCurrencyPairTokensRESTInterface {
+public interface SupportedCurrencyPairTokensAPI {
 
     /**
      * Enumerating supported currency-pair tokens.

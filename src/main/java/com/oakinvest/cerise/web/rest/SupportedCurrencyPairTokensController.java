@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
  * @author straumat
  */
 @RestController
-public class SupportedCurrencyPairTokensRESTImplementation implements SupportedCurrencyPairTokensRESTInterface {
+public class SupportedCurrencyPairTokensController implements SupportedCurrencyPairTokensAPI {
 
     /**
      * Separator.
@@ -27,7 +27,7 @@ public class SupportedCurrencyPairTokensRESTImplementation implements SupportedC
     /**
      * Logger.
      */
-    private final Logger log = LoggerFactory.getLogger(SupportedCurrencyPairTokensRESTImplementation.class);
+    private final Logger log = LoggerFactory.getLogger(SupportedCurrencyPairTokensController.class);
 
     /**
      * Service.
@@ -39,7 +39,7 @@ public class SupportedCurrencyPairTokensRESTImplementation implements SupportedC
      *
      * @param supportedCurrencyPairTokensService supported currency-pair tokens service
      */
-    public SupportedCurrencyPairTokensRESTImplementation(final SupportedCurrencyPairTokensService supportedCurrencyPairTokensService) {
+    public SupportedCurrencyPairTokensController(final SupportedCurrencyPairTokensService supportedCurrencyPairTokensService) {
         this.service = supportedCurrencyPairTokensService;
     }
 

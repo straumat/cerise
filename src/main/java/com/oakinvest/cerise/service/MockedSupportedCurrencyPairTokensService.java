@@ -2,7 +2,6 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensParameters;
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensResult;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -14,8 +13,7 @@ import java.util.List;
  * @author straumat
  */
 @Service
-@Qualifier("MockedSupportedCurrencyPairTokensService")
-public class MockedSupportedCurrencyPairTokensServiceImplementation implements SupportedCurrencyPairTokensService {
+public class MockedSupportedCurrencyPairTokensService implements SupportedCurrencyPairTokensService {
 
     /**
      * The last parameter received by the service.
