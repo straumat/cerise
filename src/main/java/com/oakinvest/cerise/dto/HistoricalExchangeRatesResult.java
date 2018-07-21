@@ -6,12 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Current exchange rate result.
+ * Historical exchange rates result.
  *
  * @author straumat
  */
 @SuppressWarnings("magicnumber")
-public class CurrentExchangeRateResult {
+public class HistoricalExchangeRatesResult {
 
     /**
      * The currency-pair token.
@@ -30,18 +30,6 @@ public class CurrentExchangeRateResult {
      */
     @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).", example = "1488767410.5463133", required = true, position = 3)
     private List<Rate> rates = new LinkedList<>();
-
-    /**
-     * Only if the request specified a nonce, the server SHOULD include it here as a JSON String.
-     */
-    @ApiModelProperty(notes = "Only if the request specified a nonce, the server SHOULD include it here as a JSON String.", example = "ERAGDYEJAGD", required = true, position = 4)
-    private String nonce;
-
-    /**
-     * Optional. May be used for Linked Data Signatures.
-     */
-    @ApiModelProperty(notes = "May be used for Linked Data Signatures", position = 5)
-    private String signature;
 
     /**
      * Getter of cp.
@@ -89,15 +77,6 @@ public class CurrentExchangeRateResult {
     }
 
     /**
-     * Setterde of rates.
-     *
-     * @param newRates the rates to set
-     */
-    public final void setRates(final List<Rate> newRates) {
-        rates = newRates;
-    }
-
-    /**
      * Add a rate to the list of rates.
      *
      * @param type  type
@@ -111,39 +90,12 @@ public class CurrentExchangeRateResult {
     }
 
     /**
-     * Getter of nonce.
+     * Setterde of rates.
      *
-     * @return nonce
+     * @param newRates the rates to set
      */
-    public final String getNonce() {
-        return nonce;
-    }
-
-    /**
-     * Setterde of nonce.
-     *
-     * @param newNonce the nonce to set
-     */
-    public final void setNonce(final String newNonce) {
-        nonce = newNonce;
-    }
-
-    /**
-     * Getter of signature.
-     *
-     * @return signature
-     */
-    public final String getSignature() {
-        return signature;
-    }
-
-    /**
-     * Setterde of signature.
-     *
-     * @param newSignature the signature to set
-     */
-    public final void setSignature(final String newSignature) {
-        signature = newSignature;
+    public final void setRates(final List<Rate> newRates) {
+        rates = newRates;
     }
 
 }

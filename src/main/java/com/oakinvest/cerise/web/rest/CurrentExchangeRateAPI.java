@@ -44,6 +44,7 @@ public interface CurrentExchangeRateAPI {
             @ApiImplicitParam(name = "nonce", required = true, defaultValue = "typical,high", value = "Type of exchange rate data being requested. May be \"high\", \"low\", \"average\", \"typical\", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.")
     })
     // TODO Change maxrate to maxRate
+    // TODO Change minrate to minRate
     List<CurrentExchangeRateResult> getCurrencyPairInformation(@RequestParam String mode,
                                                                @RequestParam String cp,
                                                                @RequestParam(required = false) String type,
