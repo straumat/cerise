@@ -90,6 +90,9 @@
         <swagger.version>2.9.2</swagger.version>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <swagger-ui.version>2.9.2</swagger-ui.version>
+        <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+        <dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
+        <docker.image.prefix>straumat</docker.image.prefix>
     </properties>
     <!-- =========================================================================================================== -->
 
@@ -215,6 +218,29 @@
                             <Implementation-Version>${project.version}</Implementation-Version>
                         </manifestEntries>
                     </archive>
+                </configuration>
+            </plugin>
+            <!-- Docker plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${dockerfile-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+                    <repository>${docker.image.prefix}/${project.name}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.name}.jar</JAR_FILE>
+                    </buildArgs>
                 </configuration>
             </plugin>
             <!-- Release plugin -->
