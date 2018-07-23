@@ -25,6 +25,5 @@ after_success:
 - RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker stop $(docker ps -aq --filter "name=cerise")'
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker rm -f $(docker ps -aq --filter "name=cerise")'
-- sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker rmi -f $(docker images -q --filter "name=cerise")'
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
-- sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -p 8080:9090 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
+- sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -p 9090:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
