@@ -3,6 +3,7 @@ package com.oakinvest.cerise.web.rest;
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.CurrencyPairInformationResult;
 import com.oakinvest.cerise.service.CurrencyPairInformationService;
+import com.oakinvest.cerise.util.generic.CeriseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author straumat
  */
 @RestController
-public class CurrencyPairInformationController implements CurrencyPairInformationAPI {
+public class CurrencyPairInformationController extends CeriseController implements CurrencyPairInformationAPI {
 
     /**
      * Logger.
@@ -48,20 +49,6 @@ public class CurrencyPairInformationController implements CurrencyPairInformatio
         // -------------------------------------------------------------------------------------------------------------
         // Calling the service.
         return service.getCurrencyPairInformation(p);
-    }
-
-    /**
-     * Returns optional value of a value.
-     *
-     * @param value value
-     * @return optional value
-     */
-    private String getCleanValue(final String value) {
-        if (value == null || "" .equals(value)) {
-            return null;
-        } else {
-            return value.trim();
-        }
     }
 
 }
