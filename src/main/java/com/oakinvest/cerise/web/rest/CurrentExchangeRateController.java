@@ -47,7 +47,7 @@ public class CurrentExchangeRateController extends CeriseController implements C
 
 
         CurrentExchangeRateParameters p = new CurrentExchangeRateParameters(getCleanValue(cp),
-                getList(type),
+                getListFromString(type),
                 getCleanValue(minrate),
                 getCleanValue(maxrate),
                 getCleanValue(nonce)

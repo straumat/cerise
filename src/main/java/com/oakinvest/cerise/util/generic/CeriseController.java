@@ -20,7 +20,7 @@ public class CeriseController {
      * @param value list of values (example : "en_US,en_GB").
      * @return list of string.
      */
-    protected final List<String> getList(final String value) {
+    protected final List<String> getListFromString(final String value) {
         List<String> list = new LinkedList<>();
         if (value != null) {
             StringTokenizer tokenizer = new StringTokenizer(value, LIST_SEPARATOR);

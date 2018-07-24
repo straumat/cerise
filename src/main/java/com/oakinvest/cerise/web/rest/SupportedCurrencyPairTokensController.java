@@ -54,7 +54,7 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
 
         SupportedCurrencyPairTokensParameters p = new SupportedCurrencyPairTokensParameters(getCleanValue(quote),
                 getCleanValue(base),
-                getList(locale));
+                getListFromString(locale));
 
         // -------------------------------------------------------------------------------------------------------------
         // Calling the service.

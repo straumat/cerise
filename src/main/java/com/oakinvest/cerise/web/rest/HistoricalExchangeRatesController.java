@@ -47,7 +47,7 @@ public class HistoricalExchangeRatesController extends CeriseController implemen
         // TODO Check valid values for parameters.
 
         HistoricalExchangeRatesParameters p = new HistoricalExchangeRatesParameters(getCleanValue(cp),
-                getList(type),
+                getListFromString(type),
                 from,
                 to,
                 nearest,
