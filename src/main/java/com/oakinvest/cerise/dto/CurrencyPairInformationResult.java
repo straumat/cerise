@@ -14,105 +14,136 @@ import java.util.List;
 public class CurrencyPairInformationResult {
 
     /**
-     * The currency-pair token.
+     * The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols).
      */
-    @ApiModelProperty(notes = "The currency-pair token", example = "XBTUSD-ver4", required = true, position = 1)
+    @ApiModelProperty(notes = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
+            example = "XBTUSD-ver4",
+            required = true,
+            position = 1)
     private String cp;
 
     /**
      * The currency code for the quote currency.
      */
-    @ApiModelProperty(notes = "The currency code for the quote currency", example = "USD", required = true, position = 2)
+    @ApiModelProperty(notes = "The currency code for the quote currency",
+            example = "USD",
+            required = true,
+            position = 2)
     private String quote;
 
     /**
      * The currency code for the base currency.
      */
-    @ApiModelProperty(notes = "The currency code for the base currency", example = "XBT", required = true, position = 3)
+    @ApiModelProperty(notes = "The currency code for the base currency",
+            example = "XBT",
+            required = true,
+            position = 3)
     private String base;
 
     /**
      * If provided, a String with the applicable Unicode CLDR locale.
      */
-    @ApiModelProperty(notes = "If provided, a String with the applicable Unicode CLDR locale", example = "en_US", required = true, position = 4)
+    @ApiModelProperty(notes = "If provided, a String with the applicable Unicode CLDR locale",
+            example = "en_US",
+            required = true,
+            position = 4)
     private String locale;
 
     /**
      * Optional description. For example, it could be "Based on Florida BTM prices." or any other short String that provides information useful to the user. SHOULD be shorter than 45 characters.
      */
-    @ApiModelProperty(notes = "Optional description. For example, it could be \"Based on Florida BTM prices.\" or any other short String that provides information useful to the user", example = "Smoothed averages", position = 5)
+    @ApiModelProperty(notes = "Optional description. For example, it could be \"Based on Florida BTM prices.\" or any other short String that provides information useful to the user",
+            example = "Smoothed averages",
+            position = 5)
     private String desc;
 
     /**
      * Optional description, but may be longer and include newlines.
      */
-    @ApiModelProperty(notes = "Optional description, but may be longer and include newlines.", example = "\"USD price quotes as compared to Bitcoin value\\n\\nRecommended for casual usage", position = 6)
+    @ApiModelProperty(notes = "Optional description, but may be longer and include newlines.",
+            example = "\"USD price quotes as compared to Bitcoin value\\n\\nRecommended for casual usage",
+            position = 6)
     @JsonProperty("longdesc")
     private String longDesc;
 
     /**
      * An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.
      */
-    @ApiModelProperty(notes = "An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.", position = 7)
+    @ApiModelProperty(notes = "An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.",
+            position = 7)
     private List<List<String>> symbol;
 
     /**
      * The type of digits to use for the quote currency's numbers. "arabic" should be used for common 0-9 digits.
      */
-    @ApiModelProperty(notes = "The type of digits to use for the quote currency's numbers. \"arabic\" should be used for common 0-9 digits.", example = "arabic", position = 8)
+    @ApiModelProperty(notes = "The type of digits to use for the quote currency's numbers. \"arabic\" should be used for common 0-9 digits.",
+            example = "arabic",
+            position = 8)
     private String digits;
 
     /**
      * An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, ",", 0]
      */
-    @ApiModelProperty(notes = "An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, \",\", 0]", position = 9)
+    @ApiModelProperty(notes = "An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, \",\", 0]",
+            position = 9)
     private List<String> grouping;
 
     /**
      * A String to be placed between whole numbers and a fractional amount.
      */
-    @ApiModelProperty(notes = "A String to be placed between whole numbers and a fractional amount.", example = "?", position = 8)
+    @ApiModelProperty(notes = "A String to be placed between whole numbers and a fractional amount.",
+            example = "?",
+            position = 8)
     @JsonProperty("fraction_sep")
     private String fractionSeparator;
 
     /**
      * Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).
      */
-    @ApiModelProperty(notes = "Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).", position = 10)
+    @ApiModelProperty(notes = "Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).",
+            position = 10)
     @JsonProperty("fraction_digits")
     private List<Integer> fractionDigits;
 
     /**
      * A Number of seconds indicating a minimum time between polls to the server. Clients should be prudent about not polling too often, even if this number is low.
      */
-    @ApiModelProperty(notes = "A Number of seconds indicating a minimum time between polls to the server. Clients should be prudent about not polling too often, even if this number is low.\n", example = "300", position = 11)
+    @ApiModelProperty(notes = "A Number of seconds indicating a minimum time between polls to the server. Clients should be prudent about not polling too often, even if this number is low.\n",
+            example = "300",
+            position = 11)
     @JsonProperty("minpoll")
     private int minPoll;
 
     /**
      * If provided and true, indicates longpolling is supported by the server.
      */
-    @ApiModelProperty(notes = "If provided and true, indicates long polling is supported by the server.", example = "true", position = 12)
+    @ApiModelProperty(notes = "If provided and true, indicates long polling is supported by the server.",
+            example = "true",
+            position = 12)
     @JsonProperty("longpoll")
     private boolean longPoll;
 
     /**
      * If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.
      */
-    @ApiModelProperty(notes = "If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.", position = 13)
+    @ApiModelProperty(notes = "If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.",
+            position = 13)
     private long history;
 
     /**
      * If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.
      */
-    @ApiModelProperty(notes = "If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.", example = "133423244", position = 14)
+    @ApiModelProperty(notes = "If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.",
+            example = "133423244",
+            position = 14)
     // TODO What is the type ?
     private long archive;
 
     /**
      * Optional. May be used for Linked Data Signatures.
      */
-    @ApiModelProperty(notes = "May be used for Linked Data Signatures", position = 15)
+    @ApiModelProperty(notes = "May be used for Linked Data Signatures",
+            position = 15)
     private String signature;
 
     /**
@@ -125,7 +156,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of cp.
+     * Setter of cp.
      *
      * @param newCp the cp to set
      */
@@ -143,7 +174,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of quote.
+     * Setter of quote.
      *
      * @param newQuote the quote to set
      */
@@ -161,7 +192,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of base.
+     * Setter of base.
      *
      * @param newBase the base to set
      */
@@ -179,7 +210,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of locale.
+     * Setter of locale.
      *
      * @param newLocale the locale to set
      */
@@ -197,7 +228,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of desc.
+     * Setter of desc.
      *
      * @param newDesc the desc to set
      */
@@ -215,7 +246,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of longDesc.
+     * Setter of longDesc.
      *
      * @param newLongDesc the longDesc to set
      */
@@ -233,7 +264,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of symbol.
+     * Setter of symbol.
      *
      * @param newSymbol the symbol to set
      */
@@ -251,7 +282,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of digits.
+     * Setter of digits.
      *
      * @param newDigits the digits to set
      */
@@ -269,7 +300,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of grouping.
+     * Setter of grouping.
      *
      * @param newGrouping the grouping to set
      */
@@ -287,7 +318,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of fractionSeparator.
+     * Setter of fractionSeparator.
      *
      * @param newFractionSep the fractionSeparator to set
      */
@@ -305,7 +336,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of fractionDigits.
+     * Setter of fractionDigits.
      *
      * @param newFractionDigits the fractionDigits to set
      */
@@ -323,7 +354,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of minPoll.
+     * Setter of minPoll.
      *
      * @param newMinPoll the minPoll to set
      */
@@ -341,7 +372,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of longPoll.
+     * Setter of longPoll.
      *
      * @param newLongPoll the longPoll to set
      */
@@ -359,7 +390,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of history.
+     * Setter of history.
      *
      * @param newHistory the history to set
      */
@@ -377,7 +408,7 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of archive.
+     * Setter of archive.
      *
      * @param newArchive the archive to set
      */
@@ -395,11 +426,12 @@ public class CurrencyPairInformationResult {
     }
 
     /**
-     * Setterde of signature.
+     * Setter of signature.
      *
      * @param newSignature the signature to set
      */
     public final void setSignature(final String newSignature) {
         signature = newSignature;
     }
+
 }

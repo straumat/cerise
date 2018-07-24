@@ -14,21 +14,30 @@ import java.util.List;
 public class HistoricalExchangeRatesResult {
 
     /**
-     * The currency-pair token.
+     * The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols).
      */
-    @ApiModelProperty(notes = "The currency-pair token", example = "XBTUSD-ver4", required = true, position = 1)
+    @ApiModelProperty(notes = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
+            example = "XBTUSD-ver4",
+            required = true,
+            position = 1)
     private String cp;
 
     /**
      * The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).
      */
-    @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).", example = "1488767410.5463133", required = true, position = 2)
+    @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).",
+            example = "1488767410.5463133",
+            required = true,
+            position = 2)
     private long time;
 
     /**
      * A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.
      */
-    @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).", example = "1488767410.5463133", required = true, position = 3)
+    @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).",
+            example = "1488767410.5463133",
+            required = true,
+            position = 3)
     private List<Rate> rates = new LinkedList<>();
 
     /**
@@ -41,7 +50,7 @@ public class HistoricalExchangeRatesResult {
     }
 
     /**
-     * Setterde of cp.
+     * Setter of cp.
      *
      * @param newCp the cp to set
      */
@@ -59,7 +68,7 @@ public class HistoricalExchangeRatesResult {
     }
 
     /**
-     * Setterde of time.
+     * Setter of time.
      *
      * @param newTime the time to set
      */
@@ -90,7 +99,7 @@ public class HistoricalExchangeRatesResult {
     }
 
     /**
-     * Setterde of rates.
+     * Setter of rates.
      *
      * @param newRates the rates to set
      */

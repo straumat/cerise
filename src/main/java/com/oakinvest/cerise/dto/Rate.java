@@ -31,7 +31,7 @@ public class Rate {
     }
 
     /**
-     * Setterde of type.
+     * Setter of type.
      *
      * @param newType the type to set
      */
@@ -49,7 +49,7 @@ public class Rate {
     }
 
     /**
-     * Setterde of value.
+     * Setter of value.
      *
      * @param newValue the value to set
      */
