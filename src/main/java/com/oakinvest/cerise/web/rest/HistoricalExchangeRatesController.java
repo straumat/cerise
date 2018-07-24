@@ -39,15 +39,15 @@ public class HistoricalExchangeRatesController extends CeriseController implemen
     }
 
     @Override
-    public final List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(final String mode, final String cp, final String type, final Long from, final Long to, final Boolean nearest, final Float ratedelta, final Float timedelta) {
+    public final List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(final String mode, final String[] cp, final String[] type, final Long from, final Long to, final Boolean nearest, final Float ratedelta, final Float timedelta) {
         log.info("Supported currency-pair tokens called : cp={}, type={}, from={}, to={}, nearest={}, ratedelta={}, timedelta = {}.", cp, type, from, to, nearest, ratedelta, timedelta);
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
         // TODO Check valid values for parameters.
 
-        HistoricalExchangeRatesParameters p = new HistoricalExchangeRatesParameters(getCleanValue(cp),
-                getListFromString(type),
+        HistoricalExchangeRatesParameters p = new HistoricalExchangeRatesParameters(getListFromArray(cp),
+                getListFromArray(type),
                 from,
                 to,
                 nearest,

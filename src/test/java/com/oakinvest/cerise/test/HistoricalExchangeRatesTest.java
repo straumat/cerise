@@ -13,13 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertNull;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Historical exchange rates test.
@@ -38,10 +36,10 @@ public class HistoricalExchangeRatesTest {
     private MockedHistoricalExchangeRatesService service;
 
     /**
-     * Historical exchange rates test.
+     * Historical exchange rates test results.
      */
     @Test
-    public void getHistoricalExchangeRates() throws Exception {
+    public void getHistoricalExchangeRatesResults() throws Exception {
 
         // Testing all the data.
         mvc.perform(get("/")
@@ -49,6 +47,8 @@ public class HistoricalExchangeRatesTest {
                 .param("cp", "XBTUSD-ver4,2")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(not(containsString("\\n\\r"))))
                 .andExpect(jsonPath("$", hasSize(5)))
                 // First result.
                 .andExpect(jsonPath("$[0].cp").value("XBTUSD-ver4"))
@@ -78,33 +78,23 @@ public class HistoricalExchangeRatesTest {
 
         // Testing the generated parameters for the service.
         HistoricalExchangeRatesParameters p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
         assertEquals("Mode parameter set", Mode.history, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
+        assertEquals("CP parameter set", p.getCp().get(1), "2");
         assertEquals("Type empty", p.getTypes().size(), 0);
         assertNull("from", p.getFrom());
         assertNull("to", p.getTo());
         assertNull("nearest", p.isNearest());
         assertNull("to", p.getTo());
         assertNull("to", p.getTo());
+    }
 
-        // Testing with cp parameter.
-        mvc.perform(get("/")
-                .param("mode", "history")
-                .param("cp", " XBTUSD-ver4,2 ")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.history, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
-        assertEquals("Type empty", p.getTypes().size(), 0);
-        assertNull("from", p.getFrom());
-        assertNull("to", p.getTo());
-        assertNull("nearest", p.isNearest());
-        assertNull("ratedelta", p.getRateDelta());
-        assertNull("timedelta", p.getTimeDelta());
+    /**
+     * Historical exchange rates test parameters.
+     */
+    @Test
+    public void getHistoricalExchangeRatesParameters() throws Exception {
 
         // Testing with cp and types parameter.
         mvc.perform(get("/")
@@ -113,11 +103,11 @@ public class HistoricalExchangeRatesTest {
                 .param("type", " typical , high ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
+        HistoricalExchangeRatesParameters p = service.getLastUsedParameter();
         assertEquals("Mode parameter set", Mode.history, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
+        assertEquals("CP parameter set", p.getCp().get(1), "2");
         assertTrue("Type empty", p.getTypes().size() > 0);
         assertEquals("Type content", p.getTypes().get(0), "typical");
         assertEquals("Type content", p.getTypes().get(1), "high");
@@ -140,10 +130,10 @@ public class HistoricalExchangeRatesTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
         assertEquals("Mode parameter set", Mode.history, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
+        assertEquals("CP parameter set", p.getCp().get(1), "2");
         assertTrue("Type empty", p.getTypes().size() > 0);
         assertEquals("Type content", p.getTypes().get(0), "typical");
         assertEquals("Type content", p.getTypes().get(1), "high");
@@ -153,5 +143,4 @@ public class HistoricalExchangeRatesTest {
         assertEquals("ratedelta", p.getRateDelta(), 4f);
         assertEquals("timedelta", p.getTimeDelta(), 5f);
     }
-
 }

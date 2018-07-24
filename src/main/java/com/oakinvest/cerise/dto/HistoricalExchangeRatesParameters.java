@@ -17,7 +17,7 @@ public class HistoricalExchangeRatesParameters {
     /**
      * Currency pair(s) for which information is requested.
      */
-    private String cp;
+    private List<String> cp;
 
     /**
      * Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.
@@ -60,7 +60,7 @@ public class HistoricalExchangeRatesParameters {
      * @param newRateDelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      * @param newTimeDelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      */
-    public HistoricalExchangeRatesParameters(final String newCp, final List<String> newTypes, final Long newFrom, final Long newTo, final Boolean newNearest, final Float newRateDelta, final Float newTimeDelta) {
+    public HistoricalExchangeRatesParameters(final List<String> newCp, final List<String> newTypes, final Long newFrom, final Long newTo, final Boolean newNearest, final Float newRateDelta, final Float newTimeDelta) {
         this.cp = newCp;
         this.types = newTypes;
         this.from = newFrom;
@@ -85,7 +85,7 @@ public class HistoricalExchangeRatesParameters {
      *
      * @return cp
      */
-    public final String getCp() {
+    public final List<String> getCp() {
         return cp;
     }
 

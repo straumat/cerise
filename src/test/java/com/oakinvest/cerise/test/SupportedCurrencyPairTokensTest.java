@@ -13,11 +13,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -38,16 +41,18 @@ public class SupportedCurrencyPairTokensTest {
     private MockedSupportedCurrencyPairTokensService service;
 
     /**
-     * Test for Enumerating supported currency-pair tokens.
+     * Test for Enumerating supported currency-pair tokens results.
      */
     @Test
-    public void getSupportedCurrencyPairTokens() throws Exception {
+    public void getSupportedCurrencyPairTokensResults() throws Exception {
 
         // Testing all the data.
         mvc.perform(get("/")
                 .param("mode", "list")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(not(containsString("\\n\\r"))))
                 .andExpect(jsonPath("$", hasSize(3)))
                 // First result.
                 .andExpect(jsonPath("$[0].cp").value("XBTUSD-ver4"))
@@ -73,11 +78,7 @@ public class SupportedCurrencyPairTokensTest {
 
         // Testing the generated parameters for the service.
         SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.list, p.getMode());
-        assertNull("Quote parameter not set", p.getQuote());
-        assertNull("Base parameter not set", p.getBase());
-        assertTrue("Locales are empty", p.getLocales().isEmpty());
+        assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
 
         // Testing with quote parameter.
         mvc.perform(get("/")
@@ -86,12 +87,18 @@ public class SupportedCurrencyPairTokensTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.list, p.getMode());
+        assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
         assertNotNull("Quote parameter is set", p.getQuote());
         assertEquals("Quote parameter value", "USD", p.getQuote());
         assertNull("Base parameter not set", p.getBase());
         assertTrue("Locales are empty", p.getLocales().isEmpty());
+    }
+
+    /**
+     * Test for Enumerating supported currency-pair tokens parameters.
+     */
+    @Test
+    public void getSupportedCurrencyPairTokensParameters() throws Exception {
 
         // Testing with quote and base parameters.
         mvc.perform(get("/")
@@ -100,9 +107,8 @@ public class SupportedCurrencyPairTokensTest {
                 .param("base", " XBT ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.list, p.getMode());
+        SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();
+        assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
         assertNotNull("Quote parameter is set", p.getQuote());
         assertEquals("Quote parameter value", "USD", p.getQuote());
         assertNotNull("Base parameter not set", p.getBase());
@@ -118,8 +124,7 @@ public class SupportedCurrencyPairTokensTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.list, p.getMode());
+        assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
         assertNotNull("Quote parameter is set", p.getQuote());
         assertEquals("Quote parameter value", "USD", p.getQuote());
         assertNotNull("Base parameter not set", p.getBase());
@@ -128,5 +133,6 @@ public class SupportedCurrencyPairTokensTest {
         assertEquals("First locale test", "en_US", p.getLocales().get(0));
         assertEquals("Second locale test", "en_GB", p.getLocales().get(1));
     }
+
 
 }

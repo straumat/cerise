@@ -17,7 +17,7 @@ public class CurrentExchangeRateParameters {
     /**
      * Currency pair(s) for which information is requested.
      */
-    private String cp;
+    private List<String> cp;
 
     /**
      * Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.
@@ -48,7 +48,7 @@ public class CurrentExchangeRateParameters {
      * @param newMaxrate If specified, indicates this request is a longpoll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
      * @param newNonce   If specified, the server SHOULD return it in each result.
      */
-    public CurrentExchangeRateParameters(final String newCp, final List<String> newTypes, final String newMinrate, final String newMaxrate, final String newNonce) {
+    public CurrentExchangeRateParameters(final List<String> newCp, final List<String> newTypes, final String newMinrate, final String newMaxrate, final String newNonce) {
         this.cp = newCp;
         this.types = newTypes;
         this.minrate = newMinrate;
@@ -70,7 +70,7 @@ public class CurrentExchangeRateParameters {
      *
      * @return cp
      */
-    public final String getCp() {
+    public final List<String> getCp() {
         return cp;
     }
 

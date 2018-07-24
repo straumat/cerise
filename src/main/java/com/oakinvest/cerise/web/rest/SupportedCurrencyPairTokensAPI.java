@@ -30,19 +30,29 @@ public interface SupportedCurrencyPairTokensAPI {
      * @param locale If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).
      * @return results
      */
-    @RequestMapping(value = "/", params = "mode=list", method = RequestMethod.GET, consumes = {"application/x-www-form-urlencoded"})
+    @RequestMapping(value = "/",
+            params = "mode=list",
+            method = RequestMethod.GET)
     @ApiOperation(value = "Enumerating supported currency-pair tokens",
             response = SupportedCurrencyPairTokensResult.class,
             responseContainer = "List")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "mode", required = true, value = "Always \"list\" for this request."),
-            @ApiImplicitParam(name = "quote", defaultValue = "USD", value = "If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s)"),
-            @ApiImplicitParam(name = "base", defaultValue = "XBT", value = "If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s)"),
-            @ApiImplicitParam(name = "locale", defaultValue = "en_US,en_GB", value = "If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s)")
+            @ApiImplicitParam(name = "mode",
+                    required = true,
+                    value = "Always \"list\" for this request."),
+            @ApiImplicitParam(name = "quote",
+                    example = "USD",
+                    value = "If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s)"),
+            @ApiImplicitParam(name = "base",
+                    example = "XBT",
+                    value = "If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s)"),
+            @ApiImplicitParam(name = "locale",
+                    example = "en_US,en_GB",
+                    value = "If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s)")
     })
     List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(@RequestParam String mode,
                                                                            @RequestParam(required = false) String quote,
                                                                            @RequestParam(required = false) String base,
-                                                                           @RequestParam(required = false) String locale);
+                                                                           @RequestParam(required = false) String[] locale);
 
 }

@@ -38,13 +38,13 @@ public class CurrencyPairInformationController extends CeriseController implemen
     }
 
     @Override
-    public final List<CurrencyPairInformationResult> getCurrencyPairInformation(final String mode, final String cp) {
+    public final List<CurrencyPairInformationResult> getCurrencyPairInformation(final String mode, final String[] cp) {
         log.info("Supported currency-pair tokens called : cp={}.", cp);
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
         // TODO Check valid values for cp.
-        CurrencyPairInformationParameters p = new CurrencyPairInformationParameters(getCleanValue(cp));
+        CurrencyPairInformationParameters p = new CurrencyPairInformationParameters(getListFromArray(cp));
 
         // -------------------------------------------------------------------------------------------------------------
         // Calling the service.

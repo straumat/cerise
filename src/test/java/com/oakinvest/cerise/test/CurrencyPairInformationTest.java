@@ -2,9 +2,7 @@ package com.oakinvest.cerise.test;
 
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.Mode;
-import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensParameters;
 import com.oakinvest.cerise.service.MockedCurrencyPairInformationService;
-import com.oakinvest.cerise.service.MockedSupportedCurrencyPairTokensService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
-
-import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Currency-pair information.
@@ -42,16 +34,18 @@ public class CurrencyPairInformationTest {
     private MockedCurrencyPairInformationService service;
 
     /**
-     * Test for Currency-pair information.
+     * Test for Currency-pair information results.
      */
     @Test
-    public void getCurrencyPairInformation() throws Exception {
-
+    public void getCurrencyPairInformationResults() throws Exception {
         // Testing all the data.
         mvc.perform(get("/")
                 .param("mode", "info")
+                .param("cp", "XBTUSD-ver4,2")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(not(containsString("\\n\\r"))))
                 .andExpect(jsonPath("$", hasSize(2)))
                 // First result.
                 .andExpect(jsonPath("$[0].cp").value("XBTUSD-ver4"))
@@ -102,23 +96,30 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[1].archive").value(14674583332L))
                 .andExpect(jsonPath("$[1].signature").isEmpty());
 
-        // Testing the generated parameters for the service.
+        // Testing the generated parameters for this call.
         CurrencyPairInformationParameters p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.info, p.getMode());
-        assertNull("CP parameter not set", p.getCp());
+        assertEquals("Mode parameter value is wrong", Mode.info, p.getMode());
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
+        assertEquals("CP parameter set", "2", p.getCp().get(1));
+    }
 
-        // Testing with quote parameter.
+    /**
+     * Test for Currency-pair information parameters.
+     */
+    @Test
+    public void getCurrencyPairInformationParameters() throws Exception {
+        // Testing with all parameters.
         mvc.perform(get("/")
                 .param("mode", "info")
                 .param("cp", " XBTUSD-ver4,2 ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.info, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
+        final CurrencyPairInformationParameters p = service.getLastUsedParameter();
+        assertEquals("Mode parameter value is wrong", Mode.info, p.getMode());
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
+        assertEquals("CP parameter set", "2", p.getCp().get(1));
     }
 
 }

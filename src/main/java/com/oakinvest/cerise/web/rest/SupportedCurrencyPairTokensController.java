@@ -38,7 +38,7 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
     }
 
     @Override
-    public final List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(final String mode, final String quote, final String base, final String locale) {
+    public final List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(final String mode, final String quote, final String base, final String[] locale) {
         log.info("Supported currency-pair tokens called : quote={}, base={}, locale={}.", quote, base, locale);
 
         // -------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
 
         SupportedCurrencyPairTokensParameters p = new SupportedCurrencyPairTokensParameters(getCleanValue(quote),
                 getCleanValue(base),
-                getListFromString(locale));
+                getListFromArray(locale));
 
         // -------------------------------------------------------------------------------------------------------------
         // Calling the service.

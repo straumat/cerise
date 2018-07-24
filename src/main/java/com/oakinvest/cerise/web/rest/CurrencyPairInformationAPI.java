@@ -27,15 +27,22 @@ public interface CurrencyPairInformationAPI {
      * @param cp   Currency pair(s) for which information is requested.
      * @return results
      */
-    @RequestMapping(value = "/", params = "mode=info", method = RequestMethod.GET, consumes = {"application/x-www-form-urlencoded"})
+    @RequestMapping(value = "/",
+            params = "mode=info",
+            method = RequestMethod.GET)
     @ApiOperation(value = "Currency-pair information",
             response = CurrencyPairInformationResult.class,
             responseContainer = "List")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "mode", required = true, value = "Always \"info\" for this request."),
-            @ApiImplicitParam(name = "cp", required = true, defaultValue = "XBTUSD-ver4,2", value = "Currency pair(s) for which information is requested.")
+            @ApiImplicitParam(name = "mode",
+                    required = true,
+                    value = "Always \"info\" for this request."),
+            @ApiImplicitParam(name = "cp",
+                    required = true,
+                    example = "XBTUSD-ver4,2",
+                    value = "Currency pair(s) for which information is requested.")
     })
     List<CurrencyPairInformationResult> getCurrencyPairInformation(@RequestParam String mode,
-                                                                   @RequestParam String cp);
+                                                                   @RequestParam String[] cp);
 
 }

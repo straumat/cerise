@@ -1,8 +1,8 @@
 package com.oakinvest.cerise.util.generic;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * CeriseController.
@@ -10,25 +10,17 @@ import java.util.StringTokenizer;
 public class CeriseController {
 
     /**
-     * List separator.
-     */
-    private static final String LIST_SEPARATOR = ",";
-
-    /**
-     * Returns a List of value from a string containing data separated by a comma.
+     * Returns a list of string from an array of string.
      *
-     * @param value list of values (example : "en_US,en_GB").
-     * @return list of string.
+     * @param array array of string.
+     * @return empty list if array is null or a a list of string.
      */
-    protected final List<String> getListFromString(final String value) {
-        List<String> list = new LinkedList<>();
-        if (value != null) {
-            StringTokenizer tokenizer = new StringTokenizer(value, LIST_SEPARATOR);
-            while (tokenizer.hasMoreTokens()) {
-                list.add(tokenizer.nextToken().trim());
-            }
+    protected final List<String> getListFromArray(final String[] array) {
+        if (array == null) {
+            return new LinkedList<>();
+        } else {
+            return Arrays.asList(array);
         }
-        return list;
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.oakinvest.cerise.dto;
 
+import java.util.List;
+
 /**
  * Currency-pair information parameters.
  *
@@ -15,14 +17,14 @@ public class CurrencyPairInformationParameters {
     /**
      * Currency pair(s) for which information is requested.
      */
-    private String cp;
+    private List<String> cp;
 
     /**
      * Constructor.
      *
      * @param newCp Currency pair(s) for which information is requested.
      */
-    public CurrencyPairInformationParameters(final String newCp) {
+    public CurrencyPairInformationParameters(final List<String> newCp) {
         this.cp = newCp;
     }
 
@@ -40,7 +42,7 @@ public class CurrencyPairInformationParameters {
      *
      * @return cp
      */
-    public final String getCp() {
+    public final List<String> getCp() {
         return cp;
     }
 

@@ -1,6 +1,5 @@
 package com.oakinvest.cerise.test;
 
-import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.service.MockedCurrentExchangeRateService;
@@ -13,14 +12,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Current exchange rate test.
@@ -40,10 +37,10 @@ public class CurrentExchangeRateTest {
     private MockedCurrentExchangeRateService service;
 
     /**
-     * Test for Current exchange rate.
+     * Test for Current exchange rate results.
      */
     @Test
-    public void getCurrentExchangeRate() throws Exception {
+    public void getCurrentExchangeRateResults() throws Exception {
         // Testing all the data.
         mvc.perform(get("/")
                 .param("mode", "rate")
@@ -51,6 +48,8 @@ public class CurrentExchangeRateTest {
                 .param("type", "typical,high")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(not(containsString("\\n\\r"))))
                 .andExpect(jsonPath("$", hasSize(2)))
                 // First result.
                 .andExpect(jsonPath("$[0].cp").value("XBTUSD-ver4"))
@@ -69,14 +68,21 @@ public class CurrentExchangeRateTest {
 
         // Testing the generated parameters for the service.
         CurrentExchangeRateParameters p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
-        assertEquals("Mode parameter set", Mode.rate, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertNotEquals("Type not set", p.getTypes().size(), 0);
-        assertNull("Minrate", p.getMinrate());
-        assertNull("Maxrate", p.getMaxrate());
-        assertNull("Nonce", p.getNonce());
+        assertEquals("Mode parameter value is wrong", Mode.rate, p.getMode());
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
+        assertEquals("CP parameter set", "2", p.getCp().get(1));
+        assertNotEquals("Type is set", p.getTypes().size(), 0);
+        assertNull("Minrate is set", p.getMinrate());
+        assertNull("Maxrateis set", p.getMaxrate());
+        assertNull("Nonce is set", p.getNonce());
+    }
 
+    /**
+     * Test for Current exchange rate parameters.
+     */
+    @Test
+    public void getCurrentExchangeRateParameters() throws Exception {
         // Testing with type parameter.
         mvc.perform(get("/")
                 .param("mode", "rate")
@@ -84,14 +90,11 @@ public class CurrentExchangeRateTest {
                 .param("type", " typical , high ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
+        CurrentExchangeRateParameters p = service.getLastUsedParameter();
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
-        assertEquals("Type", p.getTypes().size(), 2);
-        assertEquals("Type 1 ", p.getTypes().get(0), "typical");
-        assertEquals("Type 2 ", p.getTypes().get(1), "high");
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
+        assertEquals("CP parameter set", p.getCp().get(1), "2");
         assertNull("Minrate", p.getMinrate());
         assertNull("Maxrate", p.getMaxrate());
         assertNull("Nonce", p.getNonce());
@@ -105,10 +108,10 @@ public class CurrentExchangeRateTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
+        assertEquals("CP parameter set", p.getCp().get(1), "2");
         assertEquals("Type", p.getTypes().size(), 2);
         assertEquals("Type 1 ", p.getTypes().get(0), "typical");
         assertEquals("Type 2 ", p.getTypes().get(1), "high");
@@ -126,10 +129,10 @@ public class CurrentExchangeRateTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
+        assertEquals("CP parameter set", p.getCp().get(1), "2");
         assertEquals("Type", p.getTypes().size(), 2);
         assertEquals("Type 1 ", p.getTypes().get(0), "typical");
         assertEquals("Type 2 ", p.getTypes().get(1), "high");
@@ -148,10 +151,10 @@ public class CurrentExchangeRateTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
-        assertNotNull("Last parameter exists", p);
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
-        assertNotNull("CP parameter not set", p.getCp());
-        assertEquals("CP parameter set", p.getCp(), "XBTUSD-ver4,2");
+        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
+        assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
+        assertEquals("CP parameter set", p.getCp().get(1), "2");
         assertEquals("Type", p.getTypes().size(), 2);
         assertEquals("Type 1 ", p.getTypes().get(0), "typical");
         assertEquals("Type 2 ", p.getTypes().get(1), "high");

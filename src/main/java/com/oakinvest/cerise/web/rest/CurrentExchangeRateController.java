@@ -38,7 +38,7 @@ public class CurrentExchangeRateController extends CeriseController implements C
     }
 
     @Override
-    public final List<CurrentExchangeRateResult> getCurrencyPairInformation(final String mode, final String cp, final String type, final String minrate, final String maxrate, final String nonce) {
+    public final List<CurrentExchangeRateResult> getCurrencyPairInformation(final String mode, final String[] cp, final String[] type, final String minrate, final String maxrate, final String nonce) {
         log.info("Supported currency-pair tokens called : cp={}, type={}, minrate={}, maxrate={}, nonce={}.", cp, type, minrate, maxrate, nonce);
 
         // -------------------------------------------------------------------------------------------------------------
@@ -46,8 +46,8 @@ public class CurrentExchangeRateController extends CeriseController implements C
         // TODO Check valid values for parameters.
 
 
-        CurrentExchangeRateParameters p = new CurrentExchangeRateParameters(getCleanValue(cp),
-                getListFromString(type),
+        CurrentExchangeRateParameters p = new CurrentExchangeRateParameters(getListFromArray(cp),
+                getListFromArray(type),
                 getCleanValue(minrate),
                 getCleanValue(maxrate),
                 getCleanValue(nonce)
