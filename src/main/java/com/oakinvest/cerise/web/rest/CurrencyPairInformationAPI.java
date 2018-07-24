@@ -27,7 +27,7 @@ public interface CurrencyPairInformationAPI {
      * @param cp   Currency pair(s) for which information is requested.
      * @return results
      */
-    @RequestMapping(value = "/", params = "mode=info", method = RequestMethod.GET)
+    @RequestMapping(value = "/", params = "mode=info", method = RequestMethod.GET, consumes = {"application/x-www-form-urlencoded"})
     @ApiOperation(value = "Currency-pair information",
             response = CurrencyPairInformationResult.class,
             responseContainer = "List")

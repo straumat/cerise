@@ -47,7 +47,7 @@ public class HistoricalExchangeRatesTest {
         mvc.perform(get("/")
                 .param("mode", "history")
                 .param("cp", "XBTUSD-ver4,2")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(5)))
                 // First result.
@@ -91,7 +91,8 @@ public class HistoricalExchangeRatesTest {
         // Testing with cp parameter.
         mvc.perform(get("/")
                 .param("mode", "history")
-                .param("cp", " XBTUSD-ver4,2 "))
+                .param("cp", " XBTUSD-ver4,2 ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
@@ -109,7 +110,8 @@ public class HistoricalExchangeRatesTest {
         mvc.perform(get("/")
                 .param("mode", "history")
                 .param("cp", " XBTUSD-ver4,2 ")
-                .param("type", " typical , high "))
+                .param("type", " typical , high ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
@@ -134,7 +136,8 @@ public class HistoricalExchangeRatesTest {
                 .param("to", "3")
                 .param("nearest", "true")
                 .param("ratedelta", "4")
-                .param("timedelta", "5"))
+                .param("timedelta", "5")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);

@@ -49,7 +49,7 @@ public class CurrentExchangeRateTest {
                 .param("mode", "rate")
                 .param("cp", "XBTUSD-ver4,2")
                 .param("type", "typical,high")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 // First result.
@@ -81,7 +81,8 @@ public class CurrentExchangeRateTest {
         mvc.perform(get("/")
                 .param("mode", "rate")
                 .param("cp", " XBTUSD-ver4,2 ")
-                .param("type", " typical , high "))
+                .param("type", " typical , high ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
@@ -100,7 +101,8 @@ public class CurrentExchangeRateTest {
                 .param("mode", "rate")
                 .param("cp", " XBTUSD-ver4,2 ")
                 .param("type", " typical , high ")
-                .param("minrate", "3"))
+                .param("minrate", "3")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
@@ -120,7 +122,8 @@ public class CurrentExchangeRateTest {
                 .param("cp", " XBTUSD-ver4,2 ")
                 .param("type", " typical , high ")
                 .param("minrate", "3")
-                .param("maxrate", "4"))
+                .param("maxrate", "4")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
@@ -141,7 +144,8 @@ public class CurrentExchangeRateTest {
                 .param("type", " typical , high ")
                 .param("minrate", "3")
                 .param("maxrate", "4")
-                .param("nonce", "JGT"))
+                .param("nonce", "JGT")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);

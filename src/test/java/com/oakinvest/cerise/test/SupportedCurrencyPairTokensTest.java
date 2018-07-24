@@ -46,7 +46,7 @@ public class SupportedCurrencyPairTokensTest {
         // Testing all the data.
         mvc.perform(get("/")
                 .param("mode", "list")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 // First result.
@@ -82,7 +82,8 @@ public class SupportedCurrencyPairTokensTest {
         // Testing with quote parameter.
         mvc.perform(get("/")
                 .param("mode", "list")
-                .param("quote", " USD "))
+                .param("quote", " USD ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
@@ -96,7 +97,8 @@ public class SupportedCurrencyPairTokensTest {
         mvc.perform(get("/")
                 .param("mode", "list")
                 .param("quote", "USD")
-                .param("base", " XBT "))
+                .param("base", " XBT ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
@@ -112,7 +114,8 @@ public class SupportedCurrencyPairTokensTest {
                 .param("mode", "list")
                 .param("quote", "USD")
                 .param("base", " XBT ")
-                .param("locale", " en_US , en_GB "))
+                .param("locale", " en_US , en_GB ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);

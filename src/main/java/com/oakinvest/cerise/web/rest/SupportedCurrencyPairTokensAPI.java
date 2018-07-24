@@ -30,7 +30,7 @@ public interface SupportedCurrencyPairTokensAPI {
      * @param locale If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).
      * @return results
      */
-    @RequestMapping(value = "/", params = "mode=list", method = RequestMethod.GET)
+    @RequestMapping(value = "/", params = "mode=list", method = RequestMethod.GET, consumes = {"application/x-www-form-urlencoded"})
     @ApiOperation(value = "Enumerating supported currency-pair tokens",
             response = SupportedCurrencyPairTokensResult.class,
             responseContainer = "List")

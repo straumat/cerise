@@ -31,7 +31,7 @@ public interface CurrentExchangeRateAPI {
      * @param nonce   If specified, the server SHOULD return it in each result.
      * @return results
      */
-    @RequestMapping(value = "/", params = "mode=rate", method = RequestMethod.GET)
+    @RequestMapping(value = "/", params = "mode=rate", method = RequestMethod.GET, consumes = {"application/x-www-form-urlencoded"})
     @ApiOperation(value = "Currency-pair information",
             response = CurrentExchangeRateResult.class,
             responseContainer = "List")

@@ -34,7 +34,7 @@ public interface HistoricalExchangeRatesAPI {
      * @param timedelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      * @return results
      */
-    @RequestMapping(value = "/", params = "mode=history", method = RequestMethod.GET)
+    @RequestMapping(value = "/", params = "mode=history", method = RequestMethod.GET, consumes = {"application/x-www-form-urlencoded"})
     @ApiOperation(value = "Historical exchange rates API",
             response = HistoricalExchangeRatesResult.class,
             responseContainer = "List")

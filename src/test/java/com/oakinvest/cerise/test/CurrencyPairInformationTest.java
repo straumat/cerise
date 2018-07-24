@@ -50,7 +50,7 @@ public class CurrencyPairInformationTest {
         // Testing all the data.
         mvc.perform(get("/")
                 .param("mode", "info")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 // First result.
@@ -111,7 +111,8 @@ public class CurrencyPairInformationTest {
         // Testing with quote parameter.
         mvc.perform(get("/")
                 .param("mode", "info")
-                .param("cp", " XBTUSD-ver4,2 "))
+                .param("cp", " XBTUSD-ver4,2 ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
         assertNotNull("Last parameter exists", p);
