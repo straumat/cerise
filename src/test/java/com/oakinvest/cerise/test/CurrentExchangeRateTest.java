@@ -3,6 +3,7 @@ package com.oakinvest.cerise.test;
 import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.service.MockedCurrentExchangeRateService;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,6 +162,37 @@ public class CurrentExchangeRateTest {
         assertEquals("Minrate", p.getMinrate(), "3");
         assertEquals("Maxrate", p.getMaxrate(), "4");
         assertEquals("Nonce", p.getNonce(), "JGT");
+    }
+
+    /**
+     * Test for Current exchange rate with long CP.
+     */
+    @Test
+    public void getCurrentExchangeRateWithLongCP() throws Exception {
+
+        // Testing with long cp as return.
+        mvc.perform(get("/")
+                .param("mode", "rate")
+                .param("cp", "TEST_LONG_CP, " + StringUtils.repeat("A", 256))
+                .param("type", " typical , high ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("A", 256)));
+
+
+        // Testing with long cp as return.
+        mvc.perform(get("/")
+                .param("mode", "rate")
+                .param("cp", "TEST_LONG_CP")
+                .param("type", " typical , high ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(jsonPath("errors", hasSize(2)))
+                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)))
+                .andExpect(jsonPath("errors[1]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)));
     }
 
 }

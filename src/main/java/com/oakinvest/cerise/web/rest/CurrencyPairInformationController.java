@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,14 +43,31 @@ public class CurrencyPairInformationController extends CeriseController implemen
     public final List<CurrencyPairInformationResult> getCurrencyPairInformation(final String mode, final String[] cp) {
         log.info("Supported currency-pair tokens called : cp={}.", cp);
 
+        // ------------------------------------------------ -------------------------------------------------------------
+        // Validating parameters.
+
+        // Validating CP
+        validateCPList(Arrays.asList(cp));
+
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
-        // TODO Check valid values for cp.
         CurrencyPairInformationParameters p = new CurrencyPairInformationParameters(getListFromArray(cp));
 
         // -------------------------------------------------------------------------------------------------------------
         // Calling the service.
-        return service.getCurrencyPairInformation(p);
+        final List<CurrencyPairInformationResult> results = service.getCurrencyPairInformation(p);
+
+        // ------------------------------------------------ -------------------------------------------------------------
+        // Validating results.
+
+        // Validating CP.
+        final List<String> cpList = new LinkedList<>();
+        results.forEach(data -> cpList.add(data.getCp()));
+        validateCPList(cpList);
+
+        // -------------------------------------------------------------------------------------------------------------
+        // Returning the value.
+        return results;
     }
 
 }

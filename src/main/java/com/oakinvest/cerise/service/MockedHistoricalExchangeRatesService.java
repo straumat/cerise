@@ -2,6 +2,7 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesParameters;
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesResult;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -26,42 +27,52 @@ public class MockedHistoricalExchangeRatesService implements HistoricalExchangeR
     public final List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(final HistoricalExchangeRatesParameters parameters) {
         lastUsedParameter = parameters;
         List<HistoricalExchangeRatesResult> results = new LinkedList<>();
+        HistoricalExchangeRatesResult result = new HistoricalExchangeRatesResult();
+
+        // Test for long CP maximum size.
+        if (parameters.getCp().size() > 0 && "TEST_LONG_CP".equals(parameters.getCp().get(0))) {
+            result = new HistoricalExchangeRatesResult();
+            result.setCp(StringUtils.repeat("*", 256));
+            result.setTime(1488760000);
+            result.addRates("typical", 1300);
+            results.add(result);
+        }
 
         // First result.
-        HistoricalExchangeRatesResult r = new HistoricalExchangeRatesResult();
-        r.setCp("XBTUSD-ver4");
-        r.setTime(1488760000);
-        r.addRates("typical", 1300);
-        results.add(r);
+        result = new HistoricalExchangeRatesResult();
+        result.setCp("XBTUSD-ver4");
+        result.setTime(1488760000);
+        result.addRates("typical", 1300);
+        results.add(result);
 
         // Second result.
-        r = new HistoricalExchangeRatesResult();
-        r.setCp("XBTUSD-ver4");
-        r.setTime(1488760010);
-        r.addRates("typical", 1301.1);
-        results.add(r);
+        result = new HistoricalExchangeRatesResult();
+        result.setCp("XBTUSD-ver4");
+        result.setTime(1488760010);
+        result.addRates("typical", 1301.1);
+        results.add(result);
 
         // Third result.
-        r = new HistoricalExchangeRatesResult();
-        r.setCp("XBTUSD-ver4");
-        r.setTime(1488760020);
-        r.addRates("typical", 1320);
-        results.add(r);
+        result = new HistoricalExchangeRatesResult();
+        result.setCp("XBTUSD-ver4");
+        result.setTime(1488760020);
+        result.addRates("typical", 1320);
+        results.add(result);
 
         // Fourth result.
-        r = new HistoricalExchangeRatesResult();
-        r.setCp("XBTUSD-ver4");
-        r.setTime(1488760030);
-        r.addRates("typical", 1305);
-        results.add(r);
+        result = new HistoricalExchangeRatesResult();
+        result.setCp("XBTUSD-ver4");
+        result.setTime(1488760030);
+        result.addRates("typical", 1305);
+        results.add(result);
 
         // Sixth result.
-        r = new HistoricalExchangeRatesResult();
-        r.setCp("2");
+        result = new HistoricalExchangeRatesResult();
+        result.setCp("2");
         // TODO Not the good type. No "." allowed.
-        r.setTime(1488760000);
-        r.addRates("typical", 1300);
-        results.add(r);
+        result.setTime(1488760000);
+        result.addRates("typical", 1300);
+        results.add(result);
 
         return results;
     }

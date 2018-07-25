@@ -3,6 +3,7 @@ package com.oakinvest.cerise.test;
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesParameters;
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.service.MockedHistoricalExchangeRatesService;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,4 +144,34 @@ public class HistoricalExchangeRatesTest {
         assertEquals("ratedelta", p.getRateDelta(), 4f);
         assertEquals("timedelta", p.getTimeDelta(), 5f);
     }
+
+    /**
+     * Historical exchange rates test with long cp.
+     */
+    @Test
+    public void getHistoricalExchangeRatesWithLongCP() throws Exception {
+
+        // Test with long cp as parameter.
+        mvc.perform(get("/")
+                .param("mode", "history")
+                .param("cp", StringUtils.repeat("*", 256) + ",TOTO," + StringUtils.repeat("C", 256))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(jsonPath("errors", hasSize(2)))
+                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)))
+                .andExpect(jsonPath("errors[1]").value("Currency-pair too long : " + StringUtils.repeat("C", 256)));
+
+        // Test with long CP as return.
+        mvc.perform(get("/")
+                .param("mode", "history")
+                .param("cp", "TEST_LONG_CP")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)));
+
+    }
+
 }

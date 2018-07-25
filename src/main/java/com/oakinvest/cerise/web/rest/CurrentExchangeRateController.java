@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,11 +43,14 @@ public class CurrentExchangeRateController extends CeriseController implements C
     public final List<CurrentExchangeRateResult> getCurrencyPairInformation(final String mode, final String[] cp, final String[] type, final String minrate, final String maxrate, final String nonce) {
         log.info("Supported currency-pair tokens called : cp={}, type={}, minrate={}, maxrate={}, nonce={}.", cp, type, minrate, maxrate, nonce);
 
+        // ------------------------------------------------ -------------------------------------------------------------
+        // Validating parameters.
+
+        // Validating CP
+        validateCPList(Arrays.asList(cp));
+
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
-        // TODO Check valid values for parameters.
-
-
         CurrentExchangeRateParameters p = new CurrentExchangeRateParameters(getListFromArray(cp),
                 getListFromArray(type),
                 getCleanValue(minrate),
@@ -53,9 +58,20 @@ public class CurrentExchangeRateController extends CeriseController implements C
                 getCleanValue(nonce)
         );
 
+
         // -------------------------------------------------------------------------------------------------------------
         // Calling the service.
-        return service.getCurrentExchangeRate(p);
+        final List<CurrentExchangeRateResult> results = service.getCurrentExchangeRate(p);
+
+        // ------------------------------------------------ -------------------------------------------------------------
+        // Validating results.
+
+        // Validating CP.
+        final List<String> cpList = new LinkedList<>();
+        results.forEach(data -> cpList.add(data.getCp()));
+        validateCPList(cpList);
+
+        return results;
     }
 
 }

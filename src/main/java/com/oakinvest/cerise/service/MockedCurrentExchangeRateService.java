@@ -2,6 +2,7 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.CurrentExchangeRateResult;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -26,9 +27,21 @@ public class MockedCurrentExchangeRateService implements CurrentExchangeRateServ
     public final List<CurrentExchangeRateResult> getCurrentExchangeRate(final CurrentExchangeRateParameters parameters) {
         lastUsedParameter = parameters;
         List<CurrentExchangeRateResult> results = new LinkedList<>();
+        CurrentExchangeRateResult result = new CurrentExchangeRateResult();
+
+        // Test for long CP maximum size.
+        if (parameters.getCp().size() > 0 && "TEST_LONG_CP".equals(parameters.getCp().get(0))) {
+            result = new CurrentExchangeRateResult();
+            result.setCp(StringUtils.repeat("*", 256));
+            result.setTime(1488767410);
+            result.addRates("typical", 1349.332215);
+            result.addRates("high", 1351.2);
+            results.add(result);
+            results.add(result);
+        }
 
         // First result.
-        CurrentExchangeRateResult result = new CurrentExchangeRateResult();
+        result = new CurrentExchangeRateResult();
         result.setCp("XBTUSD-ver4");
         result.setTime(1488767410);
         result.addRates("typical", 1349.332215);

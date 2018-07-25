@@ -3,6 +3,7 @@ package com.oakinvest.cerise.test;
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.service.MockedCurrencyPairInformationService;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +121,33 @@ public class CurrencyPairInformationTest {
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
         assertEquals("CP parameter set", "2", p.getCp().get(1));
+    }
+
+    /**
+     * Test for Currency-pair information CP parameters max size.
+     */
+    @Test
+    public void getCurrencyPairInformationWithLongCP() throws Exception {
+        // long cp as parameter.
+        mvc.perform(get("/")
+                .param("mode", "info")
+                .param("cp", StringUtils.repeat("!", 256))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("!", 256)));
+
+        // long cp as return.
+        mvc.perform(get("/")
+                .param("mode", "info")
+                .param("cp", "TEST_LONG_CP")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(jsonPath("errors", hasSize(2)))
+                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)))
+                .andExpect(jsonPath("errors[1]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)));
     }
 
 }

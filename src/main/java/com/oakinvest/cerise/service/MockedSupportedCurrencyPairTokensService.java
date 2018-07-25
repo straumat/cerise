@@ -24,9 +24,10 @@ public class MockedSupportedCurrencyPairTokensService implements SupportedCurren
     public final List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(final SupportedCurrencyPairTokensParameters parameters) {
         lastUsedParameter = parameters;
         List<SupportedCurrencyPairTokensResult> results = new LinkedList<>();
+        SupportedCurrencyPairTokensResult result = new SupportedCurrencyPairTokensResult();
 
         // First result.
-        SupportedCurrencyPairTokensResult result = new SupportedCurrencyPairTokensResult();
+        result = new SupportedCurrencyPairTokensResult();
         result.setCp("XBTUSD-ver4");
         result.setQuote("USD");
         result.setBase("XBT");

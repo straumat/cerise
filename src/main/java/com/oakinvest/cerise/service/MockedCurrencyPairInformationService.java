@@ -2,6 +2,7 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.CurrencyPairInformationResult;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,9 +28,37 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
     public final List<CurrencyPairInformationResult> getCurrencyPairInformation(final CurrencyPairInformationParameters parameters) {
         lastUsedParameter = parameters;
         List<CurrencyPairInformationResult> results = new LinkedList<>();
+        CurrencyPairInformationResult result = new CurrencyPairInformationResult();
+
+        // Test for long CP maximum size.
+        if (parameters.getCp().size() > 0 && "TEST_LONG_CP".equals(parameters.getCp().get(0))) {
+            result = new CurrencyPairInformationResult();
+            result.setCp(StringUtils.repeat("*", 256));
+            result.setQuote("USD");
+            result.setBase("XBT");
+            result.setLocale("en_US");
+            result.setDesc("Smoothed averages");
+            result.setLongDesc("USD price quotes as compared to Bitcoin value\\n\\nRecommended for casual usage");
+            result.setSymbol(Arrays.asList(Arrays.asList("-$", "$"), null));
+            result.setDigits("Arabic");
+            // TODO Should be array of different types ?
+            result.setGrouping(Arrays.asList("3", ",", "0"));
+            result.setFractionSeparator(".");
+            List<Integer> fractionDigits = new ArrayList<>();
+            fractionDigits.add(0);
+            fractionDigits.add(2);
+            fractionDigits.add(2);
+            result.setFractionDigits(fractionDigits);
+            result.setMinPoll(300);
+            result.setLongPoll(true);
+            result.setHistory(1457231416L);
+            result.setArchive(14572314161L);
+            results.add(result);
+            results.add(result);
+        }
 
         // First result.
-        CurrencyPairInformationResult result = new CurrencyPairInformationResult();
+        result = new CurrencyPairInformationResult();
         result.setCp("XBTUSD-ver4");
         result.setQuote("USD");
         result.setBase("XBT");

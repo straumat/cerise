@@ -86,10 +86,13 @@
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
         <!-- Java -->
+        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <commons-lang.version>2.6</commons-lang.version>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
         <swagger.version>2.9.2</swagger.version>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <swagger-ui.version>2.9.2</swagger-ui.version>
+        <!-- Maven -->
         <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
         <dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
         <docker.image.prefix>straumat</docker.image.prefix>
@@ -110,7 +113,7 @@
     <!-- =========================================================================================================== -->
     <!-- Dependencies configuration -->
     <dependencies>
-        <!-- Spring -->
+        <!-- Spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -135,6 +138,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger-ui.version}</version>
+        </dependency>
+        <!-- Java -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
         </dependency>
     </dependencies>
     <!-- =========================================================================================================== -->
