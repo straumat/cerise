@@ -1,11 +1,15 @@
 package com.oakinvest.cerise.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
  * Supported currency-pair tokens results.
  */
 @SuppressWarnings("magicnumber")
+@JsonInclude(NON_NULL)
 public class SupportedCurrencyPairTokensResult {
 
     /**
@@ -40,7 +44,6 @@ public class SupportedCurrencyPairTokensResult {
      */
     @ApiModelProperty(notes = "If provided, a String with the applicable Unicode CLDR locale",
             example = "en_US",
-            required = true,
             position = 4)
     private String locale;
 

@@ -12,6 +12,30 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionHandlingController {
 
     /**
+     * Deal with invalid currency exception.
+     *
+     * @param ex exception.
+     * @return rest error.
+     */
+    @ExceptionHandler(InvalidCurrencyCodeException.class)
+    public final ResponseEntity<ApiError> complianceException(final InvalidCurrencyCodeException ex) {
+        ApiError response = new ApiError(ex.getMessage(), ex.getErrors());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Deal with locale exception.
+     *
+     * @param ex exception.
+     * @return rest error.
+     */
+    @ExceptionHandler(InvalidLocaleException.class)
+    public final ResponseEntity<ApiError> complianceException(final InvalidLocaleException ex) {
+        ApiError response = new ApiError(ex.getMessage(), ex.getErrors());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
      * Deal with compliance exception.
      *
      * @param ex exception.

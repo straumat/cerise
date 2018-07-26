@@ -1,9 +1,12 @@
 package com.oakinvest.cerise.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
  * Historical exchange rates result.
@@ -11,6 +14,7 @@ import java.util.List;
  * @author straumat
  */
 @SuppressWarnings("magicnumber")
+@JsonInclude(NON_NULL)
 public class HistoricalExchangeRatesResult {
 
     /**

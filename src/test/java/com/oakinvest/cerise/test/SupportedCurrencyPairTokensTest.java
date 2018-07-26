@@ -94,7 +94,7 @@ public class SupportedCurrencyPairTokensTest {
                 .param("mode", "list")
                 .param("quote", "USD, AED")
                 .param("base", "XBT, AFN")
-                .param("locale", " en_US , en_GB ")
+                .param("locale", "en_US,en_GB")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();
@@ -138,6 +138,19 @@ public class SupportedCurrencyPairTokensTest {
                 .andExpect(jsonPath("errors", hasSize(2)))
                 .andExpect(jsonPath("errors[0]").value("Invalid currency code : BBB"))
                 .andExpect(jsonPath("errors[1]").value("Invalid currency code : DDD"));
+
+        // Wrong values of locales.
+        mvc.perform(get("/")
+                .param("mode", "list")
+                .param("quote", "XBT, AFN")
+                .param("base", "XBT, AFN")
+                .param("locale", " en_US , UU_UU, TOTO, en_GB, TATA "))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Invalid locales"))
+                .andExpect(jsonPath("errors", hasSize(3)))
+                .andExpect(jsonPath("errors[0]").value("Invalid locale : UU_UU"))
+                .andExpect(jsonPath("errors[1]").value("Invalid locale : TOTO"))
+                .andExpect(jsonPath("errors[2]").value("Invalid locale : TATA"));
     }
 
 }

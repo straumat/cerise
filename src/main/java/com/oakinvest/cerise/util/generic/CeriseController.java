@@ -2,7 +2,10 @@ package com.oakinvest.cerise.util.generic;
 
 import com.oakinvest.cerise.util.constants.CurrencyCode;
 import com.oakinvest.cerise.util.exception.ComplianceException;
+import com.oakinvest.cerise.util.exception.InvalidCurrencyCodeException;
+import com.oakinvest.cerise.util.exception.InvalidLocaleException;
 import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -23,6 +26,40 @@ public class CeriseController {
      * Currency-pair tokens are arbitrary Strings no longer than 255 characters.
      */
     private static final int CP_MAX_SIZE = 255;
+
+
+    /**
+     * Pass throw a list of locales and raise an exception if one is invalid.
+     *
+     * @param localeList locale list.
+     */
+    protected final void validateLocaleList(final String[] localeList) {
+        if (localeList != null) {
+            validateLocaleList(Arrays.asList(localeList));
+        }
+    }
+
+    /**
+     * Pass throw a list of locales and raise an exception if one is invalid.
+     *
+     * @param localeList locale list.
+     */
+    protected final void validateLocaleList(final List<String> localeList) {
+        List<String> errors = new LinkedList<>();
+        localeList.stream()
+                .filter(Objects::nonNull)
+                .forEach(l -> {
+                            try {
+                                LocaleUtils.toLocale(l);
+                            } catch (IllegalArgumentException e) {
+                                errors.add("Invalid locale : " + l);
+                            }
+                        }
+                );
+        if (!errors.isEmpty()) {
+            throw new InvalidLocaleException("Invalid locales", errors);
+        }
+    }
 
     /**
      * Pass throw a list of currency code and raise an exception if one is invalid.
@@ -48,7 +85,7 @@ public class CeriseController {
                 .filter(c -> !EnumUtils.isValidEnum(CurrencyCode.class, c))
                 .forEach(c -> errors.add("Invalid currency code : " + c));
         if (!errors.isEmpty()) {
-            throw new ComplianceException("Invalid currency codes", errors);
+            throw new InvalidCurrencyCodeException("Invalid currency codes", errors);
         }
     }
 

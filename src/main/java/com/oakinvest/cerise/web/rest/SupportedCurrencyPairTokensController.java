@@ -42,18 +42,13 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
         log.info("Supported currency-pair tokens called : quote={}, base={}, locale={}.", quote, base, locale);
 
         // -------------------------------------------------------------------------------------------------------------
-        // Building the parameters.
+        // Validating the parameters.
         validateCurrencyCodeList(quote);
         validateCurrencyCodeList(base);
+        validateLocaleList(locale);
 
-        // TODO Checking that quote exists.
-
-        // TODO Checking that base exists.
-
-        // Checking that locales exists.
-        // TODO Implements "commons lang has a utility method to parse and validate locale strings: LocaleUtils.toLocale(String)"
-        // https://stackoverflow.com/questions/3684747/how-to-validate-a-locale-in-java
-
+        // -------------------------------------------------------------------------------------------------------------
+        // Creating the parameters.
         SupportedCurrencyPairTokensParameters p = new SupportedCurrencyPairTokensParameters(getListFromArray(quote),
                 getListFromArray(base),
                 getListFromArray(locale));
