@@ -51,8 +51,8 @@ public interface SupportedCurrencyPairTokensAPI {
                     value = "If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s)")
     })
     List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(@RequestParam String mode,
-                                                                           @RequestParam(required = false) String quote,
-                                                                           @RequestParam(required = false) String base,
+                                                                           @RequestParam(required = false) String[] quote,
+                                                                           @RequestParam(required = false) String[] base,
                                                                            @RequestParam(required = false) String[] locale);
 
 }

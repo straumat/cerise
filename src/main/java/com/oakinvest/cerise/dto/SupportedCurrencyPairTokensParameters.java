@@ -15,12 +15,12 @@ public class SupportedCurrencyPairTokensParameters {
     /**
      * If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s).
      */
-    private String quote;
+    private List<String> quote;
 
     /**
      * If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s).
      */
-    private String base;
+    private List<String> base;
 
     /**
      * If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).
@@ -34,7 +34,7 @@ public class SupportedCurrencyPairTokensParameters {
      * @param newBase    If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s).
      * @param newLocales If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).
      */
-    public SupportedCurrencyPairTokensParameters(final String newQuote, final String newBase, final List<String> newLocales) {
+    public SupportedCurrencyPairTokensParameters(final List<String> newQuote, final List<String> newBase, final List<String> newLocales) {
         quote = newQuote;
         base = newBase;
         locales = newLocales;
@@ -54,7 +54,7 @@ public class SupportedCurrencyPairTokensParameters {
      *
      * @return quote
      */
-    public final String getQuote() {
+    public final List<String> getQuote() {
         return quote;
     }
 
@@ -63,7 +63,7 @@ public class SupportedCurrencyPairTokensParameters {
      *
      * @return base
      */
-    public final String getBase() {
+    public final List<String> getBase() {
         return base;
     }
 

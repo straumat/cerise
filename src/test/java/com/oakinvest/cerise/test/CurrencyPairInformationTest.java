@@ -3,7 +3,7 @@ package com.oakinvest.cerise.test;
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.service.MockedCurrencyPairInformationService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

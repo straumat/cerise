@@ -5,16 +5,19 @@ import com.oakinvest.cerise.util.generic.CeriseException;
 import java.util.List;
 
 /**
- * Exception raised when there is a compliance failure.
+ * Exception raised when there is an invalid currency code.
+ *
+ * @author straumat
  */
-public class ComplianceException extends CeriseException {
+public class InvalidCurrencyCodeException extends CeriseException {
+
 
     /**
      * Constructor with a simple error message.
      *
      * @param message message.
      */
-    public ComplianceException(final String message) {
+    public InvalidCurrencyCodeException(final String message) {
         super(message);
     }
 
@@ -24,7 +27,7 @@ public class ComplianceException extends CeriseException {
      * @param message   message.
      * @param newErrors list of errors.
      */
-    public ComplianceException(final String message, final List<String> newErrors) {
+    public InvalidCurrencyCodeException(final String message, final List<String> newErrors) {
         super(message, newErrors);
     }
 

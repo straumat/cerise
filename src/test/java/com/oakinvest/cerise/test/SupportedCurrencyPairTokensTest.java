@@ -3,6 +3,7 @@ package com.oakinvest.cerise.test;
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensParameters;
 import com.oakinvest.cerise.service.MockedSupportedCurrencyPairTokensService;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,6 @@ public class SupportedCurrencyPairTokensTest {
      */
     @Test
     public void getSupportedCurrencyPairTokensResults() throws Exception {
-
         // Testing all the data.
         mvc.perform(get("/")
                 .param("mode", "list")
@@ -79,19 +79,9 @@ public class SupportedCurrencyPairTokensTest {
         // Testing the generated parameters for the service.
         SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();
         assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
-
-        // Testing with quote parameter.
-        mvc.perform(get("/")
-                .param("mode", "list")
-                .param("quote", " USD ")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
-        assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
-        assertNotNull("Quote parameter is set", p.getQuote());
-        assertEquals("Quote parameter value", "USD", p.getQuote());
-        assertNull("Base parameter not set", p.getBase());
-        assertTrue("Locales are empty", p.getLocales().isEmpty());
+        assertTrue("Quote parameter is not empty", p.getQuote().isEmpty());
+        assertTrue("Base parameter is not empty", p.getBase().isEmpty());
+        assertTrue("Locales parameter is not empty", p.getLocales().isEmpty());
     }
 
     /**
@@ -99,40 +89,55 @@ public class SupportedCurrencyPairTokensTest {
      */
     @Test
     public void getSupportedCurrencyPairTokensParameters() throws Exception {
-
         // Testing with quote and base parameters.
         mvc.perform(get("/")
                 .param("mode", "list")
-                .param("quote", "USD")
-                .param("base", " XBT ")
+                .param("quote", "USD, AED")
+                .param("base", "XBT, AFN")
+                .param("locale", " en_US , en_GB ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();
         assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
-        assertNotNull("Quote parameter is set", p.getQuote());
-        assertEquals("Quote parameter value", "USD", p.getQuote());
-        assertNotNull("Base parameter not set", p.getBase());
-        assertEquals("Base parameter value", "XBT", p.getBase());
-        assertTrue("Locales are empty", p.getLocales().isEmpty());
-
-        // Testing with quote, base and locales parameters.
-        mvc.perform(get("/")
-                .param("mode", "list")
-                .param("quote", "USD")
-                .param("base", " XBT ")
-                .param("locale", " en_US , en_GB ")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
-        assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
-        assertNotNull("Quote parameter is set", p.getQuote());
-        assertEquals("Quote parameter value", "USD", p.getQuote());
-        assertNotNull("Base parameter not set", p.getBase());
-        assertEquals("Base parameter value", "XBT", p.getBase());
-        assertEquals("Three Locales", 2, p.getLocales().size());
-        assertEquals("First locale test", "en_US", p.getLocales().get(0));
-        assertEquals("Second locale test", "en_GB", p.getLocales().get(1));
+        assertEquals("Quote parameter is set", 2, p.getQuote().size());
+        assertEquals("Quote parameter value", "USD", p.getQuote().get(0));
+        assertEquals("Quote parameter value", "AED", p.getQuote().get(1));
+        assertEquals("Base parameter not set", 2, p.getBase().size());
+        assertEquals("Base parameter value", "XBT", p.getBase().get(0));
+        assertEquals("Base parameter value", "AFN", p.getBase().get(1));
+        assertEquals("Base parameter not set", 2, p.getLocales().size());
+        assertEquals("Base parameter value", "en_US", p.getLocales().get(0));
+        assertEquals("Base parameter value", "en_GB", p.getLocales().get(1));
     }
 
+    /**
+     * Test for Enumerating supported currency-pair tokens parameters.
+     */
+    @Test
+    public void getSupportedCurrencyPairTokensWithInvalidCurrencyCode() throws Exception {
+        // Wrong values of quotes.
+        mvc.perform(get("/")
+                .param("mode", "list")
+                .param("quote", "USD, TOTO, AED, A, AAA, CCC")
+                .param("base", "XBT, AFN")
+                .param("locale", " en_US , en_GB "))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Invalid currency codes"))
+                .andExpect(jsonPath("errors", hasSize(2)))
+                .andExpect(jsonPath("errors[0]").value("Invalid currency code : AAA"))
+                .andExpect(jsonPath("errors[1]").value("Invalid currency code : CCC"));
+
+        // Wrong values of quotes.
+        mvc.perform(get("/")
+                .param("mode", "list")
+                .param("quote", "XBT, AFN")
+                .param("base", "USD, TOTO, AED, A, BBB, DDD")
+                .param("locale", " en_US , en_GB "))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("message").value("Invalid currency codes"))
+                .andExpect(jsonPath("errors", hasSize(2)))
+                .andExpect(jsonPath("errors[0]").value("Invalid currency code : BBB"))
+                .andExpect(jsonPath("errors[1]").value("Invalid currency code : DDD"));
+    }
 
 }

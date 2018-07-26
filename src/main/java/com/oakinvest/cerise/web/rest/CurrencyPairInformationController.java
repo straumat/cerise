@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,7 +46,8 @@ public class CurrencyPairInformationController extends CeriseController implemen
         // Validating parameters.
 
         // Validating CP
-        validateCPList(Arrays.asList(cp));
+        validateCPList(cp);
+        //validateCurrencyCodeList(Arrays.asList(quote));
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.

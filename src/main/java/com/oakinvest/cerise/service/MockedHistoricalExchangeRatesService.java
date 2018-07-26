@@ -2,7 +2,7 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesParameters;
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesResult;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;

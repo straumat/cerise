@@ -38,11 +38,13 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
     }
 
     @Override
-    public final List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(final String mode, final String quote, final String base, final String[] locale) {
+    public final List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(final String mode, final String[] quote, final String[] base, final String[] locale) {
         log.info("Supported currency-pair tokens called : quote={}, base={}, locale={}.", quote, base, locale);
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
+        validateCurrencyCodeList(quote);
+        validateCurrencyCodeList(base);
 
         // TODO Checking that quote exists.
 
@@ -52,8 +54,8 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
         // TODO Implements "commons lang has a utility method to parse and validate locale strings: LocaleUtils.toLocale(String)"
         // https://stackoverflow.com/questions/3684747/how-to-validate-a-locale-in-java
 
-        SupportedCurrencyPairTokensParameters p = new SupportedCurrencyPairTokensParameters(getCleanValue(quote),
-                getCleanValue(base),
+        SupportedCurrencyPairTokensParameters p = new SupportedCurrencyPairTokensParameters(getListFromArray(quote),
+                getListFromArray(base),
                 getListFromArray(locale));
 
         // -------------------------------------------------------------------------------------------------------------
