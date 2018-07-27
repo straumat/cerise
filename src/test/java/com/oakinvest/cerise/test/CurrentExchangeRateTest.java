@@ -54,17 +54,16 @@ public class CurrentExchangeRateTest {
                 .andExpect(jsonPath("$", hasSize(2)))
                 // First result.
                 .andExpect(jsonPath("$[0].cp").value("XBTUSD-ver4"))
-                .andExpect(jsonPath("$[0].time").value(1488767410))
-                .andExpect(jsonPath("$[0].rates[0].type").value("typical"))
-                .andExpect(jsonPath("$[0].rates[0].value").value(1349.332215))
-                .andExpect(jsonPath("$[0].rates[1].type").value("high"))
-                .andExpect(jsonPath("$[0].rates[1].value").value(1351.2))
+                .andExpect(jsonPath("$[0].time").value(1488767410.5463133))
+                .andExpect(jsonPath("$[0].rates.typical").value(1349.332215))
+                .andExpect(jsonPath("$[0].rates.high").value(1351.2))
+                .andExpect(jsonPath("$[1].nonce").doesNotExist())
                 .andExpect(jsonPath("$[0].signature").doesNotExist())
                 // Second result.
                 .andExpect(jsonPath("$[1].cp").value("2"))
-                .andExpect(jsonPath("$[1].time").value(1488767410))
-                .andExpect(jsonPath("$[1].rates[0].type").value("typical"))
-                .andExpect(jsonPath("$[1].rates[0].value").value(1350.111332))
+                .andExpect(jsonPath("$[1].time").value(1488767410D))
+                .andExpect(jsonPath("$[1].rates.typical").value(1350.111332))
+                .andExpect(jsonPath("$[1].nonce").doesNotExist())
                 .andExpect(jsonPath("$[1].signature").doesNotExist());
 
         // Testing the generated parameters for the service.
@@ -105,7 +104,7 @@ public class CurrentExchangeRateTest {
                 .param("mode", "rate")
                 .param("cp", " XBTUSD-ver4,2 ")
                 .param("type", " typical , high ")
-                .param("minrate", "3")
+                .param("minrate", "1350.111332")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
@@ -116,7 +115,7 @@ public class CurrentExchangeRateTest {
         assertEquals("Type", p.getTypes().size(), 2);
         assertEquals("Type 1 ", p.getTypes().get(0), "typical");
         assertEquals("Type 2 ", p.getTypes().get(1), "high");
-        assertEquals("Minrate", p.getMinrate(), "3");
+        assertEquals("Minrate", p.getMinrate(), 1350.111332);
         assertNull("Maxrate", p.getMaxrate());
         assertNull("Nonce", p.getNonce());
 
@@ -125,8 +124,8 @@ public class CurrentExchangeRateTest {
                 .param("mode", "rate")
                 .param("cp", " XBTUSD-ver4,2 ")
                 .param("type", " typical , high ")
-                .param("minrate", "3")
-                .param("maxrate", "4")
+                .param("minrate", "1350.111332")
+                .param("maxrate", "1351.111332")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
         p = service.getLastUsedParameter();
@@ -137,8 +136,8 @@ public class CurrentExchangeRateTest {
         assertEquals("Type", p.getTypes().size(), 2);
         assertEquals("Type 1 ", p.getTypes().get(0), "typical");
         assertEquals("Type 2 ", p.getTypes().get(1), "high");
-        assertEquals("Minrate", p.getMinrate(), "3");
-        assertEquals("Maxrate", p.getMaxrate(), "4");
+        assertEquals("Minrate", p.getMinrate(), 1350.111332);
+        assertEquals("Maxrate", p.getMaxrate(), 1351.111332);
         assertNull("Nonce", p.getNonce());
 
         // Testing with type, minrate, maxrate & nonce parameter.
@@ -146,8 +145,8 @@ public class CurrentExchangeRateTest {
                 .param("mode", "rate")
                 .param("cp", " XBTUSD-ver4,2 ")
                 .param("type", " typical , high ")
-                .param("minrate", "3")
-                .param("maxrate", "4")
+                .param("minrate", "1350.111332")
+                .param("maxrate", "1351.111332")
                 .param("nonce", "JGT")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
@@ -159,8 +158,8 @@ public class CurrentExchangeRateTest {
         assertEquals("Type", p.getTypes().size(), 2);
         assertEquals("Type 1 ", p.getTypes().get(0), "typical");
         assertEquals("Type 2 ", p.getTypes().get(1), "high");
-        assertEquals("Minrate", p.getMinrate(), "3");
-        assertEquals("Maxrate", p.getMaxrate(), "4");
+        assertEquals("Minrate", p.getMinrate(), 1350.111332);
+        assertEquals("Maxrate", p.getMaxrate(), 1351.111332);
         assertEquals("Nonce", p.getNonce(), "JGT");
     }
 
@@ -168,12 +167,11 @@ public class CurrentExchangeRateTest {
      * Test for Current exchange rate with long CP.
      */
     @Test
-    public void getCurrentExchangeRateWithLongCP() throws Exception {
-
-        // Testing with long cp as return.
+    public void getCurrentExchangeRateWithWrongParameters() throws Exception {
+        // Testing with long cp as parameter.
         mvc.perform(get("/")
                 .param("mode", "rate")
-                .param("cp", "TEST_LONG_CP, " + StringUtils.repeat("A", 256))
+                .param("cp", "TEST, " + StringUtils.repeat("A", 256))
                 .param("type", " typical , high ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isInternalServerError())
@@ -193,6 +191,17 @@ public class CurrentExchangeRateTest {
                 .andExpect(jsonPath("errors", hasSize(2)))
                 .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)))
                 .andExpect(jsonPath("errors[1]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)));
+
+        // Wrong currency code.
+        mvc.perform(get("/")
+                .param("mode", "rate")
+                .param("cp", "AAAAAAA, USD, EUR, CCC, DDD")
+                .param("type", " typical , high ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(jsonPath("message").value("Invalid currency codes"))
+                .andExpect(jsonPath("errors", hasSize(2)))
+                .andExpect(jsonPath("errors[0]").value("Invalid currency code : CCC"))
+                .andExpect(jsonPath("errors[1]").value("Invalid currency code : DDD"));
     }
 
 }

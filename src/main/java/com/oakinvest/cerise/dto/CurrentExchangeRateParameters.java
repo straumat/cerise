@@ -27,12 +27,12 @@ public class CurrentExchangeRateParameters {
     /**
      * If specified, indicates this request is a longpoll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
      */
-    private String minrate;
+    private Double minrate;
 
     /**
      * If specified, indicates this request is a longpoll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
      */
-    private String maxrate;
+    private Double maxrate;
 
     /**
      * If specified, the server SHOULD return it in each result.
@@ -48,7 +48,7 @@ public class CurrentExchangeRateParameters {
      * @param newMaxrate If specified, indicates this request is a longpoll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
      * @param newNonce   If specified, the server SHOULD return it in each result.
      */
-    public CurrentExchangeRateParameters(final List<String> newCp, final List<String> newTypes, final String newMinrate, final String newMaxrate, final String newNonce) {
+    public CurrentExchangeRateParameters(final List<String> newCp, final List<String> newTypes, final Double newMinrate, final Double newMaxrate, final String newNonce) {
         this.cp = newCp;
         this.types = newTypes;
         this.minrate = newMinrate;
@@ -88,7 +88,7 @@ public class CurrentExchangeRateParameters {
      *
      * @return minrate
      */
-    public final String getMinrate() {
+    public final Double getMinrate() {
         return minrate;
     }
 
@@ -97,7 +97,7 @@ public class CurrentExchangeRateParameters {
      *
      * @return maxrate
      */
-    public final String getMaxrate() {
+    public final Double getMaxrate() {
         return maxrate;
     }
 

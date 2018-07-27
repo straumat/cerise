@@ -63,8 +63,8 @@ public interface CurrentExchangeRateAPI {
     List<CurrentExchangeRateResult> getCurrencyPairInformation(@RequestParam String mode,
                                                                @RequestParam String[] cp,
                                                                @RequestParam(required = false) String[] type,
-                                                               @RequestParam(required = false) String minrate,
-                                                               @RequestParam(required = false) String maxrate,
+                                                               @RequestParam(required = false) Double minrate,
+                                                               @RequestParam(required = false) Double maxrate,
                                                                @RequestParam(required = false) String nonce);
 
 }

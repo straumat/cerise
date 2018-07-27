@@ -102,13 +102,4 @@ public class HistoricalExchangeRatesResult {
         getRates().add(r);
     }
 
-    /**
-     * Setter of rates.
-     *
-     * @param newRates the rates to set
-     */
-    public final void setRates(final List<Rate> newRates) {
-        rates = newRates;
-    }
-
 }

@@ -33,7 +33,7 @@ public class MockedCurrentExchangeRateService implements CurrentExchangeRateServ
         if (parameters.getCp().size() > 0 && "TEST_LONG_CP".equals(parameters.getCp().get(0))) {
             result = new CurrentExchangeRateResult();
             result.setCp(StringUtils.repeat("*", 256));
-            result.setTime(1488767410);
+            result.setTime(1488767410.5463133);
             result.addRates("typical", 1349.332215);
             result.addRates("high", 1351.2);
             results.add(result);
@@ -43,7 +43,7 @@ public class MockedCurrentExchangeRateService implements CurrentExchangeRateServ
         // First result.
         result = new CurrentExchangeRateResult();
         result.setCp("XBTUSD-ver4");
-        result.setTime(1488767410);
+        result.setTime(1488767410.5463133);
         result.addRates("typical", 1349.332215);
         result.addRates("high", 1351.2);
         results.add(result);
@@ -51,7 +51,7 @@ public class MockedCurrentExchangeRateService implements CurrentExchangeRateServ
         // Second result.
         result = new CurrentExchangeRateResult();
         result.setCp("2");
-        result.setTime(1488767410);
+        result.setTime(1488767410D);
         result.addRates("typical", 1350.111332);
         results.add(result);
 

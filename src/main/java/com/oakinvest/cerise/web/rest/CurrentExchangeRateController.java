@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,14 +39,18 @@ public class CurrentExchangeRateController extends CeriseController implements C
     }
 
     @Override
-    public final List<CurrentExchangeRateResult> getCurrencyPairInformation(final String mode, final String[] cp, final String[] type, final String minrate, final String maxrate, final String nonce) {
+    public final List<CurrentExchangeRateResult> getCurrencyPairInformation(final String mode,
+                                                                            final String[] cp,
+                                                                            final String[] type,
+                                                                            final Double minrate,
+                                                                            final Double maxrate,
+                                                                            final String nonce) {
         log.info("Supported currency-pair tokens called : cp={}, type={}, minrate={}, maxrate={}, nonce={}.", cp, type, minrate, maxrate, nonce);
 
         // ------------------------------------------------ -------------------------------------------------------------
         // Validating parameters.
-
-        // Validating CP
-        validateCPList(Arrays.asList(cp));
+        validateCPList(cp);
+        validateCurrencyCodeList(cp);
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
@@ -65,8 +68,6 @@ public class CurrentExchangeRateController extends CeriseController implements C
 
         // ------------------------------------------------ -------------------------------------------------------------
         // Validating results.
-
-        // Validating CP.
         final List<String> cpList = new LinkedList<>();
         results.forEach(data -> cpList.add(data.getCp()));
         validateCPList(cpList);

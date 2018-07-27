@@ -25,7 +25,7 @@ public class Rate {
             example = "1349.332215",
             required = true,
             position = 2)
-    private double value;
+    private Double value;
 
     /**
      * Getter of type.
@@ -50,7 +50,7 @@ public class Rate {
      *
      * @return value
      */
-    public final double getValue() {
+    public final Double getValue() {
         return value;
     }
 
@@ -59,7 +59,7 @@ public class Rate {
      *
      * @param newValue the value to set
      */
-    public final void setValue(final double newValue) {
+    public final void setValue(final Double newValue) {
         value = newValue;
     }
 
