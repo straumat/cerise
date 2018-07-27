@@ -71,7 +71,7 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[0].longpoll").value(true))
                 .andExpect(jsonPath("$[0].history").value(1457231416L))
                 .andExpect(jsonPath("$[0].archive").value(14572314161L))
-                .andExpect(jsonPath("$[0].signature").isEmpty())
+                .andExpect(jsonPath("$[0].signature").doesNotExist())
                 // Second result.
                 .andExpect(jsonPath("$[1].cp").value("2"))
                 .andExpect(jsonPath("$[1].quote").value("USD"))
@@ -95,7 +95,7 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[1].longpoll").value(false))
                 .andExpect(jsonPath("$[1].history").value(1467458333L))
                 .andExpect(jsonPath("$[1].archive").value(14674583332L))
-                .andExpect(jsonPath("$[1].signature").isEmpty());
+                .andExpect(jsonPath("$[1].signature").doesNotExist());
 
         // Testing the generated parameters for this call.
         CurrencyPairInformationParameters p = service.getLastUsedParameter();

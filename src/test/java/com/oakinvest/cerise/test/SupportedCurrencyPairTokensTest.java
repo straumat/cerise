@@ -60,21 +60,21 @@ public class SupportedCurrencyPairTokensTest {
                 .andExpect(jsonPath("$[0].base").value("XBT"))
                 .andExpect(jsonPath("$[0].locale").value("en_US"))
                 .andExpect(jsonPath("$[0].desc").value("Smoothed averages"))
-                .andExpect(jsonPath("$[0].signature").isEmpty())
+                .andExpect(jsonPath("$[0].signature").doesNotExist())
                 // Second result.
                 .andExpect(jsonPath("$[1].cp").value("2"))
                 .andExpect(jsonPath("$[1].quote").value("USD"))
                 .andExpect(jsonPath("$[1].base").value("XBT"))
                 .andExpect(jsonPath("$[1].locale").value("en_US"))
                 .andExpect(jsonPath("$[1].desc").value("Updated per-trade"))
-                .andExpect(jsonPath("$[1].signature").isEmpty())
+                .andExpect(jsonPath("$[1].signature").doesNotExist())
                 // Third result.
                 .andExpect(jsonPath("$[2].cp").value("XBTUSD-european"))
                 .andExpect(jsonPath("$[2].quote").value("USD"))
                 .andExpect(jsonPath("$[2].base").value("XBT"))
                 .andExpect(jsonPath("$[2].locale").value("en_GB"))
-                .andExpect(jsonPath("$[2].desc").isEmpty())
-                .andExpect(jsonPath("$[2].signature").isEmpty());
+                .andExpect(jsonPath("$[2].desc").doesNotExist())
+                .andExpect(jsonPath("$[2].signature").doesNotExist());
 
         // Testing the generated parameters for the service.
         SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();

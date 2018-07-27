@@ -59,13 +59,13 @@ public class CurrentExchangeRateTest {
                 .andExpect(jsonPath("$[0].rates[0].value").value(1349.332215))
                 .andExpect(jsonPath("$[0].rates[1].type").value("high"))
                 .andExpect(jsonPath("$[0].rates[1].value").value(1351.2))
-                .andExpect(jsonPath("$[0].signature").isEmpty())
+                .andExpect(jsonPath("$[0].signature").doesNotExist())
                 // Second result.
                 .andExpect(jsonPath("$[1].cp").value("2"))
                 .andExpect(jsonPath("$[1].time").value(1488767410))
                 .andExpect(jsonPath("$[1].rates[0].type").value("typical"))
                 .andExpect(jsonPath("$[1].rates[0].value").value(1350.111332))
-                .andExpect(jsonPath("$[1].signature").isEmpty());
+                .andExpect(jsonPath("$[1].signature").doesNotExist());
 
         // Testing the generated parameters for the service.
         CurrentExchangeRateParameters p = service.getLastUsedParameter();
