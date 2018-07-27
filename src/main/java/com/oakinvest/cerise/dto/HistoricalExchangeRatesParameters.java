@@ -27,12 +27,12 @@ public class HistoricalExchangeRatesParameters {
     /**
      * POSIX timestamp the results should begin with.
      */
-    private Long from;
+    private Double from;
 
     /**
      * POSIX timestamp the results should end with. If omitted, the present time shall be used.
      */
-    private Long to;
+    private Double to;
 
     /**
      * If provided and true, indicates that only the nearest timestamp to "from" must be returned, and a range is not desired. ("to" should be omitted in this case.)
@@ -60,12 +60,11 @@ public class HistoricalExchangeRatesParameters {
      * @param newRateDelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      * @param newTimeDelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      */
-    public HistoricalExchangeRatesParameters(final List<String> newCp, final List<String> newTypes, final Long newFrom, final Long newTo, final Boolean newNearest, final Float newRateDelta, final Float newTimeDelta) {
+    public HistoricalExchangeRatesParameters(final List<String> newCp, final List<String> newTypes, final Double newFrom, final Double newTo, final Boolean newNearest, final Float newRateDelta, final Float newTimeDelta) {
         this.cp = newCp;
         this.types = newTypes;
         this.from = newFrom;
         this.to = newTo;
-        // TODO if null == false.
         this.nearest = newNearest;
         this.rateDelta = newRateDelta;
         this.timeDelta = newTimeDelta;
@@ -103,7 +102,7 @@ public class HistoricalExchangeRatesParameters {
      *
      * @return from
      */
-    public final Long getFrom() {
+    public final Double getFrom() {
         return from;
     }
 
@@ -112,7 +111,7 @@ public class HistoricalExchangeRatesParameters {
      *
      * @return to
      */
-    public final Long getTo() {
+    public final Double getTo() {
         return to;
     }
 

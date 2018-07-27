@@ -44,7 +44,7 @@ public interface HistoricalExchangeRatesAPI {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mode",
                     required = true,
-                    value = "Always \"rate\" for this request."),
+                    value = "Always \"history\" for this request."),
             @ApiImplicitParam(name = "cp",
                     required = true,
                     example = "XBTUSD-ver4,2",
@@ -69,8 +69,8 @@ public interface HistoricalExchangeRatesAPI {
     List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(@RequestParam String mode,
                                                                    @RequestParam String[] cp,
                                                                    @RequestParam(required = false) String[] type,
-                                                                   @RequestParam(required = false) Long from,
-                                                                   @RequestParam(required = false) Long to,
+                                                                   @RequestParam(required = false) Double from,
+                                                                   @RequestParam(required = false) Double to,
                                                                    @RequestParam(required = false) Boolean nearest,
                                                                    @RequestParam(required = false) Float ratedelta,
                                                                    @RequestParam(required = false) Float timedelta);

@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,19 +40,18 @@ public class HistoricalExchangeRatesController extends CeriseController implemen
     }
 
     @Override
-    public final List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(final String mode, final String[] cp, final String[] type, final Long from, final Long to, final Boolean nearest, final Float ratedelta, final Float timedelta) {
+    public final List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(final String mode, final String[] cp, final String[] type, final Double from, final Double to, final Boolean nearest, final Float ratedelta, final Float timedelta) {
         log.info("Supported currency-pair tokens called : cp={}, type={}, from={}, to={}, nearest={}, ratedelta={}, timedelta = {}.", cp, type, from, to, nearest, ratedelta, timedelta);
 
         // ------------------------------------------------ -------------------------------------------------------------
         // Validating parameters.
 
         // Validating CP
-        validateCPList(Arrays.asList(cp));
+        validateCPList(cp);
+        validateCurrencyCodeList(cp);
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
-        // TODO Check valid values for parameters.
-
         HistoricalExchangeRatesParameters p = new HistoricalExchangeRatesParameters(getListFromArray(cp),
                 getListFromArray(type),
                 from,

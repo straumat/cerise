@@ -3,8 +3,8 @@ package com.oakinvest.cerise.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -33,16 +33,15 @@ public class HistoricalExchangeRatesResult {
             example = "1488767410.5463133",
             required = true,
             position = 2)
-    private long time;
+    private Double time;
 
     /**
      * A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.
      */
-    @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).",
-            example = "1488767410.5463133",
+    @ApiModelProperty(notes = "A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.",
             required = true,
             position = 3)
-    private List<Rate> rates = new LinkedList<>();
+    private Map<String, Object> rates = new LinkedHashMap<>();
 
     /**
      * Getter of cp.
@@ -67,7 +66,7 @@ public class HistoricalExchangeRatesResult {
      *
      * @return time
      */
-    public final long getTime() {
+    public final Double getTime() {
         return time;
     }
 
@@ -76,7 +75,7 @@ public class HistoricalExchangeRatesResult {
      *
      * @param newTime the time to set
      */
-    public final void setTime(final long newTime) {
+    public final void setTime(final Double newTime) {
         time = newTime;
     }
 
@@ -85,7 +84,7 @@ public class HistoricalExchangeRatesResult {
      *
      * @return rates
      */
-    public final List<Rate> getRates() {
+    public final Map<String, Object> getRates() {
         return rates;
     }
 
@@ -96,10 +95,7 @@ public class HistoricalExchangeRatesResult {
      * @param value value
      */
     public final void addRates(final String type, final double value) {
-        Rate r = new Rate();
-        r.setType(type);
-        r.setValue(value);
-        getRates().add(r);
+        rates.put(type, value);
     }
 
 }
