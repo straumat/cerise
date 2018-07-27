@@ -44,10 +44,8 @@ public class CurrencyPairInformationController extends CeriseController implemen
 
         // ------------------------------------------------ -------------------------------------------------------------
         // Validating parameters.
-
-        // Validating CP
         validateCPList(cp);
-        //validateCurrencyCodeList(Arrays.asList(quote));
+        validateCurrencyCodeList(cp);
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.

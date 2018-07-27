@@ -69,8 +69,8 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[0].fraction_digits[2]").value(2))
                 .andExpect(jsonPath("$[0].minpoll").value(300))
                 .andExpect(jsonPath("$[0].longpoll").value(true))
-                .andExpect(jsonPath("$[0].history").value(1457231416L))
-                .andExpect(jsonPath("$[0].archive").value(14572314161L))
+                .andExpect(jsonPath("$[0].history").value(1457231416))
+                .andExpect(jsonPath("$[0].archive").value(145723141))
                 .andExpect(jsonPath("$[0].signature").doesNotExist())
                 // Second result.
                 .andExpect(jsonPath("$[1].cp").value("2"))
@@ -83,7 +83,6 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[1].symbol[0][1]").value("$"))
                 .andExpect(jsonPath("$[1].symbol[1]").isEmpty())
                 .andExpect(jsonPath("$[1].digits").value("Arabic"))
-                // TODO Review grouping.
                 .andExpect(jsonPath("$[1].grouping[0]").value("3"))
                 .andExpect(jsonPath("$[1].grouping[1]").value(","))
                 .andExpect(jsonPath("$[1].grouping[2]").value("0"))
@@ -93,8 +92,8 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[1].fraction_digits[2]").value(2))
                 .andExpect(jsonPath("$[1].minpoll").value(3600))
                 .andExpect(jsonPath("$[1].longpoll").value(false))
-                .andExpect(jsonPath("$[1].history").value(1467458333L))
-                .andExpect(jsonPath("$[1].archive").value(14674583332L))
+                .andExpect(jsonPath("$[1].history").value(1467458333.1225))
+                .andExpect(jsonPath("$[1].archive").value(146745833.1225))
                 .andExpect(jsonPath("$[1].signature").doesNotExist());
 
         // Testing the generated parameters for this call.
@@ -148,6 +147,16 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("errors", hasSize(2)))
                 .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)))
                 .andExpect(jsonPath("errors[1]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)));
+
+        // Wrong currency code.
+        mvc.perform(get("/")
+                .param("mode", "info")
+                .param("cp", " XBTUSD-ver4,2, AAA, BBB, USD ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(jsonPath("message").value("Invalid currency codes"))
+                .andExpect(jsonPath("errors", hasSize(2)))
+                .andExpect(jsonPath("errors[0]").value("Invalid currency code : AAA"))
+                .andExpect(jsonPath("errors[1]").value("Invalid currency code : BBB"));
     }
 
 }

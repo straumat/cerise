@@ -49,7 +49,6 @@ public class CurrencyPairInformationResult {
      */
     @ApiModelProperty(notes = "If provided, a String with the applicable Unicode CLDR locale",
             example = "en_US",
-            required = true,
             position = 4)
     private String locale;
 
@@ -90,7 +89,7 @@ public class CurrencyPairInformationResult {
      */
     @ApiModelProperty(notes = "An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, \",\", 0]",
             position = 9)
-    private List<String> grouping;
+    private Grouping grouping;
 
     /**
      * A String to be placed between whole numbers and a fractional amount.
@@ -132,7 +131,7 @@ public class CurrencyPairInformationResult {
      */
     @ApiModelProperty(notes = "If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.",
             position = 13)
-    private long history;
+    private double history;
 
     /**
      * If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.
@@ -141,7 +140,7 @@ public class CurrencyPairInformationResult {
             example = "133423244",
             position = 14)
     // TODO What is the type ?
-    private long archive;
+    private double archive;
 
     /**
      * Optional. May be used for Linked Data Signatures.
@@ -299,8 +298,8 @@ public class CurrencyPairInformationResult {
      *
      * @return grouping
      */
-    public final List<String> getGrouping() {
-        return grouping;
+    public final List<Object> getGrouping() {
+        return grouping.getValue();
     }
 
     /**
@@ -308,7 +307,7 @@ public class CurrencyPairInformationResult {
      *
      * @param newGrouping the grouping to set
      */
-    public final void setGrouping(final List<String> newGrouping) {
+    public final void setGrouping(final Grouping newGrouping) {
         grouping = newGrouping;
     }
 
@@ -389,7 +388,7 @@ public class CurrencyPairInformationResult {
      *
      * @return history
      */
-    public final long getHistory() {
+    public final double getHistory() {
         return history;
     }
 
@@ -398,7 +397,7 @@ public class CurrencyPairInformationResult {
      *
      * @param newHistory the history to set
      */
-    public final void setHistory(final long newHistory) {
+    public final void setHistory(final double newHistory) {
         history = newHistory;
     }
 
@@ -407,7 +406,7 @@ public class CurrencyPairInformationResult {
      *
      * @return archive
      */
-    public final long getArchive() {
+    public final double getArchive() {
         return archive;
     }
 
@@ -416,7 +415,7 @@ public class CurrencyPairInformationResult {
      *
      * @param newArchive the archive to set
      */
-    public final void setArchive(final long newArchive) {
+    public final void setArchive(final double newArchive) {
         archive = newArchive;
     }
 

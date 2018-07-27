@@ -2,6 +2,7 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.CurrencyPairInformationResult;
+import com.oakinvest.cerise.dto.Grouping;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +42,7 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
             result.setLongDesc("USD price quotes as compared to Bitcoin value\\n\\nRecommended for casual usage");
             result.setSymbol(Arrays.asList(Arrays.asList("-$", "$"), null));
             result.setDigits("Arabic");
-            // TODO Should be array of different types ?
-            result.setGrouping(Arrays.asList("3", ",", "0"));
+            result.setGrouping(new Grouping(3, ",", 0));
             result.setFractionSeparator(".");
             List<Integer> fractionDigits = new ArrayList<>();
             fractionDigits.add(0);
@@ -67,8 +67,7 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
         result.setLongDesc("USD price quotes as compared to Bitcoin value\\n\\nRecommended for casual usage");
         result.setSymbol(Arrays.asList(Arrays.asList("-$", "$"), null));
         result.setDigits("Arabic");
-        // TODO Should be array of different types ?
-        result.setGrouping(Arrays.asList("3", ",", "0"));
+        result.setGrouping(new Grouping(3, ",", 0));
         result.setFractionSeparator(".");
         List<Integer> fractionDigits = new ArrayList<>();
         fractionDigits.add(0);
@@ -78,7 +77,7 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
         result.setMinPoll(300);
         result.setLongPoll(true);
         result.setHistory(1457231416L);
-        result.setArchive(14572314161L);
+        result.setArchive(145723141L);
         results.add(result);
 
         // Second result.
@@ -91,14 +90,13 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
         result.setLongDesc("Maximum precision USD price quotes as compared to Bitcoin value");
         result.setSymbol(Arrays.asList(Arrays.asList("-$", "$"), null));
         result.setDigits("Arabic");
-        // TODO Should be array of different types ?
-        result.setGrouping(Arrays.asList("3", ",", "0"));
+        result.setGrouping(new Grouping(3, ",", 0));
         result.setFractionSeparator(".");
         result.setFractionDigits(fractionDigits);
         result.setMinPoll(3600);
         result.setLongPoll(false);
-        result.setHistory(1467458333L);
-        result.setArchive(14674583332L);
+        result.setHistory(1467458333.1225);
+        result.setArchive(146745833.1225);
         results.add(result);
 
         return results;

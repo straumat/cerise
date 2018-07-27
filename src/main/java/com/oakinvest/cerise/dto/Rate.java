@@ -12,13 +12,19 @@ public class Rate {
     /**
      * Type of exchange rate data.
      */
-    @ApiModelProperty(notes = "Type of exchange rate data", example = "typical", required = true, position = 1)
+    @ApiModelProperty(notes = "Type of exchange rate data",
+            example = "typical",
+            required = true,
+            position = 1)
     private String type;
 
     /**
      * Rate value.
      */
-    @ApiModelProperty(notes = "Rate value", example = "1349.332215", required = true, position = 2)
+    @ApiModelProperty(notes = "Rate value",
+            example = "1349.332215",
+            required = true,
+            position = 2)
     private double value;
 
     /**

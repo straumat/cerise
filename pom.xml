@@ -88,8 +88,6 @@
         <!-- Java -->
         <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
         <commons-lang.version>3.7</commons-lang.version>
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-        <h2.version>1.4.197</h2.version>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
         <swagger.version>2.9.2</swagger.version>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
@@ -116,18 +114,6 @@
     <!-- Dependencies configuration -->
     <dependencies>
         <!-- Spring boot -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-batch</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -158,11 +144,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
         </dependency>
     </dependencies>
     <!-- =========================================================================================================== -->
