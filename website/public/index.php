@@ -101,7 +101,7 @@ function displayAPIReleases($file)
                 <a class="nav-link" href="#">API</a>
                 <a class="nav-link" href="#">Server</a>
                 <a class="nav-link" href="#">Clients</a>
-                <a class="nav-link" href="#">Github</a>
+                <a class="nav-link" href="https://github.com/straumat/cerise" target="github-cerise">Github</a>
                 <a class="nav-link" href="#">Contact</a>
             </nav>
         </section>
