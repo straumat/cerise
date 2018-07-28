@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,19 +45,23 @@ public interface SupportedCurrencyPairTokensAPI {
             @ApiImplicitParam(name = "quote",
                     dataType = "string",
                     example = "USD",
-                    value = "If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s)"),
+                    value = "If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s)."),
             @ApiImplicitParam(name = "base",
                     dataType = "string",
                     example = "XBT",
-                    value = "If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s)"),
+                    value = "If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s)."),
             @ApiImplicitParam(name = "locale",
                     dataType = "string",
                     example = "en_US,en_GB",
-                    value = "If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s)")
+                    value = "If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).")
     })
-    List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(@RequestParam String mode,
+    List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(@ApiParam(value = "Always \"list\" for this request.")
+                                                                           @RequestParam String mode,
+                                                                           @ApiParam(value = "If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s).")
                                                                            @RequestParam(required = false) String[] quote,
+                                                                           @ApiParam(value = "If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s).")
                                                                            @RequestParam(required = false) String[] base,
+                                                                           @ApiParam(value = "If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).")
                                                                            @RequestParam(required = false) String[] locale);
 
 }

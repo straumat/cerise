@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,14 +57,14 @@ public interface HistoricalExchangeRatesAPI {
                     required = true,
                     example = "typical,high",
                     value = "Type of exchange rate data being requested. May be \"high\", \"low\", \"average\", \"typical\", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate."),
-            @ApiImplicitParam(name = "to",
-                    dataType = "double",
-                    example = "1488759998",
-                    value = "POSIX timestamp the results should end with. If omitted, the present time shall be used."),
             @ApiImplicitParam(name = "from",
                     dataType = "double",
                     example = "1488760090",
                     value = "POSIX timestamp the results should begin with."),
+            @ApiImplicitParam(name = "to",
+                    dataType = "double",
+                    example = "1488759998",
+                    value = "POSIX timestamp the results should end with. If omitted, the present time shall be used."),
             @ApiImplicitParam(name = "nearest",
                     dataType = "boolean",
                     example = "true",
@@ -77,13 +78,21 @@ public interface HistoricalExchangeRatesAPI {
                     example = "10",
                     value = "If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.")
     })
-    List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(@RequestParam String mode,
+    List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(@ApiParam(value = "Always \"history\" for this request.")
+                                                                   @RequestParam String mode,
+                                                                   @ApiParam(value = "Currency pair(s) for which information is requested.")
                                                                    @RequestParam String[] cp,
+                                                                   @ApiParam(value = "Type of exchange rate data being requested. May be \"high\", \"low\", \"average\", \"typical\", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.")
                                                                    @RequestParam(required = false) String[] type,
+                                                                   @ApiParam(value = "POSIX timestamp the results should begin with.")
                                                                    @RequestParam(required = false) Double from,
+                                                                   @ApiParam(value = "POSIX timestamp the results should end with. If omitted, the present time shall be used.")
                                                                    @RequestParam(required = false) Double to,
+                                                                   @ApiParam(value = "If provided and true, indicates that only the nearest timestamp to \"from\" must be returned, and a range is not desired. (\"to\" should be omitted in this case.)")
                                                                    @RequestParam(required = false) Boolean nearest,
+                                                                   @ApiParam(value = "If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.")
                                                                    @RequestParam(required = false) Float ratedelta,
+                                                                   @ApiParam(value = "If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.")
                                                                    @RequestParam(required = false) Float timedelta);
 
 }

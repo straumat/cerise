@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,11 +67,17 @@ public interface CurrentExchangeRateAPI {
     })
     // TODO Change maxrate to maxRate
     // TODO Change minrate to minRate
-    List<CurrentExchangeRateResult> getCurrencyPairInformation(@RequestParam String mode,
+    List<CurrentExchangeRateResult> getCurrencyPairInformation(@ApiParam(value = "Always \"rate\" for this request.")
+                                                               @RequestParam String mode,
+                                                               @ApiParam(value = "Currency pair(s) for which information is requested.")
                                                                @RequestParam String[] cp,
+                                                               @ApiParam(value = "Type of exchange rate data being requested. May be \"high\", \"low\", \"average\", \"typical\", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.")
                                                                @RequestParam(required = false) String[] type,
+                                                               @ApiParam(value = "If specified, indicates this request is a long poll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.")
                                                                @RequestParam(required = false) Double minrate,
+                                                               @ApiParam(value = "If specified, indicates this request is a long poll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.")
                                                                @RequestParam(required = false) Double maxrate,
+                                                               @ApiParam(value = "If specified, the server SHOULD return it in each result.")
                                                                @RequestParam(required = false) String nonce);
 
 }

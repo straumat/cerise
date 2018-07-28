@@ -241,7 +241,7 @@
                         <apiSource>
                             <springmvc>true</springmvc>
                             <locations>
-                                <location>com.oakinvest.cerise</location>
+                                <location>com.oakinvest.cerise.web.rest.CurrentExchangeRateAPII</location>
                             </locations>
                             <schemes>
                                 <scheme>http</scheme>
@@ -263,14 +263,14 @@
                                     <name>Stéphane Traumat</name>
                                     <url>https://github.com/straumat/cerise</url>
                                 </contact>
-
                                 <license>
                                     <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
                                     <name>BSD 2-Clause "Simplified" License</name>
                                 </license>
                             </info>
                             <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs</templatePath>
-                            <outputPath>${basedir}/target/specifications/${project.version}/index.html
+                            <outputPath>
+                                ${basedir}/target/specifications/${project.version}/currentExchangeRateAPII.html
                             </outputPath>
                             <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
                             <attachSwaggerArtifact>false</attachSwaggerArtifact>
@@ -279,12 +279,211 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <!-- SupportedCurrencyPairTokensAPI -->
+                        <id>SupportedCurrencyPairTokensAPI</id>
                         <phase>package</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>
+                                        <location>com.oakinvest.cerise.web.rest.SupportedCurrencyPairTokensAPI
+                                        </location>
+                                    </locations>
+                                    <schemes>
+                                        <scheme>http</scheme>
+                                    </schemes>
+                                    <host>api.cerise.tech</host>
+                                    <basePath>/</basePath>
+                                    <info>
+                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
+                                        </title>
+                                        <version>${project.version}</version>
+                                        <description>A common interface for requesting currency exchange rate
+                                            information from a
+                                            server - BIP171 implementation
+                                        </description>
+                                        <termsOfService>
+                                            https://github.com/straumat/cerise/blob/master/LICENSE
+                                        </termsOfService>
+                                        <contact>
+                                            <email>stephane.traumat@gmail.com</email>
+                                            <name>Stéphane Traumat</name>
+                                            <url>https://github.com/straumat/cerise</url>
+                                        </contact>
+                                        <license>
+                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
+                                            <name>BSD 2-Clause "Simplified" License</name>
+                                        </license>
+                                    </info>
+                                    <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
+                                    </templatePath>
+                                    <outputPath>
+                                        ${basedir}/target/specifications/${project.version}/supportedCurrencyPairTokensAPI.html
+                                    </outputPath>
+                                    <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
+                                    <attachSwaggerArtifact>false</attachSwaggerArtifact>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- CurrencyPairInformationAPI -->
+                        <id>CurrencyPairInformationAPI</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>
+                                        <location>com.oakinvest.cerise.web.rest.CurrencyPairInformationAPI
+                                        </location>
+                                    </locations>
+                                    <schemes>
+                                        <scheme>http</scheme>
+                                    </schemes>
+                                    <host>api.cerise.tech</host>
+                                    <basePath>/</basePath>
+                                    <info>
+                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
+                                        </title>
+                                        <version>${project.version}</version>
+                                        <description>A common interface for requesting currency exchange rate
+                                            information from a
+                                            server - BIP171 implementation
+                                        </description>
+                                        <termsOfService>
+                                            https://github.com/straumat/cerise/blob/master/LICENSE
+                                        </termsOfService>
+                                        <contact>
+                                            <email>stephane.traumat@gmail.com</email>
+                                            <name>Stéphane Traumat</name>
+                                            <url>https://github.com/straumat/cerise</url>
+                                        </contact>
+                                        <license>
+                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
+                                            <name>BSD 2-Clause "Simplified" License</name>
+                                        </license>
+                                    </info>
+                                    <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
+                                    </templatePath>
+                                    <outputPath>
+                                        ${basedir}/target/specifications/${project.version}/currencyPairInformationAPI.html
+                                    </outputPath>
+                                    <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
+                                    <attachSwaggerArtifact>false</attachSwaggerArtifact>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- CurrentExchangeRateAPI -->
+                        <id>CurrentExchangeRateAPI</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>
+                                        <location>com.oakinvest.cerise.web.rest.CurrentExchangeRateAPI
+                                        </location>
+                                    </locations>
+                                    <schemes>
+                                        <scheme>http</scheme>
+                                    </schemes>
+                                    <host>api.cerise.tech</host>
+                                    <basePath>/</basePath>
+                                    <info>
+                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
+                                        </title>
+                                        <version>${project.version}</version>
+                                        <description>A common interface for requesting currency exchange rate
+                                            information from a
+                                            server - BIP171 implementation
+                                        </description>
+                                        <termsOfService>
+                                            https://github.com/straumat/cerise/blob/master/LICENSE
+                                        </termsOfService>
+                                        <contact>
+                                            <email>stephane.traumat@gmail.com</email>
+                                            <name>Stéphane Traumat</name>
+                                            <url>https://github.com/straumat/cerise</url>
+                                        </contact>
+                                        <license>
+                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
+                                            <name>BSD 2-Clause "Simplified" License</name>
+                                        </license>
+                                    </info>
+                                    <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
+                                    </templatePath>
+                                    <outputPath>
+                                        ${basedir}/target/specifications/${project.version}/currentExchangeRateAPI.html
+                                    </outputPath>
+                                    <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
+                                    <attachSwaggerArtifact>false</attachSwaggerArtifact>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- HistoricalExchangeRatesAPI -->
+                        <id>HistoricalExchangeRatesAPI</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>
+                                        <location>com.oakinvest.cerise.web.rest.HistoricalExchangeRatesAPI
+                                        </location>
+                                    </locations>
+                                    <schemes>
+                                        <scheme>http</scheme>
+                                    </schemes>
+                                    <host>api.cerise.tech</host>
+                                    <basePath>/</basePath>
+                                    <info>
+                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
+                                        </title>
+                                        <version>${project.version}</version>
+                                        <description>A common interface for requesting currency exchange rate
+                                            information from a
+                                            server - BIP171 implementation
+                                        </description>
+                                        <termsOfService>
+                                            https://github.com/straumat/cerise/blob/master/LICENSE
+                                        </termsOfService>
+                                        <contact>
+                                            <email>stephane.traumat@gmail.com</email>
+                                            <name>Stéphane Traumat</name>
+                                            <url>https://github.com/straumat/cerise</url>
+                                        </contact>
+                                        <license>
+                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
+                                            <name>BSD 2-Clause "Simplified" License</name>
+                                        </license>
+                                    </info>
+                                    <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
+                                    </templatePath>
+                                    <outputPath>
+                                        ${basedir}/target/specifications/${project.version}/historicalExchangeRatesAPI.html
+                                    </outputPath>
+                                    <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
+                                    <attachSwaggerArtifact>false</attachSwaggerArtifact>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
                     </execution>
                 </executions>
+
                 <dependencies>
                 </dependencies>
             </plugin>
