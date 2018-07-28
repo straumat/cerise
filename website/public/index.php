@@ -12,7 +12,7 @@
     <link href="assets/css/page.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 
-    <!-- Favicons -->
+    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="assets/img/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/img/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/img/favicon/apple-icon-72x72.png">
@@ -30,7 +30,60 @@
 
 <body>
 
-<!-- Navbar -->
+<?php
+
+/**
+ * Display API releases.
+ * @param $file page to link to.
+ */
+function displayAPIReleases($file)
+{
+    $stableReleaseFound = false;
+    $allFiles = scandir("specifications", SCANDIR_SORT_DESCENDING);
+    $files = array_diff($allFiles, array('.', '..'));
+    foreach ($files as $key => $value) {
+
+        // Snapshot release.
+        if (strpos($value, 'SNAPSHOT') !== false) {
+            ?>
+            <div class="text-center mt-7">
+                <a class="btn btn-outline-primary px-7"
+                   href="specifications/<?php echo $value; ?>/<?php echo $file ?>"
+                   target="$file-snapshot-<?php echo $value; ?>">View
+                    snapshot release</a>
+            </div>
+            <?php
+        } else {
+            // Stable release.
+            if (!$stableReleaseFound) {
+                $stableReleaseFound = true;
+                ?>
+                <div class="text-center mt-7">
+                    <a class="btn btn-outline-primary px-7"
+                       href="specifications/<?php echo $value; ?>/<?php echo $file ?>"
+                       target="$file-release-<?php echo $value; ?>">View
+                        stable release</a>
+                </div>
+                <br>
+                <p class="small text-lighter">Older releases</p>
+                <?php
+            } else {
+                // Older releases.
+                ?>
+                <a href="specifications/<?php echo $value; ?>/<?php echo $file ?>"
+                   target="$file-release-<?php echo $value; ?>"><?php echo $value; ?></a>
+                <br>
+                <?php
+            }
+        }
+    }
+}
+
+?>
+
+<!--================================================================================================================ -->
+<!--Navigation -->
+<!--================================================================================================================ -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
 
@@ -44,7 +97,7 @@
 
         <section class="navbar-mobile">
             <nav class="nav nav-navbar nav-text-normal mr-auto">
-                <a class="nav-link" href="#">Specifications</a>
+                <a class="nav-link" href="#specifications">Specifications</a>
                 <a class="nav-link" href="#">API</a>
                 <a class="nav-link" href="#">Server</a>
                 <a class="nav-link" href="#">Clients</a>
@@ -54,9 +107,12 @@
         </section>
 
     </div>
-</nav><!-- /.navbar -->
+</nav>
+<!--================================================================================================================ -->
 
-<!-- Header -->
+<!--================================================================================================================ -->
+<!--Header -->
+<!--================================================================================================================ -->
 <header class="header h-fullscreen"
         style="background-image: linear-gradient(135deg, #f9f7ff 0%, #fff 50%, #f6f3ff 100%);">
     <div class="container">
@@ -65,10 +121,11 @@
             <div class="col-lg-6">
                 <h1 class="fw-600">
                     <span style="color:#710005">C</span>urrency & <span style="color:#710005">E</span>xchange <span
-                        style="color:#710005">R</span>ate <span style="color:#710005">I</span>nformation <span
-                        style="color:#710005">SE</span>rver (<a
-                        href="https://github.com/bitcoin/bips/blob/master/bip-0171.mediawiki" target="BIP-0171"><span
-                        style="color:#710005">BIP-0171</span></a>).
+                            style="color:#710005">R</span>ate <span style="color:#710005">I</span>nformation <span
+                            style="color:#710005">SE</span>rver (<a
+                            href="https://github.com/bitcoin/bips/blob/master/bip-0171.mediawiki"
+                            target="BIP-0171"><span
+                                style="color:#710005">BIP-0171</span></a>).
                     <p class="lead mt-5 mb-5">Our aim is to provide the following artifacts : A mocked BIP 171 compliant
                         server side implementation with unit tests, a template server project allowing you to quickly
                         implement your own server and clients libraries to
@@ -85,11 +142,51 @@
 
         </div>
     </div>
-</header><!-- /.header -->
+</header>
+<!--================================================================================================================ -->
 
-
+<!--================================================================================================================ -->
 <!-- Main Content -->
 <main class="main-content">
+
+    <!--============================================================================================================ -->
+    <!--Currency/exchange rate information API -->
+    <!--============================================================================================================ -->
+    <a id="specifications"></a>
+    <section class="section bg-gray">
+        <div class="container text-center">
+            <header class="section-header">
+                <h2>Currency/exchange rate information API</h2>
+            </header>
+            <div class="row gap-y">
+                <!-- Supported currency-pair tokens -->
+                <div class="col-lg-3">
+                    <h6><a href="#">Supported currency-pair tokens</a></h6>
+                    <hr>
+                    <?php displayAPIReleases("supportedCurrencyPairTokensAPI.html"); ?>
+                </div>
+                <!-- Currency-pair information -->
+                <div class="col-lg-3">
+                    <h6><a href="#">Currency-pair information</a></h6>
+                    <hr>
+                    <?php displayAPIReleases("currencyPairInformationAPI.html"); ?>
+                </div>
+                <!-- Current exchange rate -->
+                <div class="col-lg-3">
+                    <h6><a href="#">Current exchange rate</a></h6>
+                    <hr>
+                    <?php displayAPIReleases("currentExchangeRateAPI.html"); ?>
+                </div>
+                <!-- Historical exchange rates -->
+                <div class="col-lg-3">
+                    <h6><a href="#">Historical exchange rates</a></h6>
+                    <hr>
+                    <?php displayAPIReleases("historicalExchangeRatesAPI.html"); ?>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============================================================================================================ -->
 
     <!--
     |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
@@ -274,69 +371,6 @@
                     </blockquote>
                 </div>
 
-            </div>
-
-        </div>
-    </section>
-
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Recent Video Tutorials
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
-    <section class="section bg-gray">
-        <div class="container text-center">
-            <header class="section-header">
-                <h2>Recent Video Tutorials</h2>
-                <hr>
-                <p class="lead">We are so excited and proud of our product. It's really easy to create a landing page
-                    for your awesome product.</p>
-            </header>
-
-
-            <div class="row gap-y">
-
-                <div class="col-lg-4">
-                    <div class="video-btn-wrapper">
-                        <img class="shadow-2 rounded" src="assets/img/thumb/1.jpg" alt="...">
-                        <a class="btn btn-glass btn-circle btn-light" href="https://www.youtube.com/watch?v=ah4pcPbRi2M"
-                           data-provide="lightbox"><i class="fa fa-play"></i></a>
-                    </div>
-                    <br>
-                    <h6><a href="#">We relocated our office to a new designed garage</a></h6>
-                    <p class="small text-lighter">News</p>
-                </div>
-
-
-                <div class="col-lg-4">
-                    <div class="video-btn-wrapper">
-                        <img class="shadow-2 rounded" src="assets/img/thumb/2.jpg" alt="...">
-                        <a class="btn btn-glass btn-circle btn-light" href="https://www.youtube.com/watch?v=ah4pcPbRi2M"
-                           data-provide="lightbox"><i class="fa fa-play"></i></a>
-                    </div>
-                    <br>
-                    <h6><a href="#">Top 5 brilliant content marketing strategies</a></h6>
-                    <p class="small text-lighter">Marketing</p>
-                </div>
-
-
-                <div class="col-lg-4">
-                    <div class="video-btn-wrapper">
-                        <img class="shadow-2 rounded" src="assets/img/thumb/3.jpg" alt="...">
-                        <a class="btn btn-glass btn-circle btn-light" href="https://www.youtube.com/watch?v=ah4pcPbRi2M"
-                           data-provide="lightbox"><i class="fa fa-play"></i></a>
-                    </div>
-                    <br>
-                    <h6><a href="#">Best practices for minimalist design</a></h6>
-                    <p class="small text-lighter">Design</p>
-                </div>
-
-            </div>
-
-
-            <div class="text-center mt-7">
-                <a class="btn btn-outline-primary px-7" href="#">View all</a>
             </div>
 
         </div>

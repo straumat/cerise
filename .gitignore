@@ -1,6 +1,9 @@
 # IDEs and editors
 target/
 
+# Project specific
+website/public/specifications/*
+
 # eclipse specific git ignore
 bin/**
 .tmp/

@@ -1,4 +1,4 @@
-![Cerise BIP-0171](website/assets/img/logo.png)
+![Cerise BIP-0171](website/public/assets/img/logo.png)
 
 Currency &amp; Exchange Rate Information SErver for Bitcoin ([BIP-0171](https://github.com/bitcoin/bips/blob/master/bip-0171.mediawiki))
 

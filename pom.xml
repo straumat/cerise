@@ -298,8 +298,7 @@
                                     <host>api.cerise.tech</host>
                                     <basePath>/</basePath>
                                     <info>
-                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
-                                        </title>
+                                        <title>BIP-0171 - Enumerating supported currency-pair tokens</title>
                                         <version>${project.version}</version>
                                         <description>A common interface for requesting currency exchange rate
                                             information from a
@@ -349,7 +348,7 @@
                                     <host>api.cerise.tech</host>
                                     <basePath>/</basePath>
                                     <info>
-                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
+                                        <title>BIP-0171 - Currency-pair information
                                         </title>
                                         <version>${project.version}</version>
                                         <description>A common interface for requesting currency exchange rate
@@ -400,8 +399,7 @@
                                     <host>api.cerise.tech</host>
                                     <basePath>/</basePath>
                                     <info>
-                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
-                                        </title>
+                                        <title>BIP-0171 - Current exchange rate</title>
                                         <version>${project.version}</version>
                                         <description>A common interface for requesting currency exchange rate
                                             information from a
@@ -451,7 +449,7 @@
                                     <host>api.cerise.tech</host>
                                     <basePath>/</basePath>
                                     <info>
-                                        <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
+                                        <title>BIP-0171 - Historical exchange rates
                                         </title>
                                         <version>${project.version}</version>
                                         <description>A common interface for requesting currency exchange rate
