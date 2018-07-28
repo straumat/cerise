@@ -92,6 +92,8 @@
         <swagger.version>2.9.2</swagger.version>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <swagger-ui.version>2.9.2</swagger-ui.version>
+        <!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
+        <swagger-maven-plugin.version>3.1.7</swagger-maven-plugin.version>
         <!-- Maven -->
         <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
         <dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
@@ -228,6 +230,63 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+            </plugin>
+            <!-- Documentation plugin -->
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>${swagger-maven-plugin.version}</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>
+                                <location>com.oakinvest.cerise</location>
+                            </locations>
+                            <schemes>
+                                <scheme>http</scheme>
+                            </schemes>
+                            <host>api.cerise.tech</host>
+                            <basePath>/</basePath>
+                            <info>
+                                <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
+                                </title>
+                                <version>${project.version}</version>
+                                <description>A common interface for requesting currency exchange rate information from a
+                                    server - BIP171 implementation
+                                </description>
+                                <termsOfService>
+                                    https://github.com/straumat/cerise/blob/master/LICENSE
+                                </termsOfService>
+                                <contact>
+                                    <email>stephane.traumat@gmail.com</email>
+                                    <name>Stéphane Traumat</name>
+                                    <url>https://github.com/straumat/cerise</url>
+                                </contact>
+
+                                <license>
+                                    <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
+                                    <name>BSD 2-Clause "Simplified" License</name>
+                                </license>
+                            </info>
+                            <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs</templatePath>
+                            <outputPath>${basedir}/target/specifications/${project.version}/index.html
+                            </outputPath>
+                            <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
+                            <attachSwaggerArtifact>false</attachSwaggerArtifact>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                </dependencies>
             </plugin>
             <!-- Docker plugin -->
             <plugin>

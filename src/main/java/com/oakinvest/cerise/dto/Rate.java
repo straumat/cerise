@@ -12,7 +12,7 @@ public class Rate {
     /**
      * Type of exchange rate data.
      */
-    @ApiModelProperty(notes = "Type of exchange rate data",
+    @ApiModelProperty(value = "Type of exchange rate data",
             example = "typical",
             required = true,
             position = 1)
@@ -21,7 +21,7 @@ public class Rate {
     /**
      * Rate value.
      */
-    @ApiModelProperty(notes = "Rate value",
+    @ApiModelProperty(value = "Rate value",
             example = "1349.332215",
             required = true,
             position = 2)

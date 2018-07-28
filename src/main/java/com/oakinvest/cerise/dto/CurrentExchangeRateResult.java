@@ -20,7 +20,7 @@ public class CurrentExchangeRateResult {
     /**
      * The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols).
      */
-    @ApiModelProperty(notes = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
+    @ApiModelProperty(value = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
             example = "XBTUSD-ver4",
             required = true,
             position = 1)
@@ -29,7 +29,7 @@ public class CurrentExchangeRateResult {
     /**
      * The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).
      */
-    @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).",
+    @ApiModelProperty(value = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).",
             example = "1488767410.5463133",
             required = true,
             position = 2)
@@ -38,7 +38,7 @@ public class CurrentExchangeRateResult {
     /**
      * A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.
      */
-    @ApiModelProperty(notes = "A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.).",
+    @ApiModelProperty(value = "A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.).",
             example = "{\"typical\": 1349.332215, \"high\": 1351.2}",
             required = true,
             position = 3)
@@ -47,7 +47,7 @@ public class CurrentExchangeRateResult {
     /**
      * Only if the request specified a nonce, the server SHOULD include it here as a JSON String.
      */
-    @ApiModelProperty(notes = "Only if the request specified a nonce, the server SHOULD include it here as a JSON String.",
+    @ApiModelProperty(value = "Only if the request specified a nonce, the server SHOULD include it here as a JSON String.",
             example = "ERAGDYEJAGD",
             required = true,
             position = 4)
@@ -56,7 +56,7 @@ public class CurrentExchangeRateResult {
     /**
      * Optional. May be used for Linked Data Signatures.
      */
-    @ApiModelProperty(notes = "May be used for Linked Data Signatures",
+    @ApiModelProperty(value = "May be used for Linked Data Signatures",
             position = 5)
     private String signature;
 

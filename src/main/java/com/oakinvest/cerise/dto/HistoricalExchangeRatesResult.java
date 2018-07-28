@@ -20,7 +20,7 @@ public class HistoricalExchangeRatesResult {
     /**
      * The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols).
      */
-    @ApiModelProperty(notes = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
+    @ApiModelProperty(value = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
             example = "XBTUSD-ver4",
             required = true,
             position = 1)
@@ -29,7 +29,7 @@ public class HistoricalExchangeRatesResult {
     /**
      * The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).
      */
-    @ApiModelProperty(notes = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).",
+    @ApiModelProperty(value = "The time (as a POSIX timestamp) the rate information is applicable to (should be approximately the request time).",
             example = "1488767410.5463133",
             required = true,
             position = 2)
@@ -38,7 +38,7 @@ public class HistoricalExchangeRatesResult {
     /**
      * A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.
      */
-    @ApiModelProperty(notes = "A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.",
+    @ApiModelProperty(value = "A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.",
             example = "{\"typical\": 1300}",
             required = true,
             position = 3)

@@ -20,7 +20,7 @@ public class CurrencyPairInformationResult {
     /**
      * The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols).
      */
-    @ApiModelProperty(notes = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
+    @ApiModelProperty(value = "The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols)",
             example = "XBTUSD-ver4",
             required = true,
             position = 1)
@@ -29,7 +29,7 @@ public class CurrencyPairInformationResult {
     /**
      * The currency code for the quote currency.
      */
-    @ApiModelProperty(notes = "The currency code for the quote currency",
+    @ApiModelProperty(value = "The currency code for the quote currency",
             example = "USD",
             required = true,
             position = 2)
@@ -38,7 +38,7 @@ public class CurrencyPairInformationResult {
     /**
      * The currency code for the base currency.
      */
-    @ApiModelProperty(notes = "The currency code for the base currency",
+    @ApiModelProperty(value = "The currency code for the base currency",
             example = "XBT",
             required = true,
             position = 3)
@@ -47,7 +47,7 @@ public class CurrencyPairInformationResult {
     /**
      * If provided, a String with the applicable Unicode CLDR locale.
      */
-    @ApiModelProperty(notes = "If provided, a String with the applicable Unicode CLDR locale",
+    @ApiModelProperty(value = "If provided, a String with the applicable Unicode CLDR locale",
             example = "en_US",
             position = 4)
     private String locale;
@@ -55,7 +55,7 @@ public class CurrencyPairInformationResult {
     /**
      * Optional description. For example, it could be "Based on Florida BTM prices." or any other short String that provides information useful to the user. SHOULD be shorter than 45 characters.
      */
-    @ApiModelProperty(notes = "Optional description. For example, it could be \"Based on Florida BTM prices.\" or any other short String that provides information useful to the user",
+    @ApiModelProperty(value = "Optional description. For example, it could be \"Based on Florida BTM prices.\" or any other short String that provides information useful to the user",
             example = "Smoothed averages",
             position = 5)
     private String desc;
@@ -63,8 +63,8 @@ public class CurrencyPairInformationResult {
     /**
      * Optional description, but may be longer and include newlines.
      */
-    @ApiModelProperty(notes = "Optional description, but may be longer and include newlines.",
-            example = "\"USD price quotes as compared to Bitcoin value\\n\\nRecommended for casual usage",
+    @ApiModelProperty(value = "Optional description, but may be longer and include newlines.",
+            example = "USD price quotes as compared to Bitcoin value\\n\\nRecommended for casual usage",
             position = 6)
     @JsonProperty("longdesc")
     private String longDesc;
@@ -72,7 +72,7 @@ public class CurrencyPairInformationResult {
     /**
      * An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.
      */
-    @ApiModelProperty(notes = "An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.",
+    @ApiModelProperty(value = "An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.",
             example = "[[\"-$\", \"$\"], null]",
             position = 7)
     private List<List<String>> symbol;
@@ -80,7 +80,7 @@ public class CurrencyPairInformationResult {
     /**
      * The type of digits to use for the quote currency's numbers. "arabic" should be used for common 0-9 digits.
      */
-    @ApiModelProperty(notes = "The type of digits to use for the quote currency's numbers. \"arabic\" should be used for common 0-9 digits.",
+    @ApiModelProperty(value = "The type of digits to use for the quote currency's numbers. \"arabic\" should be used for common 0-9 digits.",
             example = "arabic",
             position = 8)
     private String digits;
@@ -88,7 +88,7 @@ public class CurrencyPairInformationResult {
     /**
      * An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, ",", 0]
      */
-    @ApiModelProperty(notes = "An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, \",\", 0]",
+    @ApiModelProperty(value = "An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, \",\", 0]",
             example = "[3, \",\", 0]",
             position = 9)
     private Grouping grouping;
@@ -96,7 +96,7 @@ public class CurrencyPairInformationResult {
     /**
      * A String to be placed between whole numbers and a fractional amount.
      */
-    @ApiModelProperty(notes = "A String to be placed between whole numbers and a fractional amount.",
+    @ApiModelProperty(value = "A String to be placed between whole numbers and a fractional amount.",
             example = "?",
             position = 8)
     @JsonProperty("fraction_sep")
@@ -105,7 +105,7 @@ public class CurrencyPairInformationResult {
     /**
      * Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).
      */
-    @ApiModelProperty(notes = "Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).",
+    @ApiModelProperty(value = "Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).",
             example = "[0, 2, 2]",
             position = 10)
     @JsonProperty("fraction_digits")
@@ -114,7 +114,7 @@ public class CurrencyPairInformationResult {
     /**
      * A Number of seconds indicating a minimum time between polls to the server. Clients should be prudent about not polling too often, even if this number is low.
      */
-    @ApiModelProperty(notes = "A Number of seconds indicating a minimum time between polls to the server. Clients should be prudent about not polling too often, even if this number is low.\n",
+    @ApiModelProperty(value = "A Number of seconds indicating a minimum time between polls to the server. Clients should be prudent about not polling too often, even if this number is low.\n",
             example = "300",
             position = 11)
     @JsonProperty("minpoll")
@@ -123,7 +123,7 @@ public class CurrencyPairInformationResult {
     /**
      * If provided and true, indicates longpolling is supported by the server.
      */
-    @ApiModelProperty(notes = "If provided and true, indicates long polling is supported by the server.",
+    @ApiModelProperty(value = "If provided and true, indicates long polling is supported by the server.",
             example = "true",
             position = 12)
     @JsonProperty("longpoll")
@@ -132,14 +132,14 @@ public class CurrencyPairInformationResult {
     /**
      * If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.
      */
-    @ApiModelProperty(notes = "If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.",
+    @ApiModelProperty(value = "If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.",
             position = 13)
     private double history;
 
     /**
      * If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.
      */
-    @ApiModelProperty(notes = "If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.",
+    @ApiModelProperty(value = "If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.",
             example = "133423244",
             position = 14)
     private double archive;
@@ -147,7 +147,7 @@ public class CurrencyPairInformationResult {
     /**
      * Optional. May be used for Linked Data Signatures.
      */
-    @ApiModelProperty(notes = "May be used for Linked Data Signatures",
+    @ApiModelProperty(value = "May be used for Linked Data Signatures",
             position = 15)
     private String signature;
 

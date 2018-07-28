@@ -64,6 +64,7 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     public final void addViewControllers(final ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/docs", "/api");
         registry.addRedirectViewController("/docs", "/swagger-ui.html");
         registry.addRedirectViewController("/documentation", "/swagger-ui.html");
         registry.addRedirectViewController("/swagger", "/swagger-ui.html");
