@@ -29,7 +29,6 @@
 </head>
 
 <body>
-
 <?php
 
 /**
@@ -42,7 +41,6 @@ function displayAPIReleases($file)
     $allFiles = scandir("specifications", SCANDIR_SORT_DESCENDING);
     $files = array_diff($allFiles, array('.', '..'));
     foreach ($files as $key => $value) {
-
         // Snapshot release.
         if (strpos($value, 'SNAPSHOT') !== false) {
             ?>
@@ -86,7 +84,7 @@ function displayAPIReleases($file)
 <!--================================================================================================================ -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-
+        <!--Logo -->
         <div class="navbar-left mr-4">
             <button class="navbar-toggler" type="button">&#9776;</button>
             <a class="navbar-brand" href="#">
@@ -94,18 +92,17 @@ function displayAPIReleases($file)
                 <img class="logo-light" src="assets/img/logo_small.png" alt="logo">
             </a>
         </div>
-
+        <!--Menu -->
         <section class="navbar-mobile">
             <nav class="nav nav-navbar nav-text-normal mr-auto">
                 <a class="nav-link" href="#specifications">Specifications</a>
-                <a class="nav-link" href="#">API</a>
+                <a class="nav-link" href="#api">API (live)</a>
                 <a class="nav-link" href="#">Server</a>
                 <a class="nav-link" href="#">Clients</a>
                 <a class="nav-link" href="https://github.com/straumat/cerise" target="github-cerise">Github</a>
                 <a class="nav-link" href="#">Contact</a>
             </nav>
         </section>
-
     </div>
 </nav>
 <!--================================================================================================================ -->
@@ -131,8 +128,10 @@ function displayAPIReleases($file)
                         implement your own server and clients libraries to
                         call any BIP-0171 compliant server.</p>
                     <p class="gap-xy">
-                        <a class="btn btn-round btn-primary mw-200" href="#">View & test API</a>
-                        <a class="btn btn-round btn-outline-secondary mw-200" href="#">Contact US</a>
+                        <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/docs" target="api">View
+                            & test API</a>
+                        <a class="btn btn-round btn-outline-secondary mw-200" href="mailto:stephane.traumat@gmail.com">Contact
+                            US</a>
                     </p>
             </div>
 
@@ -148,6 +147,24 @@ function displayAPIReleases($file)
 <!--================================================================================================================ -->
 <!-- Main Content -->
 <main class="main-content">
+
+    <!--============================================================================================================ -->
+    <!--Contact us -->
+    <!--============================================================================================================ -->
+    <section class="section py-7" style="background-color: #8ea6e6">
+        <div class="container">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-9">
+                    <h4 class="mb-0 text-white text-center text-md-left">Wants to see the API in action ?</h4>
+                </div>
+                <div class="col-md-3 text-center text-md-right">
+                    <a class="btn btn-lg btn-round btn-light" href="http://api.cerise.tech/docs" target="api">View live
+                        API</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============================================================================================================ -->
 
     <!--============================================================================================================ -->
     <!--Currency/exchange rate information API -->
@@ -187,6 +204,51 @@ function displayAPIReleases($file)
         </div>
     </section>
     <!--============================================================================================================ -->
+
+    <!--============================================================================================================ -->
+    <!--Contact us -->
+    <!--============================================================================================================ -->
+    <section class="section py-7" style="background-color: #8ea6e6">
+        <div class="container">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-9">
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
+                </div>
+                <div class="col-md-3 text-center text-md-right">
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:stephane.traumat@gmail.com">Contact us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============================================================================================================ -->
+
+    <!--============================================================================================================ -->
+    <!--API (live) -->
+    <!--============================================================================================================ -->
+    <a id="api"></a>
+    <section class="section bg-gray overflow-hidden">
+        <div class="container">
+            <div class="row">
+                <!-- Live API description -->
+                <div class="col-md-6 align-self-center text-center text-md-left">
+                    <h2>API (Live documentation)</h2>
+                    <br>
+                    <p>Cerise provides a web interface allowing you to explore the API, view documentation and make rest
+                        calls directly from your browser.</p>
+                    <br>
+                    <a class="btn btn-lg btn-round btn-primary shadow-3" href="http://api.cerise.tech/docs"
+                       target="api">View live API</a>
+                </div>
+                <!-- Live API screenshots -->
+                <div class="col-md-5 mx-auto text-center mt-8 mt-md-0">
+                    <img src="assets/img/swagger-screenshot.png" alt="cerise api swagger screenshot" data-aos="fade-up">
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--============================================================================================================ -->
+
 
     <!--
     |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
@@ -424,9 +486,11 @@ function displayAPIReleases($file)
     </section>
 
 </main>
+<!--================================================================================================================ -->
 
-
+<!--================================================================================================================ -->
 <!-- Footer -->
+<!--================================================================================================================ -->
 <footer class="footer bg-gray py-9">
     <div class="container">
         <div class="row gap-y">
@@ -477,28 +541,14 @@ function displayAPIReleases($file)
 
         </div>
     </div>
-</footer><!-- /.footer -->
+</footer>
+<!--================================================================================================================ -->
 
-
-<!-- Offcanvas - Search -->
-<div id="offcanvas-search" class="offcanvas text-white" data-animation="fade"
-     style="background-color: rgba(255,73,84,0.9)">
-    <button type="button" class="close" data-dismiss="offcanvas" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <div class="row align-items-center text-center h-90">
-        <div class="col-10 col-md-6 mx-auto">
-            <form class="input-transparent">
-                <input class="form-control form-control-lg border-0 lead-5" type="text" name="search"
-                       placeholder="Enter your keywords here">
-            </form>
-        </div>
-    </div>
-</div>
-
+<!--================================================================================================================ -->
 <!-- Scripts -->
 <script src="assets/js/page.min.js"></script>
 <script src="assets/js/script.js"></script>
+<!--================================================================================================================ -->
 
 </body>
 </html>
