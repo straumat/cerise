@@ -35,9 +35,11 @@ public interface CurrencyPairInformationAPI {
             responseContainer = "List")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mode",
+                    dataType = "string",
                     required = true,
                     value = "Always \"info\" for this request."),
             @ApiImplicitParam(name = "cp",
+                    dataType = "string",
                     required = true,
                     example = "XBTUSD-ver4,2",
                     value = "Currency pair(s) for which information is requested.")

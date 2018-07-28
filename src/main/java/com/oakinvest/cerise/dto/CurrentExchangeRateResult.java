@@ -39,6 +39,7 @@ public class CurrentExchangeRateResult {
      * A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.
      */
     @ApiModelProperty(notes = "A JSON Object with each rate type provided as a key, and a Number as the value specifying the rate.).",
+            example = "{\"typical\": 1349.332215, \"high\": 1351.2}",
             required = true,
             position = 3)
     private Map<String, Object> rates = new LinkedHashMap<>();

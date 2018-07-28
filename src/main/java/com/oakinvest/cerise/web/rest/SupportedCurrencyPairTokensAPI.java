@@ -38,15 +38,19 @@ public interface SupportedCurrencyPairTokensAPI {
             responseContainer = "List")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mode",
+                    dataType = "string",
                     required = true,
                     value = "Always \"list\" for this request."),
             @ApiImplicitParam(name = "quote",
+                    dataType = "string",
                     example = "USD",
                     value = "If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s)"),
             @ApiImplicitParam(name = "base",
+                    dataType = "string",
                     example = "XBT",
                     value = "If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s)"),
             @ApiImplicitParam(name = "locale",
+                    dataType = "string",
                     example = "en_US,en_GB",
                     value = "If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s)")
     })

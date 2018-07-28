@@ -49,7 +49,6 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
         return new ApiInfoBuilder()
                 .title("Cerise (BIP171)")
                 .description("A common interface for requesting currency exchange rate information from a server - BIP171 implementation")
-                .version("0.1")
                 .license("BSD 2-Clause License")
                 .contact(new Contact("Stéphane Traumat", "https://github.com/straumat/cerise", "stephane.traumat@gmail.com"))
                 .build();

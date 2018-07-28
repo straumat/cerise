@@ -73,6 +73,7 @@ public class CurrencyPairInformationResult {
      * An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.
      */
     @ApiModelProperty(notes = "An Array of prefix and suffix for the quote currency. Each may be either a fixed String, an Array of two Strings (negative and positive), or null. Any positive or negative symbols must be included in this prefix/suffix; it MUST NOT be implied otherwise.",
+            example = "[[\"-$\", \"$\"], null]",
             position = 7)
     private List<List<String>> symbol;
 
@@ -88,6 +89,7 @@ public class CurrencyPairInformationResult {
      * An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, ",", 0]
      */
     @ApiModelProperty(notes = "An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, \",\", 0]",
+            example = "[3, \",\", 0]",
             position = 9)
     private Grouping grouping;
 
@@ -104,6 +106,7 @@ public class CurrencyPairInformationResult {
      * Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).
      */
     @ApiModelProperty(notes = "Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).",
+            example = "[0, 2, 2]",
             position = 10)
     @JsonProperty("fraction_digits")
     private List<Integer> fractionDigits;
@@ -139,7 +142,6 @@ public class CurrencyPairInformationResult {
     @ApiModelProperty(notes = "If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.",
             example = "133423244",
             position = 14)
-    // TODO What is the type ?
     private double archive;
 
     /**
