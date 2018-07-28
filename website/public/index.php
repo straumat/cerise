@@ -97,8 +97,8 @@ function displayAPIReleases($file)
             <nav class="nav nav-navbar nav-text-normal mr-auto">
                 <a class="nav-link" href="#specifications">Specifications</a>
                 <a class="nav-link" href="#api">API (live)</a>
-                <a class="nav-link" href="#">Server</a>
-                <a class="nav-link" href="#">Clients</a>
+                <a class="nav-link" href="#server">Server</a>
+                <a class="nav-link" href="#clients">Clients</a>
                 <a class="nav-link" href="https://github.com/straumat/cerise" target="github-cerise">Github</a>
                 <a class="nav-link" href="mailto:stephane.traumat@gmail.com">Contact</a>
             </nav>
@@ -248,241 +248,74 @@ function displayAPIReleases($file)
     </section>
     <!--============================================================================================================ -->
 
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Send better email
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
-    <section class="section">
-        <div class="container">
-            <header class="section-header">
-                <small>Feature</small>
-                <h2>Send better email</h2>
-                <hr>
-                <p class="lead">Whether you need to sell your products, share some big news, or tell a story, our
-                    campaign builder makes it easy to create email campaigns that best suit your message.</p>
-            </header>
-
-
-            <div class="row gap-y">
-
-                <div class="col-md-8 mx-auto mb-7">
-                    <img src="assets/img/preview/feature-tablet.png" alt="..." data-aos="fade-up"
-                         data-aos-duration="2000">
-                </div>
-
-
-                <div class="w-100"></div>
-
-
-                <div class="col-md-6 col-xl-4">
-                    <div class="media">
-                        <div class="lead-6 line-height-1 text-lighter w-70px"><i class="icon-mobile"></i></div>
-                        <div class="media-body">
-                            <h5>Responsive</h5>
-                            <p>Your website works on any device: desktop, tablet or mobile.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 col-xl-4">
-                    <div class="media">
-                        <div class="lead-6 line-height-1 text-lighter w-70px"><i class="icon-gears"></i></div>
-                        <div class="media-body">
-                            <h5>Customizable</h5>
-                            <p>You can easily read, edit, and write your own code, or change everything.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 col-xl-4">
-                    <div class="media">
-                        <div class="lead-6 line-height-1 text-lighter w-70px"><i class="icon-tools"></i></div>
-                        <div class="media-body">
-                            <h5>UI Kit</h5>
-                            <p>There is a bunch of useful and necessary elements for developing your website.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 col-xl-4">
-                    <div class="media">
-                        <div class="lead-6 line-height-1 text-lighter w-70px"><i class="icon-layers"></i></div>
-                        <div class="media-body">
-                            <h5>Lego Base</h5>
-                            <p>You can find our code well organized, commented and readable.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 col-xl-4">
-                    <div class="media">
-                        <div class="lead-6 line-height-1 text-lighter w-70px"><i class="icon-recycle"></i></div>
-                        <div class="media-body">
-                            <h5>Clean Code</h5>
-                            <p>As you can see in the source code, we provided a clean code.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 col-xl-4">
-                    <div class="media">
-                        <div class="lead-6 line-height-1 text-lighter w-70px"><i class="icon-chat"></i></div>
-                        <div class="media-body">
-                            <h5>Support</h5>
-                            <p>When you purchase this template, you'll freely receive future updates.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Automate your marketing
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
-    <section class="section bg-gray overflow-hidden">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-6 align-self-center text-center text-md-left">
-                    <h2>Automate your marketing</h2><br>
-                    <p>Keep a personal touch while removing manual tasks from your to-do list. Pre-built marketing
-                        automation creates room to focus on strategy. Welcome, re-engage, and follow up with the people
-                        who matter to you. If you're new to marketing automation, get up to speed with one of our nifty
-                        guides: What is Marketing Automation?</p>
-                    <br>
-                    <a class="btn btn-lg btn-round btn-primary shadow-3" href="#">Get Start Now</a>
-                </div>
-
-                <div class="col-md-5 mx-auto text-center mt-8 mt-md-0">
-                    <img src="assets/img/preview/phone-2.png" alt="..." data-aos="fade-up">
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Test drive
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
+    <!--============================================================================================================ -->
+    <!--Contact us -->
+    <!--============================================================================================================ -->
     <section class="section py-7" style="background-color: #8ea6e6">
         <div class="container">
             <div class="row gap-y align-items-center">
                 <div class="col-md-9">
-                    <h4 class="mb-0 text-white text-center text-md-left">Want a bite? You're in the right place!</h4>
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
                 </div>
-
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="#">Take a test drive</a>
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:stephane.traumat@gmail.com">Contact us</a>
                 </div>
             </div>
         </div>
     </section>
+    <!--============================================================================================================ -->
 
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Testimonials
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
+    <!--============================================================================================================ -->
+    <!--Server -->
+    <!--============================================================================================================ -->
+    <a id="server"></a>
     <section class="section">
         <div class="container">
-            <header class="section-header">
-                <small>Testimonials</small>
-                <h2>What customers say about us</h2>
-                <hr>
-                <p class="lead">We waited until we could do it right. Then we did! Instead of creating a carbon
-                    copy.</p>
-            </header>
-
             <div class="row gap-y text-center">
-
+                <!-- Cerise mocked server -->
                 <div class="col-md-6">
-                    <blockquote class="blockquote">
-                        <div><img class="avatar avatar-xl" src="assets/img/avatar/1.jpg" alt="..."></div>
-                        <br>
-                        <p>When you innovate, you make mistakes. It is best to admit them quickly, and get on with
-                            improving your other innovations.</p>
-                        <footer>Steve Jobs</footer>
-                    </blockquote>
+                    <h2>Cerise mocked server</h2>
+                    <p>Cerise mocked server is a mocked implementation of the BIP-0171 specifications. It includes
+                        the four methods with mocked responses and unit test. It also provides a web user interface
+                        to explore and run REST calls.</p>
+                    <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise"
+                       target="cerise">Get cerise server</a><br>
+                    <br>
+                    <p><a href="https://hub.docker.com/r/straumat/cerise/" target="docker"><i>We also provide a docker
+                                image here.</i></a></p>
                 </div>
-
+                <!-- Cerise template server -->
                 <div class="col-md-6">
-                    <blockquote class="blockquote">
-                        <div><img class="avatar avatar-xl" src="assets/img/avatar/2.jpg" alt="..."></div>
-                        <br>
-                        <p>Technology is just a tool. In terms of getting the kids working together and motivating them,
-                            the teacher is important.</p>
-                        <footer>Bill Gates</footer>
-                    </blockquote>
+                    <h2>Cerise template server</h2>
+                    <p>Cerise template server is a template project allowing you to quickly develop your own BIP 0171
+                        compliant server. This project is based on Cerise mocked server and thanks to it, you only have
+                        to implement four java services, we take care of the rest (request parameters and results,
+                        documentation, security...).</p>
+                    <a class="btn btn-outline-primary px-7" href="#"
+                       target="cerise">Not released yet</a>
                 </div>
-
             </div>
-
         </div>
     </section>
+    <!--============================================================================================================ -->
 
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | CTA
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
-    <section class="section py-7">
+    <!--============================================================================================================ -->
+    <!--Get the source -->
+    <!--============================================================================================================ -->
+    <section class="section py-7" style="background-color: #8ea6e6">
         <div class="container">
             <div class="row gap-y align-items-center">
-                <div class="col-md-6 text-center text-md-left">
-                    <h3>Try it for free</h3>
-                    <p>Already using MailChimp? <a href="#">Sign in</a></p>
+                <div class="col-md-9">
+                    <h4 class="mb-0 text-white text-center text-md-left">Get the source !</h4>
                 </div>
-
-                <div class="col-md-auto ml-auto text-center text-md-right">
-                    <form class="form-inline justify-content-center">
-                        <div class="form-group">
-                            <input type="text" class="form-control w-250 mb-2 mr-sm-2" placeholder="Email address">
-                        </div>
-                        <button type="submit" class="btn btn-lg btn-primary mb-2">Get Started</button>
-                    </form>
+                <div class="col-md-3 text-center text-md-right">
+                    <a class="btn btn-lg btn-round btn-light" href="https://github.com/straumat/cerise">view github</a>
                 </div>
             </div>
         </div>
     </section>
+    <!--============================================================================================================ -->
 
-
-    <!--
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    | Partners
-    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-    !-->
-    <section class="section py-6 d-none">
-        <div class="container">
-
-            <div class="partner partner-sm">
-                <img src="assets/img/partner/1.png" alt="partner 1">
-                <img src="assets/img/partner/2.png" alt="partner 2">
-                <img src="assets/img/partner/3.png" alt="partner 3">
-                <img src="assets/img/partner/4.png" alt="partner 4">
-                <img src="assets/img/partner/5.png" alt="partner 5">
-                <img src="assets/img/partner/6.png" alt="partner 6">
-            </div>
-
-        </div>
-    </section>
 
 </main>
 <!--================================================================================================================ -->
