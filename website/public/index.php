@@ -100,7 +100,7 @@ function displayAPIReleases($file)
                 <a class="nav-link" href="#">Server</a>
                 <a class="nav-link" href="#">Clients</a>
                 <a class="nav-link" href="https://github.com/straumat/cerise" target="github-cerise">Github</a>
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="mailto:stephane.traumat@gmail.com">Contact</a>
             </nav>
         </section>
     </div>
@@ -243,7 +243,6 @@ function displayAPIReleases($file)
                 <div class="col-md-5 mx-auto text-center mt-8 mt-md-0">
                     <img src="assets/img/swagger-screenshot.png" alt="cerise api swagger screenshot" data-aos="fade-up">
                 </div>
-
             </div>
         </div>
     </section>
