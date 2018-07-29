@@ -34,4 +34,34 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
-- find ./website/public/ -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://$FTP_HOST/www/{} ";"
+- cd ~/website/public
+- find ./ -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://$FTP_HOST/www/{} ";"
+# Upload documentation.
+- cd ~/target/specifications/
+- find ./ -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://$FTP_HOST/www/specifications/{} ";"
+# Generate clients.
+- sleep 5m
+- cd ~
+- mkdir clients
+- mkdir dist
+- mkdir dist/$RELEASE
+- wget http://api.cerise.tech/v2/api-docs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l android -o clients/android
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l csharp -o clients/csharp
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l cpprest -o clients/cpp
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l groovy -o clients/groovy
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l haskell -o clients/haskell
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l java -o clients/java
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l javascript -o clients/javascript
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l kotlin -o clients/kotlin
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l objc -o clients/objc
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l go -o clients/go
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l perl -o clients/perl
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l php -o clients/php
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l php -o clients/python
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l python -o clients/python
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l ruby -o clients/ruby
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l rust -o clients/rust
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l scala -o clients/scala
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l swift -o clients/swift
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l typescript -o clients/typescript
