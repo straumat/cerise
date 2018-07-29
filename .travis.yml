@@ -36,10 +36,10 @@ after_success:
 # Upload website.
 - ls -ual
 - pwd
-- cd $TRAVIS_BUILD_DIR/cerise/website/public
+- cd $TRAVIS_BUILD_DIR/website/public
 - find ./ -type f -exec curl --ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/{} ";"
 # Upload documentation.
-- cd $TRAVIS_BUILD_DIR/cerise/target/specifications/
+- cd $TRAVIS_BUILD_DIR/target/specifications/
 - find ./ -type f -exec curl--ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/specifications/{} ";"
 # Generate clients.
 - cd ~
