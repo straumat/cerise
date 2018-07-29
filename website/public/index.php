@@ -38,9 +38,9 @@
 function displayAPIReleases($file)
 {
     $stableReleaseFound = false;
-    $allFiles = scandir("specifications", SCANDIR_SORT_DESCENDING);
-    $files = array_diff($allFiles, array('.', '..'));
-    foreach ($files as $key => $value) {
+    $directories = scandir("specifications", SCANDIR_SORT_DESCENDING);
+    $releases = array_diff($directories, array('.', '..'));
+    foreach ($releases as $key => $value) {
         // Snapshot release.
         if (strpos($value, 'SNAPSHOT') !== false) {
             ?>
@@ -100,7 +100,6 @@ function displayAPIReleases($file)
                 <a class="nav-link" href="#server">Server</a>
                 <a class="nav-link" href="#clients">Clients</a>
                 <a class="nav-link" href="https://github.com/straumat/cerise" target="github-cerise">Github</a>
-                <a class="nav-link" href="mailto:stephane.traumat@gmail.com">Contact</a>
             </nav>
         </section>
     </div>
@@ -114,7 +113,6 @@ function displayAPIReleases($file)
         style="background-image: linear-gradient(135deg, #f9f7ff 0%, #fff 50%, #f6f3ff 100%);">
     <div class="container">
         <div class="row align-items-center h-100">
-
             <div class="col-lg-6">
                 <h1 class="fw-600">
                     <span style="color:#710005">C</span>urrency & <span style="color:#710005">E</span>xchange <span
@@ -130,11 +128,10 @@ function displayAPIReleases($file)
                     <p class="gap-xy">
                         <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/docs" target="api">View
                             & test API</a>
-                        <a class="btn btn-round btn-outline-secondary mw-200" href="mailto:stephane.traumat@gmail.com">Contact
+                        <a class="btn btn-round btn-outline-secondary mw-200" href="mailto:contact@cerise.tech">Contact
                             US</a>
                     </p>
             </div>
-
             <div class="col-lg-5 ml-auto d-none d-lg-block">
                 <img src="assets/img/logo.png" alt="img">
             </div>
@@ -215,7 +212,7 @@ function displayAPIReleases($file)
                     <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
                 </div>
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="mailto:stephane.traumat@gmail.com">Contact us</a>
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
                 </div>
             </div>
         </div>
@@ -258,7 +255,7 @@ function displayAPIReleases($file)
                     <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
                 </div>
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="mailto:stephane.traumat@gmail.com">Contact us</a>
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
                 </div>
             </div>
         </div>
@@ -300,7 +297,7 @@ function displayAPIReleases($file)
     <!--============================================================================================================ -->
 
     <!--============================================================================================================ -->
-    <!--Get the source -->
+    <!--Get the sources -->
     <!--============================================================================================================ -->
     <section class="section py-7" style="background-color: #8ea6e6">
         <div class="container">
@@ -316,6 +313,81 @@ function displayAPIReleases($file)
     </section>
     <!--============================================================================================================ -->
 
+    <!--============================================================================================================ -->
+    <!--Clients -->
+    <!--============================================================================================================ -->
+    <a id="clients"></a>
+    <section class="section py-7">
+        <div class="container">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-6 text-center text-md-left">
+                    <h3>Get client libraries for your favorite language</h3>
+                </div>
+                <div class="col-md-auto ml-auto text-center text-md-right">
+                    <select id="releases">
+                        <?php
+                        $latestReleaseFound = false;
+                        $latestReleaseDirectory = "";
+                        $directories = scandir("clients", SCANDIR_SORT_DESCENDING);
+                        $releases = array_diff($directories, array('.', '..'));
+                        foreach ($releases as $key => $value) {
+                            if (!$latestReleaseFound) {
+                                $latestReleaseDirectory = $value;
+                                $latestReleaseFound = true;
+                            }
+                            ?>
+                            <option value="<?php echo $value ?>"><?php echo $value; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <script>
+                        // Change of releases.
+                        var selectChange = function () {
+                            // get the selected value.
+                            var e = document.getElementById("releases");
+                            var release = e.options[e.selectedIndex].text;
+
+                            // Iterate throw releases.
+                            var inputs = document.getElementsByClassName("client");
+                            for (var i = 0; i < inputs.length; i++) {
+                                var originalHref = inputs[i].getAttribute("href").valueOf();
+                                var index = originalHref.indexOf("/cerise-");
+                                // Generate the new value.
+                                var newValue = originalHref.substring(0, 9) + release + originalHref.substring(index, originalHref.length)
+                                inputs[i].setAttribute("href", newValue);
+                            }
+
+                        };
+                        document.getElementById("releases").onclick = selectChange;
+                    </script>
+
+                </div>
+            </div>
+            <div class="row gap-y text-center">
+                <?php
+                $directories = scandir("clients/" . $latestReleaseDirectory);
+                $clients = array_diff($directories, array('.', '..'));
+                foreach ($clients as $key => $value) {
+                    $language = $value;
+                    $language = str_replace("cerise-client-", "", $value);
+                    $language = str_replace(".zip", "", $language);
+//                    $language = $language . charAt(0) . toUpperCase() + $language . slice(1);
+                    ?>
+                    <div class="col-md-4">
+                        <h2><?php echo ucfirst($language); ?></h2>
+                        <a class="btn btn-outline-primary px-7 client"
+                           href=" <?php echo "clients/" . $latestReleaseDirectory . "/" . $value; ?>"
+                           target="cerise">Get client libray</a><br>
+                        <br>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+
+    </section>
+    <!--============================================================================================================ -->
 
 </main>
 <!--================================================================================================================ -->
@@ -323,56 +395,9 @@ function displayAPIReleases($file)
 <!--================================================================================================================ -->
 <!-- Footer -->
 <!--================================================================================================================ -->
-<footer class="footer bg-gray py-9">
-    <div class="container">
-        <div class="row gap-y">
-
-            <div class="col-md-6 col-xl-4">
-                <p><a href="#"><img src="assets/img/logo/mailchimp.png" alt="logo"></a></p>
-                <p>We can combine beautiful, modern designs with clean, functional and high-performance code to produce
-                    stunning websites.</p>
-            </div>
-
-            <div class="col-6 col-md-3 col-xl-2">
-                <h6 class="mb-4 mt-1"><strong>Company</strong></h6>
-                <div class="nav flex-column">
-                    <a class="nav-link" href="#">About</a>
-                    <a class="nav-link" href="#">Careers</a>
-                    <a class="nav-link" href="#">Contact</a>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-3 col-xl-2">
-                <h6 class="mb-4 mt-1"><strong>Product</strong></h6>
-                <div class="nav flex-column">
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Pricing</a>
-                    <a class="nav-link" href="#">Security</a>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-6 col-xl-2">
-                <h6 class="mb-4 mt-1"><strong>Support</strong></h6>
-                <div class="nav flex-column">
-                    <a class="nav-link" href="#">Help Center</a>
-                    <a class="nav-link" href="#">API</a>
-                    <a class="nav-link" href="#">FAQ</a>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-6 col-xl-2 text-center">
-                <p><a class="btn btn-block btn-round btn-secondary" href="#">Try it free</a></p>
-                <br>
-                <div class="social social-bordered">
-                    <a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
-                    <a class="social-twitter" href="#"><i class="fa fa-twitter"></i></a>
-                    <a class="social-youtube" href="#"><i class="fa fa-youtube"></i></a>
-                    <a class="social-instagram" href="#"><i class="fa fa-instagram"></i></a>
-                </div>
-            </div>
-
-        </div>
-    </div>
+<footer class="footer bg-gray py-2"
+<p align="center"><img src="assets/img/logo.png"
+                       alt="Currency & Exchange Rate Information SErver (BIP-0171)"></a></p>
 </footer>
 <!--================================================================================================================ -->
 
@@ -383,4 +408,4 @@ function displayAPIReleases($file)
 <!--================================================================================================================ -->
 
 </body>
-</html>
+/html>

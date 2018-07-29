@@ -323,6 +323,7 @@
                                         ${basedir}/target/specifications/${project.version}/supportedCurrencyPairTokensAPI.html
                                     </outputPath>
                                     <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
+                                    <swaggerFileName>swagger-SupportedCurrencyPairTokensAPI</swaggerFileName>
                                     <attachSwaggerArtifact>false</attachSwaggerArtifact>
                                 </apiSource>
                             </apiSources>
@@ -481,7 +482,6 @@
                         </configuration>
                     </execution>
                 </executions>
-
                 <dependencies>
                 </dependencies>
             </plugin>
