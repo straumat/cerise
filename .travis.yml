@@ -34,6 +34,8 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
+- ls -ual
+- pwd
 - cd ~/cerise/website/public
 - find ./ -type f -exec curl --ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/{} ";"
 # Upload documentation.
