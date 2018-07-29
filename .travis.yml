@@ -35,10 +35,10 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
 - cd ~/website/public
-- find ./ -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/{} ";"
+- find ./ -type f -exec curl --ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/{} ";"
 # Upload documentation.
 - cd ~/target/specifications/
-- find ./ -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/specifications/{} ";"
+- find ./ -type f -exec curl--ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/specifications/{} ";"
 # Generate clients.
 - sleep 5m
 - cd ~
@@ -68,6 +68,7 @@ after_success:
 - cd ~/clients/csharp;zip -r cerise-client-csharp.zip *
 - cd ~/clients/cpp;zip -r cerise-client-cpp.zip *
 - cd ~/clients/groovy;zip -r cerise-client-groovy.zip *
+- cd ~/clients/haskell;zip -r cerise-client-haskell.zip *
 - cd ~/clients/java;zip -r cerise-client-java.zip *
 - cd ~/clients/cpp;zip -r cerise-client-cpp.zip *
 - cd ~/clients/javascript;zip -r cerise-client-javascript.zip *
@@ -80,9 +81,8 @@ after_success:
 - cd ~/clients/rust;zip -r cerise-client-rust.zip *
 - cd ~/clients/scala;zip -r cerise-client-scala.zip *
 - cd ~/clients/swift;zip -r cerise-client-swift.zip *
-- cd ~/clients/java;zip -r cerise-client-java.zip *
 # Moving them to dist and uploading.
 - cd ~
-- find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE \;
+- find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
 - cd dist/
-- find ./ -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/clients/{} ";"
+- find ./ -type f -exec curl --ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/clients/{} ";"
