@@ -34,4 +34,4 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
-- find ./website/public -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://$FTP_HOST{} ";"'
+- find ./website/public/ -type f -exec curl -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://$FTP_HOST{} ";"'
