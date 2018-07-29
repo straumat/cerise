@@ -16,7 +16,7 @@ before_install:
 # Install coverage tool.
 - wget -O ~/codacy-coverage-reporter-assembly-latest.jar https://github.com/codacy/codacy-coverage-reporter/releases/download/4.0.1/codacy-coverage-reporter-4.0.1-assembly.jar
 # Install swagger.
-- wget -O swagger-codegen-cli.jar http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
+- wget -O ~/swagger-codegen-cli.jar http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
 # Install ftp.
 - npm install ftp chalk
 script:
@@ -34,13 +34,12 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
-- cd ~/website/public
+- cd ~/cerise/website/public
 - find ./ -type f -exec curl --ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/{} ";"
 # Upload documentation.
-- cd ~/target/specifications/
+- cd ~/cerise/target/specifications/
 - find ./ -type f -exec curl--ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/specifications/{} ";"
 # Generate clients.
-- sleep 5m
 - cd ~
 - mkdir clients
 - mkdir dist
