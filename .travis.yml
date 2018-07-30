@@ -5,6 +5,7 @@ addons:
     packages:
     - sshpass
     - lftp
+    - libssl-dev
   artifacts:
     paths:
     - $(git ls-files -o | grep -v lib | grep -v wrapper | grep -e jar$ | tr "\n" ":")
@@ -21,6 +22,8 @@ before_install:
 script:
 - mvn package
 after_success:
+# Configuration.
+- set cmd:default-protocol sftp
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
 # Update official "cerise" image.
