@@ -36,11 +36,11 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
-- cd $TRAVIS_BUILD_DIR/website/
-- lftp -e "mirror -R public/ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- cd $TRAVIS_BUILD_DIR/website/public/
+- lftp -e "mirror -R ./ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
-- lftp -e "mirror -R specifications /home/cerisetefc/www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- lftp -e "mirror -R ./ /home/cerisetefc/www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 # Generate clients.
 - cd ~
 - mkdir clients
@@ -86,4 +86,5 @@ after_success:
 - cd ~
 - find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
 - cd dist/
-- lftp -e "mirror -R clients /www/clients" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- cd $TRAVIS_BUILD_DIR/target/specifications/
+- lftp -e "mirror -R ./ /home/cerisetefc/www/clients" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
