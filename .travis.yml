@@ -48,22 +48,22 @@ after_success:
 - mkdir dist/$RELEASE
 - wget http://api.cerise.tech/v2/api-docs
 # Code generation.
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l android -o clients/android
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l csharp -o clients/csharp
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l cpprest -o clients/cpp
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l groovy -o clients/groovy
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l haskell -o clients/haskell
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l java -o clients/java
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l javascript -o clients/javascript
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l objc -o clients/objc
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l go -o clients/go
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l perl -o clients/perl
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l php -o clients/php
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l python -o clients/python
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l ruby -o clients/ruby
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l rust -o clients/rust
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l scala -o clients/scala
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l swift -o clients/swift
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l android -o clients/android >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l csharp -o clients/csharp >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l cpprest -o clients/cpp >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l groovy -o clients/groovy >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l haskell -o clients/haskell >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l java -o clients/java >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l javascript -o clients/javascript >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l objc -o clients/objc >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l go -o clients/go >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l perl -o clients/perl >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l php -o clients/php >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l python -o clients/python >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l ruby -o clients/ruby >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l rust -o clients/rust >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l scala -o clients/scala >> /logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l swift -o clients/swift >> /logs
 # Zipping files.
 - cd ~/clients/android;zip -r cerise-client-android.zip *
 - cd ~/clients/csharp;zip -r cerise-client-csharp.zip *
