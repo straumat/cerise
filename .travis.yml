@@ -40,7 +40,7 @@ after_success:
 - lftp -e "mirror -R public/ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
-- lftp -e "mirror -R specifications /www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- lftp -e "mirror -R specifications /home/cerisetefc/www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 # Generate clients.
 - cd ~
 - mkdir clients
