@@ -82,6 +82,5 @@ after_success:
 # Moving them to dist and uploading.
 - cd ~
 - find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
-- cd dist/
-- cd $TRAVIS_BUILD_DIR/target/specifications/
+- cd ~/dist/$RELEASE
 - lftp -e "mirror -R ./ /home/cerisetefc/www/clients ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
