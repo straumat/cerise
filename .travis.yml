@@ -17,8 +17,6 @@ before_install:
 script:
 - mvn package
 after_success:
-# Configuration.
-- set cmd:default-protocol sftp
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
 # Update official "cerise" image.
@@ -33,14 +31,10 @@ after_success:
 - sleep 2m
 # Upload website.
 - cd $TRAVIS_BUILD_DIR/website/public/
-- echo "step 1!"
 - lftp -e "mirror -R ./ /home/cerisetefc/www/ ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
-- echo "step 2!"
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
-- echo "step 3!"
-- travis_wait lftp -e "mirror -R ./ /home/cerisetefc/www/specifications ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
-- echo "step 4!"
+- lftp -e "mirror -R ./ /home/cerisetefc/www/specifications ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 # Generate clients.
 - cd ~
 - mkdir clients
@@ -54,7 +48,7 @@ after_success:
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l groovy -o clients/groovy >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l haskell -o clients/haskell >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l java -o clients/java >> logs
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l javascript -o clients/javascript >> logs
+- java -jar swagger-codegen-cli.jar generate -i api-docs -l javascript-closure-angular -o clients/javascript >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l objc -o clients/objc >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l go -o clients/go >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l perl -o clients/perl >> logs
@@ -65,26 +59,26 @@ after_success:
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l scala -o clients/scala >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l swift -o clients/swift >> logs
 # Zipping files.
-- cd ~/clients/android;zip -r cerise-client-android.zip *
-- cd ~/clients/csharp;zip -r cerise-client-csharp.zip *
-- cd ~/clients/cpp;zip -r cerise-client-cpp.zip *
-- cd ~/clients/groovy;zip -r cerise-client-groovy.zip *
-- cd ~/clients/haskell;zip -r cerise-client-haskell.zip *
-- cd ~/clients/java;zip -r cerise-client-java.zip *
-- cd ~/clients/cpp;zip -r cerise-client-cpp.zip *
-- cd ~/clients/javascript;zip -r cerise-client-javascript.zip *
-- cd ~/clients/objc;zip -r cerise-client-objc.zip *
-- cd ~/clients/go;zip -r cerise-client-go.zip *
-- cd ~/clients/perl;zip -r cerise-client-perl.zip *
-- cd ~/clients/php;zip -r cerise-client-php.zip *
-- cd ~/clients/python;zip -r cerise-client-python.zip *
-- cd ~/clients/ruby;zip -r cerise-client-ruby.zip *
-- cd ~/clients/rust;zip -r cerise-client-rust.zip *
-- cd ~/clients/scala;zip -r cerise-client-scala.zip *
-- cd ~/clients/swift;zip -r cerise-client-swift.zip *
+- cd ~/clients/android;zip -r cerise-client-android.zip * >> logs
+- cd ~/clients/csharp;zip -r cerise-client-csharp.zip * >> logs
+- cd ~/clients/cpp;zip -r cerise-client-cpp.zip * >> logs
+- cd ~/clients/groovy;zip -r cerise-client-groovy.zip * >> logs
+- cd ~/clients/haskell;zip -r cerise-client-haskell.zip * >> logs
+- cd ~/clients/java;zip -r cerise-client-java.zip * >> logs
+- cd ~/clients/cpp;zip -r cerise-client-cpp.zip * >> logs
+- cd ~/clients/javascript;zip -r cerise-client-javascript.zip * >> logs
+- cd ~/clients/objc;zip -r cerise-client-objc.zip * >> logs
+- cd ~/clients/go;zip -r cerise-client-go.zip * >> logs
+- cd ~/clients/perl;zip -r cerise-client-perl.zip * >> logs
+- cd ~/clients/php;zip -r cerise-client-php.zip * >> logs
+- cd ~/clients/python;zip -r cerise-client-python.zip * >> logs
+- cd ~/clients/ruby;zip -r cerise-client-ruby.zip * >> logs
+- cd ~/clients/rust;zip -r cerise-client-rust.zip * >> logs
+- cd ~/clients/scala;zip -r cerise-client-scala.zip * >> logs
+- cd ~/clients/swift;zip -r cerise-client-swift.zip * >> logs
 # Moving them to dist and uploading.
 - cd ~
 - find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
 - cd dist/
 - cd $TRAVIS_BUILD_DIR/target/specifications/
-- travis_wait lftp -e "mirror -R ./ /home/cerisetefc/www/clients ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- lftp -e "mirror -R ./ /home/cerisetefc/www/clients ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
