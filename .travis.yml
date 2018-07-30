@@ -1,11 +1,10 @@
 language: java
-node_js:
-- node
 addons:
   ssh_known_hosts: 5.196.65.205
   apt:
     packages:
     - sshpass
+    - lftp
   artifacts:
     paths:
     - $(git ls-files -o | grep -v lib | grep -v wrapper | grep -e jar$ | tr "\n" ":")
@@ -34,13 +33,11 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
-- ls -ual
-- pwd
-- cd $TRAVIS_BUILD_DIR/website/public
-- find ./ -type f -exec curl --ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/{} ";"
+- cd $TRAVIS_BUILD_DIR/website/
+- lftp -e "mirror -R public /www/" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
-- find ./ -type f -exec curl--ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/specifications/{} ";"
+- lftp -e "mirror -R specifications /www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
 # Generate clients.
 - cd ~
 - mkdir clients
@@ -86,4 +83,4 @@ after_success:
 - cd ~
 - find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
 - cd dist/
-- find ./ -type f -exec curl --ipv4 --connect-timeout 8 --max-time 120 --retry 128 --ftp-ssl --disable-epsv --ftp-pasv -u $FTP_USERNAME:$FTP_PASSWORD --ftp-create-dirs -T {} ftp://ftp.cluster021.hosting.ovh.net/www/clients/{} ";"
+- lftp -e "mirror -R clients /www/clients" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
