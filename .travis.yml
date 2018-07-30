@@ -14,8 +14,6 @@ before_install:
 - wget -O ~/codacy-coverage-reporter-assembly-latest.jar https://github.com/codacy/codacy-coverage-reporter/releases/download/4.0.1/codacy-coverage-reporter-4.0.1-assembly.jar
 # Install swagger.
 - wget -O ~/swagger-codegen-cli.jar http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
-# Install ftp.
-- npm install ftp chalk
 script:
 - mvn package
 after_success:
