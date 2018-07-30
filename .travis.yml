@@ -38,15 +38,18 @@ after_success:
 # Upload website.
 - cd $TRAVIS_BUILD_DIR/website/public/
 - lftp -e "mirror --verbose=1 -R ./ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- echo "step 1!"
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
 - lftp -e "mirror --verbose=1 -R ./ /home/cerisetefc/www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+  echo "step 2!"
 # Generate clients.
 - cd ~
 - mkdir clients
 - mkdir dist
 - mkdir dist/$RELEASE
 - wget http://api.cerise.tech/v2/api-docs
+  echo "step 3!"
 # Code generation.
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l android -o clients/android >> /logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l csharp -o clients/csharp >> /logs
