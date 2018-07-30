@@ -37,7 +37,7 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
 - cd $TRAVIS_BUILD_DIR/website/
-- lftp -e "mirror -R public/ /www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- lftp -e "mirror -R public/ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
 - lftp -e "mirror -R specifications /www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
