@@ -39,7 +39,7 @@ function displayAPIReleases($file)
 {
     $stableReleaseFound = false;
     $directories = scandir("specifications", SCANDIR_SORT_DESCENDING);
-    $releases = array_diff($directories, array('.', '..'));
+    $releases = array_diff($directories, array('.', '..', '.empty'));
     foreach ($releases as $key => $value) {
         // Snapshot release.
         if (strpos($value, 'SNAPSHOT') !== false) {
@@ -329,7 +329,7 @@ function displayAPIReleases($file)
                         $latestReleaseFound = false;
                         $latestReleaseDirectory = "";
                         $directories = scandir("clients", SCANDIR_SORT_DESCENDING);
-                        $releases = array_diff($directories, array('.', '..'));
+                        $releases = array_diff($directories, array('.', '..', '.empty'));
                         foreach ($releases as $key => $value) {
                             if (!$latestReleaseFound) {
                                 $latestReleaseDirectory = $value;
@@ -367,7 +367,7 @@ function displayAPIReleases($file)
             <div class="row gap-y text-center">
                 <?php
                 $directories = scandir("clients/" . $latestReleaseDirectory);
-                $clients = array_diff($directories, array('.', '..'));
+                $clients = array_diff($directories, array('.', '..', '.empty'));
                 foreach ($clients as $key => $value) {
                     $language = $value;
                     $language = str_replace("cerise-client-", "", $value);
