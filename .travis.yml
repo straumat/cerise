@@ -37,19 +37,20 @@ after_success:
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 # Upload website.
 - cd $TRAVIS_BUILD_DIR/website/public/
-- travis_wait lftp -e "mirror --verbose=1 -R ./ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 - echo "step 1!"
+- travis_wait lftp -e "mirror --verbose=1 -R ./ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- echo "step 2!"
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
+- echo "step 3!"
 - travis_wait lftp -e "mirror --verbose=1 -R ./ /home/cerisetefc/www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
-  echo "step 2!"
+- echo "step 4!"
 # Generate clients.
 - cd ~
 - mkdir clients
 - mkdir dist
 - mkdir dist/$RELEASE
 - wget http://api.cerise.tech/v2/api-docs
-  echo "step 3!"
 # Code generation.
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l android -o clients/android >> /logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l csharp -o clients/csharp >> /logs
