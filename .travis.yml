@@ -34,12 +34,12 @@ after_success:
 # Upload website.
 - cd $TRAVIS_BUILD_DIR/website/public/
 - echo "step 1!"
-- lftp -e "mirror -R ./ /home/cerisetefc/www/" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- lftp -e "mirror -R ./ /home/cerisetefc/www/ ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 - echo "step 2!"
 # Upload documentation.
 - cd $TRAVIS_BUILD_DIR/target/specifications/
 - echo "step 3!"
-- travis_wait lftp -e "mirror -R ./ /home/cerisetefc/www/specifications" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- travis_wait lftp -e "mirror -R ./ /home/cerisetefc/www/specifications ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
 - echo "step 4!"
 # Generate clients.
 - cd ~
@@ -87,4 +87,4 @@ after_success:
 - find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
 - cd dist/
 - cd $TRAVIS_BUILD_DIR/target/specifications/
-- travis_wait lftp -e "mirror -R ./ /home/cerisetefc/www/clients" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- travis_wait lftp -e "mirror -R ./ /home/cerisetefc/www/clients ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
