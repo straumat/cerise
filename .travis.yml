@@ -49,7 +49,7 @@ after_success:
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l csharp -o clients/csharp >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l cpprest -o clients/cpp >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l groovy -o clients/groovy >> logs
-- java -jar swagger-codegen-cli.jar generate -i api-docs -l haskell -o clients/haskell >> logs
+#- java -jar swagger-codegen-cli.jar generate -i api-docs -l haskell -o clients/haskell >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l java -o clients/java >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l javascript-closure-angular -o clients/javascript >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l objc -o clients/objc >> logs
@@ -66,7 +66,7 @@ after_success:
 - cd ~/clients/csharp;zip -r cerise-client-csharp.zip * >> logs
 - cd ~/clients/cpp;zip -r cerise-client-cpp.zip * >> logs
 - cd ~/clients/groovy;zip -r cerise-client-groovy.zip * >> logs
-- cd ~/clients/haskell;zip -r cerise-client-haskell.zip * >> logs
+#- cd ~/clients/haskell;zip -r cerise-client-haskell.zip * >> logs
 - cd ~/clients/java;zip -r cerise-client-java.zip * >> logs
 - cd ~/clients/cpp;zip -r cerise-client-cpp.zip * >> logs
 - cd ~/clients/javascript;zip -r cerise-client-javascript.zip * >> logs
