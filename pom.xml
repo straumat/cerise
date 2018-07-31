@@ -209,6 +209,15 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Spring boot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
             <!-- Jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
