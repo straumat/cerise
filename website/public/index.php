@@ -38,11 +38,14 @@
 function displayAPIReleases($file)
 {
     $stableReleaseFound = false;
+    $snapshotFound = false;
     $directories = scandir("specifications", SCANDIR_SORT_DESCENDING);
     $releases = array_diff($directories, array('.', '..', '.empty'));
+
     foreach ($releases as $key => $value) {
         // Snapshot release.
-        if (strpos($value, 'SNAPSHOT') !== false) {
+        if (strpos($value, 'SNAPSHOT') !== false && !$snapshotFound) {
+            $snapshotFound = true;
             ?>
             <div class="text-center mt-7">
                 <a class="btn btn-outline-primary px-7"
@@ -53,7 +56,7 @@ function displayAPIReleases($file)
             <?php
         } else {
             // Stable release.
-            if (!$stableReleaseFound) {
+            if (!$stableReleaseFound && strpos($value, 'SNAPSHOT') === false) {
                 $stableReleaseFound = true;
                 ?>
                 <div class="text-center mt-7">
@@ -65,7 +68,7 @@ function displayAPIReleases($file)
                 <br>
                 <p class="small text-lighter">Older releases</p>
                 <?php
-            } else {
+            } else if (strpos($value, 'SNAPSHOT') === false) {
                 // Older releases.
                 ?>
                 <a href="specifications/<?php echo $value; ?>/<?php echo $file ?>"
@@ -276,7 +279,7 @@ function displayAPIReleases($file)
                         the four methods with mocked responses and unit test. It also provides a web user interface
                         to explore and run REST calls.</p>
                     <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise"
-                       target="cerise">Get cerise server</a><br>
+                       target="github">Get cerise server</a><br>
                     <br>
                     <p><a href="https://hub.docker.com/r/straumat/cerise/" target="docker"><i>We also provide a docker
                                 image here.</i></a></p>
@@ -306,7 +309,8 @@ function displayAPIReleases($file)
                     <h4 class="mb-0 text-white text-center text-md-left">Get the source !</h4>
                 </div>
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="https://github.com/straumat/cerise">view github</a>
+                    <a class="btn btn-lg btn-round btn-light" href="https://github.com/straumat/cerise" target="github">view
+                        github</a>
                 </div>
             </div>
         </div>
@@ -327,17 +331,30 @@ function displayAPIReleases($file)
                     <select id="releases">
                         <?php
                         $latestReleaseFound = false;
+                        $snapshotFound = false;
                         $latestReleaseDirectory = "";
                         $directories = scandir("clients", SCANDIR_SORT_DESCENDING);
                         $releases = array_diff($directories, array('.', '..', '.empty'));
                         foreach ($releases as $key => $value) {
+                            // Selecting the value for the option.
                             if (!$latestReleaseFound) {
                                 $latestReleaseDirectory = $value;
                                 $latestReleaseFound = true;
                             }
-                            ?>
-                            <option value="<?php echo $value ?>"><?php echo $value; ?></option>
-                            <?php
+
+                            // if we found
+                            if (strpos($value, 'SNAPSHOT') !== false && !$snapshotFound) {
+                                ?>
+                                <option value="<?php echo $value ?>"><?php echo $value; ?></option>
+                                <?php
+                                $snapshotFound = true;
+                            }
+
+                            if (strpos($value, 'SNAPSHOT') === false) {
+                                ?>
+                                <option value="<?php echo $value ?>"><?php echo $value; ?></option>
+                                <?php
+                            }
                         }
                         ?>
                     </select>
@@ -408,4 +425,4 @@ function displayAPIReleases($file)
 <!--================================================================================================================ -->
 
 </body>
-/html>
+</html>
