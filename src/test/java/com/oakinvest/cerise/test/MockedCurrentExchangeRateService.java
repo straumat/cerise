@@ -1,7 +1,8 @@
-package com.oakinvest.cerise.service;
+package com.oakinvest.cerise.test;
 
 import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.CurrentExchangeRateResult;
+import com.oakinvest.cerise.service.CurrentExchangeRateService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,6 @@ public class MockedCurrentExchangeRateService implements CurrentExchangeRateServ
     /**
      * The last parameter received by the service.
      */
-    // TODO Rename to parameters.
     private CurrentExchangeRateParameters lastReceivedParameter;
 
     @Override

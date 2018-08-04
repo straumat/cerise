@@ -65,8 +65,6 @@ public interface CurrentExchangeRateAPI {
                     example = "AAAAAAAAAAA",
                     value = "If specified, the server SHOULD return it in each result.")
     })
-    // TODO Change maxrate to maxRate
-    // TODO Change minrate to minRate
     List<CurrentExchangeRateResult> getCurrencyPairInformation(@ApiParam(value = "Always \"rate\" for this request.")
                                                                @RequestParam String mode,
                                                                @ApiParam(value = "Currency pair(s) for which information is requested.")

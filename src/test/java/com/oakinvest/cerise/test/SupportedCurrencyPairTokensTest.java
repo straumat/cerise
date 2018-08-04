@@ -2,7 +2,6 @@ package com.oakinvest.cerise.test;
 
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensParameters;
-import com.oakinvest.cerise.service.MockedSupportedCurrencyPairTokensService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

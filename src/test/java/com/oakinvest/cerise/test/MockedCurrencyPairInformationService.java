@@ -1,8 +1,9 @@
-package com.oakinvest.cerise.service;
+package com.oakinvest.cerise.test;
 
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.CurrencyPairInformationResult;
 import com.oakinvest.cerise.dto.Grouping;
+import com.oakinvest.cerise.service.CurrencyPairInformationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

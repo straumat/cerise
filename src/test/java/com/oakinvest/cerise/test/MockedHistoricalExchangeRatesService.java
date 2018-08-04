@@ -1,7 +1,8 @@
-package com.oakinvest.cerise.service;
+package com.oakinvest.cerise.test;
 
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesParameters;
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesResult;
+import com.oakinvest.cerise.service.HistoricalExchangeRatesService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,6 @@ public class MockedHistoricalExchangeRatesService implements HistoricalExchangeR
     /**
      * The last parameter received by the service.
      */
-    // TODO Rename to parameters.
     private HistoricalExchangeRatesParameters lastReceivedParameter;
 
     @Override
