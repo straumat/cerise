@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
 
     @Override
     public final List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(final String mode, final String[] quote, final String[] base, final String[] locale) {
-        log.info("Supported currency-pair tokens called : quote={}, base={}, locale={}.", quote, base, locale);
+        log.info("Supported currency-pair tokens called : quote={}, base={}, locale={}.", Arrays.toString(quote), Arrays.toString(base), Arrays.toString(locale));
 
         // -------------------------------------------------------------------------------------------------------------
         // Validating the parameters.
