@@ -2,6 +2,7 @@ package com.oakinvest.cerise.test;
 
 import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.Mode;
+import com.oakinvest.cerise.service.MockedCurrentExchangeRateService;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

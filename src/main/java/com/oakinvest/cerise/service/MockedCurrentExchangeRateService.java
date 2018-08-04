@@ -1,8 +1,7 @@
-package com.oakinvest.cerise.test;
+package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.CurrentExchangeRateResult;
-import com.oakinvest.cerise.service.CurrentExchangeRateService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

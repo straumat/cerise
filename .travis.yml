@@ -20,13 +20,15 @@ before_install:
 script:
 - mvn package
 after_success:
+- RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
+# Uploading cerise-api
+- curl -T $TRAVIS_BUILD_DIR/target/cerise-api.jar -ustraumat:$BINTRAY_KEY https://api.bintray.com/content/straumat/cerise/com.oakinvest.cerise/$RELEASE/
 # Update official "cerise" image.
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - docker push $DOCKER_USERNAME/cerise
 # Run "cerise" image on reference server.
-- RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker stop $(docker ps -aq --filter "label=cerise")'
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker rm -f $(docker ps -aq --filter "label=cerise")'
 - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"

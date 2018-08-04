@@ -1,8 +1,7 @@
-package com.oakinvest.cerise.test;
+package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensParameters;
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensResult;
-import com.oakinvest.cerise.service.SupportedCurrencyPairTokensService;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;

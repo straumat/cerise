@@ -230,6 +230,34 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+                <executions>
+                    <!-- api -->
+                    <execution>
+                        <id>api</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>api</classifier>
+                            <includes>
+                                <include>**/Application*</include>
+                                <include>**/dto/**/*</include>
+                                <include>**/service/CurrencyPairInformationService*</include>
+                                <include>**/service/CurrentExchangeRateService*</include>
+                                <include>**/service/HistoricalExchangeRatesService*</include>
+                                <include>**/service/SupportedCurrencyPairTokensService*</include>
+                                <include>**/util/**/*</include>
+                                <include>**/web/**/*</include>
+                            </includes>
+                            <archive>
+                                <manifestEntries>
+                                    <Implementation-Version>${project.version}</Implementation-Version>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <!-- Documentation plugin -->
             <plugin>
