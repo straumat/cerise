@@ -4,28 +4,30 @@ import java.util.List;
 
 /**
  * Supported currency-pair tokens parameters.
+ *
+ * @author straumat
  */
 public class SupportedCurrencyPairTokensParameters {
 
     /**
      * Always "list" for this request.
      */
-    private Mode mode = Mode.list;
+    private final Mode mode = Mode.list;
 
     /**
      * If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s).
      */
-    private List<String> quote;
+    private final List<String> quote;
 
     /**
      * If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s).
      */
-    private List<String> base;
+    private final List<String> base;
 
     /**
      * If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).
      */
-    private List<String> locales;
+    private final List<String> locales;
 
     /**
      * Constructor.

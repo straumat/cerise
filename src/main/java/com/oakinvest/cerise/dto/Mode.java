@@ -2,6 +2,8 @@ package com.oakinvest.cerise.dto;
 
 /**
  * Mode parameter.
+ *
+ * @author straumat
  */
 public enum Mode {
 

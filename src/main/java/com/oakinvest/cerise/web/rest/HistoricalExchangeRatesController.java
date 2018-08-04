@@ -28,7 +28,7 @@ public class HistoricalExchangeRatesController extends CeriseController implemen
     /**
      * Currency-pair information service.
      */
-    private HistoricalExchangeRatesService service;
+    private final HistoricalExchangeRatesService service;
 
     /**
      * Constructor.

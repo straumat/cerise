@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * Currency-pair information.
+ * Currency-pair information API.
  *
  * @author straumat
  */
@@ -22,10 +22,10 @@ import java.util.List;
 public interface CurrencyPairInformationAPI {
 
     /**
-     * Currency-pair information.
+     * Currency-pair information API.
      *
-     * @param mode Always "info" for this request.
-     * @param cp   Currency pair(s) for which information is requested.
+     * @param mode Always "info" for this request
+     * @param cp   Currency pair(s) for which information is requested
      * @return results
      */
     @RequestMapping(value = "/",

@@ -22,14 +22,14 @@ import java.util.List;
 public interface CurrentExchangeRateAPI {
 
     /**
-     * Current exchange rate.
+     * Current exchange rate API.
      *
-     * @param mode    Always "rate" for this request.
-     * @param cp      Currency pair(s) for which information is requested.
-     * @param type    Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.
-     * @param minrate If specified, indicates this request is a long poll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
-     * @param maxrate If specified, indicates this request is a long poll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
-     * @param nonce   If specified, the server SHOULD return it in each result.
+     * @param mode    Always "rate" for this request
+     * @param cp      Currency pair(s) for which information is requested
+     * @param type    Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate
+     * @param minrate If specified, indicates this request is a long poll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value
+     * @param maxrate If specified, indicates this request is a long poll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value
+     * @param nonce   If specified, the server SHOULD return it in each result
      * @return results
      */
     @RequestMapping(value = "/",

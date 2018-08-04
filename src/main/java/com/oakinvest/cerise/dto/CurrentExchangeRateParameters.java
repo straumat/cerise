@@ -12,32 +12,32 @@ public class CurrentExchangeRateParameters {
     /**
      * Always "rate" for this request.
      */
-    private Mode mode = Mode.rate;
+    private final Mode mode = Mode.rate;
 
     /**
      * Currency pair(s) for which information is requested.
      */
-    private List<String> cp;
+    private final List<String> cp;
 
     /**
      * Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.
      */
-    private List<String> types;
+    private final List<String> types;
 
     /**
      * If specified, indicates this request is a longpoll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
      */
-    private Double minrate;
+    private final Double minrate;
 
     /**
      * If specified, indicates this request is a longpoll. The server should not send a response until the rate(s) fall below or above (respectively) the provided value.
      */
-    private Double maxrate;
+    private final Double maxrate;
 
     /**
      * If specified, the server SHOULD return it in each result.
      */
-    private String nonce;
+    private final String nonce;
 
     /**
      * Constructor.

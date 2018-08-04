@@ -15,8 +15,8 @@ public interface CurrentExchangeRateService {
     /**
      * Current exchange rate service.
      *
-     * @param parameters parameters
-     * @return results
+     * @param parameters rest parameters
+     * @return rest results
      */
     List<CurrentExchangeRateResult> getCurrentExchangeRate(CurrentExchangeRateParameters parameters);
 

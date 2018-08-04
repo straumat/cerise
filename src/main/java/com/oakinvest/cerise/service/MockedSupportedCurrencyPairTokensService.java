@@ -18,13 +18,13 @@ public class MockedSupportedCurrencyPairTokensService implements SupportedCurren
     /**
      * The last parameter received by the service.
      */
-    private SupportedCurrencyPairTokensParameters lastUsedParameter;
+    private SupportedCurrencyPairTokensParameters lastReceivedParameter;
 
     @Override
     public final List<SupportedCurrencyPairTokensResult> getSupportedCurrencyPairTokens(final SupportedCurrencyPairTokensParameters parameters) {
-        lastUsedParameter = parameters;
+        lastReceivedParameter = parameters;
         List<SupportedCurrencyPairTokensResult> results = new LinkedList<>();
-        SupportedCurrencyPairTokensResult result = new SupportedCurrencyPairTokensResult();
+        SupportedCurrencyPairTokensResult result;
 
         // First result.
         result = new SupportedCurrencyPairTokensResult();
@@ -56,12 +56,12 @@ public class MockedSupportedCurrencyPairTokensService implements SupportedCurren
     }
 
     /**
-     * Getter of lastUsedParameter.
+     * Getter of lastReceivedParameter.
      *
-     * @return lastUsedParameter
+     * @return lastReceivedParameter
      */
-    public final SupportedCurrencyPairTokensParameters getLastUsedParameter() {
-        return lastUsedParameter;
+    public final SupportedCurrencyPairTokensParameters getLastReceivedParameter() {
+        return lastReceivedParameter;
     }
 
 }

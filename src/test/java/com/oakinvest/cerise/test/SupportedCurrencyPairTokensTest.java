@@ -3,7 +3,6 @@ package com.oakinvest.cerise.test;
 import com.oakinvest.cerise.dto.Mode;
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensParameters;
 import com.oakinvest.cerise.service.MockedSupportedCurrencyPairTokensService;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +13,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Enumerating supported currency-pair tokens.
+ * Enumerating supported currency-pair tokens test.
  *
  * @author straumat
  */
@@ -42,7 +35,7 @@ public class SupportedCurrencyPairTokensTest {
     private MockedSupportedCurrencyPairTokensService service;
 
     /**
-     * Test for Enumerating supported currency-pair tokens results.
+     * Test for enumerating supported currency-pair tokens results.
      */
     @Test
     public void getSupportedCurrencyPairTokensResults() throws Exception {
@@ -77,7 +70,7 @@ public class SupportedCurrencyPairTokensTest {
                 .andExpect(jsonPath("$[2].signature").doesNotExist());
 
         // Testing the generated parameters for the service.
-        SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();
+        SupportedCurrencyPairTokensParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
         assertTrue("Quote parameter is not empty", p.getQuote().isEmpty());
         assertTrue("Base parameter is not empty", p.getBase().isEmpty());
@@ -85,7 +78,7 @@ public class SupportedCurrencyPairTokensTest {
     }
 
     /**
-     * Test for Enumerating supported currency-pair tokens parameters.
+     * Test for enumerating supported currency-pair tokens parameters.
      */
     @Test
     public void getSupportedCurrencyPairTokensParameters() throws Exception {
@@ -97,7 +90,7 @@ public class SupportedCurrencyPairTokensTest {
                 .param("locale", "en_US,en_GB")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        SupportedCurrencyPairTokensParameters p = service.getLastUsedParameter();
+        SupportedCurrencyPairTokensParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter value is wrong", Mode.list, p.getMode());
         assertEquals("Quote parameter is set", 2, p.getQuote().size());
         assertEquals("Quote parameter value", "USD", p.getQuote().get(0));
@@ -108,13 +101,7 @@ public class SupportedCurrencyPairTokensTest {
         assertEquals("Base parameter not set", 2, p.getLocales().size());
         assertEquals("Base parameter value", "en_US", p.getLocales().get(0));
         assertEquals("Base parameter value", "en_GB", p.getLocales().get(1));
-    }
 
-    /**
-     * Test for Enumerating supported currency-pair tokens parameters.
-     */
-    @Test
-    public void getSupportedCurrencyPairTokensWithInvalidCurrencyCode() throws Exception {
         // Wrong values of quotes.
         mvc.perform(get("/")
                 .param("mode", "list")

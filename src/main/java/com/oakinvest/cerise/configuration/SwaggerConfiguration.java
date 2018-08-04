@@ -43,7 +43,7 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
     /**
      * API Information.
      *
-     * @return api information.
+     * @return api information
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

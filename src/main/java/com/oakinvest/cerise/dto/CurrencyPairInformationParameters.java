@@ -12,17 +12,17 @@ public class CurrencyPairInformationParameters {
     /**
      * Always "info" for this request.
      */
-    private Mode mode = Mode.info;
+    private final Mode mode = Mode.info;
 
     /**
      * Currency pair(s) for which information is requested.
      */
-    private List<String> cp;
+    private final List<String> cp;
 
     /**
      * Constructor.
      *
-     * @param newCp Currency pair(s) for which information is requested.
+     * @param newCp Currency pair(s) for which information is requested
      */
     public CurrencyPairInformationParameters(final List<String> newCp) {
         this.cp = newCp;

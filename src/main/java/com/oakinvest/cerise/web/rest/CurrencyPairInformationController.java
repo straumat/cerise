@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Currency-pair information.
+ * Currency-pair information controller.
  *
  * @author straumat
  */
@@ -27,7 +27,7 @@ public class CurrencyPairInformationController extends CeriseController implemen
     /**
      * Currency-pair information service.
      */
-    private CurrencyPairInformationService service;
+    private final CurrencyPairInformationService service;
 
     /**
      * Constructor.

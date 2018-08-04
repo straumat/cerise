@@ -22,14 +22,14 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
     /**
      * The last parameter received by the service.
      */
-    private CurrencyPairInformationParameters lastUsedParameter;
+    private CurrencyPairInformationParameters lastReceivedParameter;
 
     @Override
     @SuppressWarnings("magicnumber")
     public final List<CurrencyPairInformationResult> getCurrencyPairInformation(final CurrencyPairInformationParameters parameters) {
-        lastUsedParameter = parameters;
+        lastReceivedParameter = parameters;
         List<CurrencyPairInformationResult> results = new LinkedList<>();
-        CurrencyPairInformationResult result = new CurrencyPairInformationResult();
+        CurrencyPairInformationResult result;
 
         // Test for long CP maximum size.
         if (parameters.getCp().size() > 0 && "TEST_LONG_CP".equals(parameters.getCp().get(0))) {
@@ -51,8 +51,8 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
             result.setFractionDigits(fractionDigits);
             result.setMinPoll(300);
             result.setLongPoll(true);
-            result.setHistory(1457231416L);
-            result.setArchive(14572314161L);
+            result.setHistory(1457231416D);
+            result.setArchive(14572314161D);
             results.add(result);
             results.add(result);
         }
@@ -76,8 +76,8 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
         result.setFractionDigits(fractionDigits);
         result.setMinPoll(300);
         result.setLongPoll(true);
-        result.setHistory(1457231416L);
-        result.setArchive(145723141L);
+        result.setHistory(1457231416D);
+        result.setArchive(145723141D);
         results.add(result);
 
         // Second result.
@@ -103,11 +103,11 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
     }
 
     /**
-     * Getter of lastUsedParameter.
+     * Getter of lastReceivedParameter.
      *
-     * @return lastUsedParameter
+     * @return lastReceivedParameter
      */
-    public final CurrencyPairInformationParameters getLastUsedParameter() {
-        return lastUsedParameter;
+    public final CurrencyPairInformationParameters getLastReceivedParameter() {
+        return lastReceivedParameter;
     }
 }

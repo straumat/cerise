@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Enumerating supported currency-pair tokens.
+ * Enumerating supported currency-pair tokens controller.
  *
  * @author straumat
  */
@@ -26,15 +26,15 @@ public class SupportedCurrencyPairTokensController extends CeriseController impl
     /**
      * Service.
      */
-    private SupportedCurrencyPairTokensService service;
+    private final SupportedCurrencyPairTokensService service;
 
     /**
      * Constructor.
      *
-     * @param supportedCurrencyPairTokensService supported currency-pair tokens service
+     * @param newService service
      */
-    public SupportedCurrencyPairTokensController(final SupportedCurrencyPairTokensService supportedCurrencyPairTokensService) {
-        this.service = supportedCurrencyPairTokensService;
+    public SupportedCurrencyPairTokensController(final SupportedCurrencyPairTokensService newService) {
+        this.service = newService;
     }
 
     @Override

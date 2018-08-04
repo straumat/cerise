@@ -42,7 +42,7 @@ public class HistoricalExchangeRatesResult {
             example = "{\"typical\": 1300}",
             required = true,
             position = 3)
-    private Map<String, Object> rates = new LinkedHashMap<>();
+    private final Map<String, Object> rates = new LinkedHashMap<>();
 
     /**
      * Getter of cp.

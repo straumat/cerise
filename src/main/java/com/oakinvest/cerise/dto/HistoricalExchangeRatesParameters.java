@@ -12,42 +12,42 @@ public class HistoricalExchangeRatesParameters {
     /**
      * Always "history" for this request.
      */
-    private Mode mode = Mode.history;
+    private final Mode mode = Mode.history;
 
     /**
      * Currency pair(s) for which information is requested.
      */
-    private List<String> cp;
+    private final List<String> cp;
 
     /**
      * Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.
      */
-    private List<String> types;
+    private final List<String> types;
 
     /**
      * POSIX timestamp the results should begin with.
      */
-    private Double from;
+    private final Double from;
 
     /**
      * POSIX timestamp the results should end with. If omitted, the present time shall be used.
      */
-    private Double to;
+    private final Double to;
 
     /**
      * If provided and true, indicates that only the nearest timestamp to "from" must be returned, and a range is not desired. ("to" should be omitted in this case.)
      */
-    private Boolean nearest;
+    private final Boolean nearest;
 
     /**
      * If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      */
-    private Float rateDelta;
+    private final Float rateDelta;
 
     /**
      * If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      */
-    private Float timeDelta;
+    private final Float timeDelta;
 
     /**
      * Constructor.

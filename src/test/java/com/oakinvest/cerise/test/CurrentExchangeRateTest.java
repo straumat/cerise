@@ -67,19 +67,19 @@ public class CurrentExchangeRateTest {
                 .andExpect(jsonPath("$[1].signature").doesNotExist());
 
         // Testing the generated parameters for the service.
-        CurrentExchangeRateParameters p = service.getLastUsedParameter();
+        CurrentExchangeRateParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter value is wrong", Mode.rate, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
         assertEquals("CP parameter set", "2", p.getCp().get(1));
         assertNotEquals("Type is set", p.getTypes().size(), 0);
         assertNull("Minrate is set", p.getMinrate());
-        assertNull("Maxrateis set", p.getMaxrate());
+        assertNull("Maxrate is set", p.getMaxrate());
         assertNull("Nonce is set", p.getNonce());
     }
 
     /**
-     * Test for Current exchange rate parameters.
+     * Test for current exchange rate parameters.
      */
     @Test
     public void getCurrentExchangeRateParameters() throws Exception {
@@ -90,7 +90,7 @@ public class CurrentExchangeRateTest {
                 .param("type", " typical , high ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        CurrentExchangeRateParameters p = service.getLastUsedParameter();
+        CurrentExchangeRateParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
@@ -107,7 +107,7 @@ public class CurrentExchangeRateTest {
                 .param("minrate", "1350.111332")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
+        p = service.getLastReceivedParameter();
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
@@ -128,7 +128,7 @@ public class CurrentExchangeRateTest {
                 .param("maxrate", "1351.111332")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
+        p = service.getLastReceivedParameter();
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
@@ -150,7 +150,7 @@ public class CurrentExchangeRateTest {
                 .param("nonce", "JGT")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
+        p = service.getLastReceivedParameter();
         assertEquals("Mode parameter set", Mode.rate, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
@@ -161,13 +161,7 @@ public class CurrentExchangeRateTest {
         assertEquals("Minrate", p.getMinrate(), 1350.111332);
         assertEquals("Maxrate", p.getMaxrate(), 1351.111332);
         assertEquals("Nonce", p.getNonce(), "JGT");
-    }
 
-    /**
-     * Test for Current exchange rate with long CP.
-     */
-    @Test
-    public void getCurrentExchangeRateWithWrongParameters() throws Exception {
         // Testing with long cp as parameter.
         mvc.perform(get("/")
                 .param("mode", "rate")
@@ -178,7 +172,6 @@ public class CurrentExchangeRateTest {
                 .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
                 .andExpect(jsonPath("errors", hasSize(1)))
                 .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("A", 256)));
-
 
         // Testing with long cp as return.
         mvc.perform(get("/")

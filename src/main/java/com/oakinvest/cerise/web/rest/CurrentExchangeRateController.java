@@ -27,12 +27,12 @@ public class CurrentExchangeRateController extends CeriseController implements C
     /**
      * Currency-pair information service.
      */
-    private CurrentExchangeRateService service;
+    private final CurrentExchangeRateService service;
 
     /**
      * Constructor.
      *
-     * @param newService newService
+     * @param newService service
      */
     public CurrentExchangeRateController(final CurrentExchangeRateService newService) {
         this.service = newService;
