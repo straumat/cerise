@@ -24,7 +24,7 @@ after_success:
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
 # Uploading cerise-api
-- curl -T $TRAVIS_BUILD_DIR/target/cerise-api.jar -ustraumat:$BINTRAY_KEY https://api.bintray.com/content/straumat/cerise/api/$RELEASE/cerise-api.jar
+- curl -T $TRAVIS_BUILD_DIR/target/cerise-api.jar -ustraumat:$BINTRAY_KEY https://api.bintray.com/content/straumat/cerise/api/$RELEASE/cerise.jar
 # Update official "cerise" image.
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - docker push $DOCKER_USERNAME/cerise

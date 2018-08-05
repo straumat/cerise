@@ -242,6 +242,7 @@
                             <classifier>api</classifier>
                             <includes>
                                 <include>**/Application*</include>
+                                <include>**/configuration/**/*</include>
                                 <include>**/dto/**/*</include>
                                 <include>**/service/CurrencyPairInformationService*</include>
                                 <include>**/service/CurrentExchangeRateService*</include>

@@ -1,5 +1,6 @@
 package com.oakinvest.cerise.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -24,6 +25,47 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration extends WebMvcConfigurationSupport {
 
     /**
+     * Rest package.
+     */
+    private static final String REST_PACKAGE = "com.oakinvest.cerise.web.rest";
+
+    /**
+     * Swagger title.
+     */
+    @Value("${swagger.title}")
+    private String title;
+
+    /**
+     * Swagger description.
+     */
+    @Value("${swagger.description}")
+    private String description;
+
+    /**
+     * Swagger license.
+     */
+    @Value("${swagger.license}")
+    private String license;
+
+    /**
+     * Swagger contact name.
+     */
+    @Value("${swagger.contact.name}")
+    private String contactName;
+
+    /**
+     * Swagger contact email.
+     */
+    @Value("${swagger.contact.email}")
+    private String contactEmail;
+
+    /**
+     * Swagger contact web site.
+     */
+    @Value("${swagger.contact.website}")
+    private String contactWebsite;
+
+    /**
      * API Creation.
      *
      * @return api
@@ -33,7 +75,7 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.oakinvest.cerise.web.rest"))
+                .apis(RequestHandlerSelectors.basePackage(REST_PACKAGE))
                 .paths(PathSelectors.any())
                 .build()
                 .enableUrlTemplating(true)
@@ -47,10 +89,10 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Cerise (BIP171)")
-                .description("A common interface for requesting currency exchange rate information from a server - BIP171 implementation")
-                .license("BSD 2-Clause License")
-                .contact(new Contact("Stéphane Traumat", "https://github.com/straumat/cerise", "stephane.traumat@gmail.com"))
+                .title(title)
+                .description(description)
+                .license(license)
+                .contact(new Contact(contactName, contactWebsite, contactEmail))
                 .build();
     }
 
@@ -64,7 +106,6 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     public final void addViewControllers(final ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/docs", "/api");
         registry.addRedirectViewController("/docs", "/swagger-ui.html");
         registry.addRedirectViewController("/documentation", "/swagger-ui.html");
         registry.addRedirectViewController("/swagger", "/swagger-ui.html");
