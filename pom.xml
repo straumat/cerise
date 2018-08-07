@@ -242,6 +242,7 @@
                         </goals>
                         <configuration>
                             <classifier>api</classifier>
+                            <generatePom>true</generatePom>
                             <includes>
                                 <include>**/Application*</include>
                                 <include>**/configuration/**/*</include>
