@@ -85,6 +85,8 @@
         <maven-jar-plugin>3.1.0</maven-jar-plugin>
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
         <!-- Java -->
         <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
         <commons-lang.version>3.7</commons-lang.version>
@@ -94,7 +96,7 @@
         <swagger-ui.version>2.9.2</swagger-ui.version>
         <!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
         <swagger-maven-plugin.version>3.1.7</swagger-maven-plugin.version>
-        <!-- Maven -->
+        <!-- Docker -->
         <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
         <dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
         <docker.image.prefix>straumat</docker.image.prefix>
@@ -256,6 +258,27 @@
                                     <Implementation-Version>${project.version}</Implementation-Version>
                                 </manifestEntries>
                             </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Install api in maven -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven-install-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.oakinvest.cerise</groupId>
+                            <artifactId>cerise-api</artifactId>
+                            <version>${project.version}</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/target/cerise-api.jar</file>
                         </configuration>
                     </execution>
                 </executions>
