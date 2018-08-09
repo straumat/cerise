@@ -19,21 +19,13 @@ before_install:
 - wget -O ~/swagger-codegen-cli.jar http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
 script:
 - mvn package
+- mvn spring-boot:run &
 after_success:
-- RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
-# Uploading cerise-api
-- curl -T $TRAVIS_BUILD_DIR/target/cerise-api.jar -ustraumat:$BINTRAY_KEY https://api.bintray.com/content/straumat/cerise/api/$RELEASE/cerise.jar
-# Update official "cerise" image.
-- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-- docker push $DOCKER_USERNAME/cerise
-# Run "cerise" image on reference server.
-- sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker stop $(docker ps -aq --filter "label=cerise")'
-- sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker rm -f $(docker ps -aq --filter "label=cerise")'
-- sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
-- sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 - sleep 2m
+# Get the release.
+- RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
 # Upload website.
 - cd $TRAVIS_BUILD_DIR/website/public/
 - lftp -e "mirror -R ./ /home/cerisetefc/www/ ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
@@ -45,7 +37,7 @@ after_success:
 - mkdir clients
 - mkdir dist
 - mkdir dist/$RELEASE
-- wget http://api.cerise.tech/v2/api-docs
+- wget http://localhost:8080/v2/api-docs
 # Code generation.
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l android -o clients/android >> logs
 - java -jar swagger-codegen-cli.jar generate -i api-docs -l csharp -o clients/csharp >> logs
