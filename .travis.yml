@@ -24,7 +24,7 @@ after_success:
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
 # Upload jar and running server.
-- mvn spring-boot:run &
+- mvn spring-boot:run >> logs &
 - sleep 2m
 # Get the release.
 - RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
@@ -82,3 +82,5 @@ deploy:
   provider: script
   script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
   skip_cleanup: true
+  on:
+    all_branches: true
