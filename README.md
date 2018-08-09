@@ -3,27 +3,27 @@
 **C**urrency &amp; **E**xchange **R**ate **I**nformation **SE**rver for Bitcoin ([BIP-0171](https://github.com/bitcoin/bips/blob/master/bip-0171.mediawiki)) - for further information please visit our website [http://www.cerise.tech](http://www.cerise.tech/)
 
 We provide the following artifacts : 
- * A [generated specification of the four methods](http://www.cerise.tech/#specifications).
- * A [mocked BIP 171 compliant server side implementation](https://github.com/straumat/cerise) you can use to develop your client applications.
- * A [server template project](https://github.com/straumat/cerise-server-template) allowing you to write your implementation and automatically produce your BIP 171 server.
+ * [BIP-0171 specifications](http://www.cerise.tech/#specifications).
+ * A [mocked BIP-0171 compliant server as a Java application](https://github.com/straumat/cerise-server-mock) you can use to develop your client application.
+ * A [mocked BIP-0171 compliant server as a Docker image](https://hub.docker.com/r/straumat/cerise-server-mock/) you can use to develop your client application.
+ * A [BIP-0171 library](https://github.com/straumat/cerise) to transform your application in a BIP-0171 server.
+ * A [server template project](https://github.com/straumat/cerise-server-template) to quickly write your implementation and automatically produce your BIP-0171 server.
  * A collection of [client libraries](http://www.cerise.tech/#clients) to call any BIP-0171 compliant server with your favorite language.
 
-## Running.
+## Use within your maven project.
+```
+<dependency>
+    <groupId>com.oakinvest.cerise</groupId>
+    <artifactId>cerise</artifactId>
+</dependency>
+```
 
-### Running as standalone application.
-Download `cerise.jar` from [https://github.com/straumat/cerise/releases](https://github.com/straumat/cerise/releases) and run it with the command `java -jar cerise.jar`.
- 
-### Running from sources.
+## Run cerise server.
 ```
 git clone git@github.com:straumat/cerise.git
 cd cerise
 mvn spring-boot:run
 ```
 
-### Running with docker.
-```
-docker run -l cerise -p 80:8080 straumat/cerise:0.3
-```
-
 ## View documentation and call the API.
-Once the application is launched, you can access the API at this address : [http://localhost:8080/swagger-ui.html#/cerise-api](http://localhost:8080/swagger-ui.html#/cerise-api).
+You can access the API at this address : [http://localhost:8080/docs](http://localhost:8080/docs).

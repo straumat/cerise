@@ -90,7 +90,7 @@ function displayAPIReleases($file)
         <!--Logo -->
         <div class="navbar-left mr-4">
             <button class="navbar-toggler" type="button">&#9776;</button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#home">
                 <img class="logo-dark" src="assets/img/logo_small.png" alt="logo">
                 <img class="logo-light" src="assets/img/logo_small.png" alt="logo">
             </a>
@@ -112,6 +112,7 @@ function displayAPIReleases($file)
 <!--================================================================================================================ -->
 <!--Header -->
 <!--================================================================================================================ -->
+<a id="home"></a>
 <header class="header h-fullscreen"
         style="background-image: linear-gradient(135deg, #f9f7ff 0%, #fff 50%, #f6f3ff 100%);">
     <div class="container">
@@ -124,10 +125,21 @@ function displayAPIReleases($file)
                             href="https://github.com/bitcoin/bips/blob/master/bip-0171.mediawiki"
                             target="BIP-0171"><span
                                 style="color:#710005">BIP-0171</span></a>).
-                    <p class="lead mt-5 mb-5">Our aim is to provide the following artifacts : A mocked BIP 171 compliant
-                        server side implementation with unit tests, a template server project allowing you to quickly
-                        implement your own server and clients libraries to
-                        call any BIP-0171 compliant server.</p>
+                    <p class="lead mt-5 mb-5">
+                        We provide <a href="#specifications">BIP-0171 specifications</a>, a <a
+                                href="https://github.com/straumat/cerise-server-mock"
+                                target="cerise-server-mock-java">mocked
+                            BIP-0171 compliant server as a Java application</a>, a <a
+                                href="https://hub.docker.com/r/straumat/cerise-server-mock/"
+                                target="cerise-server-mock-docker">mocked BIP-0171 compliant server as a Docker
+                            image</a>, a <a href="https://github.com/straumat/cerise" target="cerise">BIP-0171 library
+                            to
+                            transform your application in a BIP-0171 server</a>,a <a
+                                href="https://github.com/straumat/cerise-server-template"
+                                target="cerise-server-template">server template project to quickly write your
+                            implementation and automatically produce your BIP-0171 server</a>, a <a href="#clients">collection
+                            of client
+                            libraries to call any BIP-0171 compliant server with your favorite language</a>.</p>
                     <p class="gap-xy">
                         <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/docs" target="api">View
                             & test API</a>
@@ -155,11 +167,10 @@ function displayAPIReleases($file)
         <div class="container">
             <div class="row gap-y align-items-center">
                 <div class="col-md-9">
-                    <h4 class="mb-0 text-white text-center text-md-left">Wants to see the API in action ?</h4>
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
                 </div>
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="http://api.cerise.tech/docs" target="api">View live
-                        API</a>
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
                 </div>
             </div>
         </div>
@@ -277,22 +288,21 @@ function displayAPIReleases($file)
                     <h2>Cerise mocked server</h2>
                     <p>Cerise mocked server is a mocked implementation of the BIP-0171 specifications. It includes
                         the four methods with mocked responses and unit test. It also provides a web user interface
-                        to explore and run REST calls.</p>
-                    <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise"
-                       target="github">Get cerise server</a><br>
+                        to explore and run REST calls easily.</p>
+                    <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise-server-mock"
+                       target="cerise-server-mock">Get cerise server</a><br>
                     <br>
-                    <p><a href="https://hub.docker.com/r/straumat/cerise/" target="docker"><i>We also provide a docker
-                                image here.</i></a></p>
+                    <p><a href="https://hub.docker.com/r/straumat/cerise-server-mock/"
+                          target="cerise-server-mock-docker"><i>We also provide a docker image here.</i></a></p>
                 </div>
                 <!-- Cerise template server -->
                 <div class="col-md-6">
                     <h2>Cerise template server</h2>
                     <p>Cerise template server is a template project allowing you to quickly develop your own BIP 0171
-                        compliant server. This project is based on Cerise mocked server and thanks to it, you only have
-                        to implement four java services, we take care of the rest (request parameters and results,
-                        documentation, security...).</p>
-                    <a class="btn btn-outline-primary px-7" href="#"
-                       target="cerise">Not released yet</a>
+                        compliant server. You only have to implement four java services, we take care of the rest
+                        (request parameters and results, documentation...).</p>
+                    <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise-server-template"
+                       target="cerise-server-template">Get cerise server template</a>
                 </div>
             </div>
         </div>
@@ -300,17 +310,16 @@ function displayAPIReleases($file)
     <!--============================================================================================================ -->
 
     <!--============================================================================================================ -->
-    <!--Get the sources -->
+    <!--Contact us -->
     <!--============================================================================================================ -->
     <section class="section py-7" style="background-color: #8ea6e6">
         <div class="container">
             <div class="row gap-y align-items-center">
                 <div class="col-md-9">
-                    <h4 class="mb-0 text-white text-center text-md-left">Get the source !</h4>
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
                 </div>
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="https://github.com/straumat/cerise" target="github">view
-                        github</a>
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
                 </div>
             </div>
         </div>
@@ -409,12 +418,30 @@ function displayAPIReleases($file)
 </main>
 <!--================================================================================================================ -->
 
+<!--============================================================================================================ -->
+<!--Contact us -->
+<!--============================================================================================================ -->
+<section class="section py-7" style="background-color: #8ea6e6">
+    <div class="container">
+        <div class="row gap-y align-items-center">
+            <div class="col-md-9">
+                <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
+            </div>
+            <div class="col-md-3 text-center text-md-right">
+                <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--============================================================================================================ -->
+
 <!--================================================================================================================ -->
 <!-- Footer -->
 <!--================================================================================================================ -->
 <footer class="footer bg-gray py-2"
-<p align="center"><img src="assets/img/logo.png"
-                       alt="Currency & Exchange Rate Information SErver (BIP-0171)"></a></p>
+<p align="center"><a href="#home"><img src="assets/img/logo.png"
+                                       alt="Currency & Exchange Rate Information SErver (BIP-0171)"></a>
+</p>
 </footer>
 <!--================================================================================================================ -->
 

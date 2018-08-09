@@ -25,7 +25,7 @@ after_success:
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
 # Upload jar and running server.
 - mvn spring-boot:run >> logs &
-- sleep 2m
+- sleep 1m
 # Get the release.
 - RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
 # Generate clients.
