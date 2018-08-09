@@ -59,7 +59,7 @@ public class CeriseController {
                         }
                 );
         if (!errors.isEmpty()) {
-            throw new InvalidLocaleException("Invalid locales", errors);
+            throw new InvalidLocaleException(errors);
         }
     }
 
@@ -87,7 +87,7 @@ public class CeriseController {
                 .filter(c -> !EnumUtils.isValidEnum(CurrencyCode.class, c))
                 .forEach(c -> errors.add("Invalid currency code : " + c));
         if (!errors.isEmpty()) {
-            throw new InvalidCurrencyCodeException("Invalid currency codes", errors);
+            throw new InvalidCurrencyCodeException(errors);
         }
     }
 

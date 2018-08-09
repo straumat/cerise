@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author straumat
  */
-public class CeriseException extends RuntimeException {
+public abstract class CeriseException extends RuntimeException {
 
     /**
      * List of constructed error messages.

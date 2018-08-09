@@ -12,22 +12,24 @@ import java.util.List;
 public class InvalidLocaleException extends CeriseException {
 
     /**
-     * Constructor with a simple error message.
-     *
-     * @param message message.
+     * Error message.
      */
-    public InvalidLocaleException(final String message) {
-        super(message);
+    private static final String ERROR_MESSAGE = "Invalid locales";
+
+    /**
+     * Constructor with a simple error message.
+     */
+    public InvalidLocaleException() {
+        super(ERROR_MESSAGE);
     }
 
     /**
      * Constructor with a message error and list of errors.
      *
-     * @param message   message
      * @param newErrors list of errors
      */
-    public InvalidLocaleException(final String message, final List<String> newErrors) {
-        super(message, newErrors);
+    public InvalidLocaleException(final List<String> newErrors) {
+        super(ERROR_MESSAGE, newErrors);
     }
 
 }

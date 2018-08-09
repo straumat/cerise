@@ -78,6 +78,7 @@ after_success:
 - find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
 - cd ~/dist/
 - lftp -e "mirror -R ./ /home/cerisetefc/www/clients ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+- cd $TRAVIS_BUILD_DIR
 deploy:
   provider: script
   script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
