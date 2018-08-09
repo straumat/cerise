@@ -96,8 +96,6 @@
         <maven-jar-plugin>3.1.0</maven-jar-plugin>
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
-        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
         <!-- Java -->
         <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
         <commons-lang.version>3.7</commons-lang.version>
@@ -107,10 +105,6 @@
         <swagger-ui.version>2.9.2</swagger-ui.version>
         <!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
         <swagger-maven-plugin.version>3.1.7</swagger-maven-plugin.version>
-        <!-- Docker -->
-        <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
-        <dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
-        <docker.image.prefix>straumat</docker.image.prefix>
     </properties>
     <!-- =========================================================================================================== -->
 
@@ -222,15 +216,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Spring boot -->
-            <!--            <plugin>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-maven-plugin</artifactId>
-                            <configuration>
-                                <executable>true</executable>
-                                <addResources>true</addResources>
-                            </configuration>
-                        </plugin>-->
             <!-- Jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -281,43 +266,6 @@
                     </apiSources>
                 </configuration>
                 <executions>
-                    <execution>
-                        <!-- API -->
-                        <id>api</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <apiSources>
-                                <apiSource>
-                                    <locations>
-                                        <location>com.oakinvest.cerise.web.rest.SupportedCurrencyPairTokensAPI
-                                        </location>
-                                        <location>com.oakinvest.cerise.web.rest.CurrencyPairInformationAPI
-                                        </location>
-                                        <location>com.oakinvest.cerise.web.rest.CurrentExchangeRateAPI
-                                        </location>
-                                        <location>com.oakinvest.cerise.web.rest.HistoricalExchangeRatesAPI
-                                        </location>
-                                    </locations>
-                                    <info>
-                                        <title>Cerise - BIP-0171 - A common interface for requesting currency exchange
-                                            rate information from a server - BIP171 implementation
-                                        </title>
-                                        <description>A common interface for requesting currency exchange rate
-                                            information from a server - BIP171 implementation
-                                        </description>
-                                    </info>
-                                    <outputFormats>json</outputFormats>
-                                    <swaggerDirectory>${basedir}/target/</swaggerDirectory>
-                                    <outputPath>
-                                        ${basedir}/target/api-docs
-                                    </outputPath>
-                                </apiSource>
-                            </apiSources>
-                        </configuration>
-                    </execution>
                     <execution>
                         <!-- SupportedCurrencyPairTokensAPI -->
                         <id>SupportedCurrencyPairTokensAPI</id>
@@ -438,29 +386,6 @@
                 </executions>
                 <dependencies>
                 </dependencies>
-            </plugin>
-            <!-- Docker plugin -->
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
-                    <repository>${docker.image.prefix}/${project.name}</repository>
-                    <tag>${project.version}</tag>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.name}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
             </plugin>
             <!-- Release plugin -->
             <plugin>
