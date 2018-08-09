@@ -19,11 +19,16 @@ before_install:
 - wget -O ~/swagger-codegen-cli.jar http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
 script:
 - mvn package
+deploy:
+  provider: script
+  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
+  skip_cleanup: true
+  on:
+    tags: true
 after_success:
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
 # Upload jar and running server.
-- mvn deploy
 - mvn spring-boot:run &
 - sleep 2m
 # Get the release.
