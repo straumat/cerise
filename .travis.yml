@@ -1,4 +1,5 @@
 language: java
+install: true
 addons:
   ssh_known_hosts: 5.196.65.205
   apt:
@@ -19,12 +20,6 @@ before_install:
 - wget -O ~/swagger-codegen-cli.jar http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
 script:
 - mvn package
-deploy:
-  provider: script
-  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
-  skip_cleanup: true
-  on:
-    tags: true
 after_success:
 # Upload test coverage.
 - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
@@ -83,3 +78,7 @@ after_success:
 - find ./clients/ -type f -name "*.zip" -exec cp {} dist/$RELEASE/ \;
 - cd ~/dist/
 - lftp -e "mirror -R ./ /home/cerisetefc/www/clients ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
+deploy:
+  provider: script
+  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
+  skip_cleanup: true
