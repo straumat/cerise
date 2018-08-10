@@ -37,11 +37,10 @@ public class HistoricalExchangeRatesTest {
     private MockedHistoricalExchangeRatesService service;
 
     /**
-     * Historical exchange rates test results.
+     * Test for historical exchange rates test results.
      */
     @Test
     public void getHistoricalExchangeRatesResults() throws Exception {
-
         // Testing all the data.
         mvc.perform(get("/")
                 .param("mode", "history")
@@ -125,7 +124,7 @@ public class HistoricalExchangeRatesTest {
                 .andExpect(jsonPath("$[17].rates.typical").value(1309.1));
 
         // Testing the generated parameters for the service.
-        HistoricalExchangeRatesParameters p = service.getLastUsedParameter();
+        HistoricalExchangeRatesParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter set", Mode.history, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
@@ -139,11 +138,10 @@ public class HistoricalExchangeRatesTest {
     }
 
     /**
-     * Historical exchange rates test parameters.
+     * Test for historical exchange rates parameters.
      */
     @Test
     public void getHistoricalExchangeRatesParameters() throws Exception {
-
         // Testing with cp and types parameter.
         mvc.perform(get("/")
                 .param("mode", "history")
@@ -151,7 +149,7 @@ public class HistoricalExchangeRatesTest {
                 .param("type", " typical , high ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        HistoricalExchangeRatesParameters p = service.getLastUsedParameter();
+        HistoricalExchangeRatesParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter set", Mode.history, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
@@ -177,7 +175,7 @@ public class HistoricalExchangeRatesTest {
                 .param("timedelta", "5")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        p = service.getLastUsedParameter();
+        p = service.getLastReceivedParameter();
         assertEquals("Mode parameter set", Mode.history, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", p.getCp().get(0), "XBTUSD-ver4");
@@ -190,13 +188,6 @@ public class HistoricalExchangeRatesTest {
         assertEquals("nearest", p.isNearest(), true);
         assertEquals("ratedelta", p.getRateDelta(), 4f);
         assertEquals("timedelta", p.getTimeDelta(), 5f);
-    }
-
-    /**
-     * Historical exchange rates test with wrong parameters.
-     */
-    @Test
-    public void getHistoricalExchangeRatesWithWrongParameters() throws Exception {
 
         // Test with long cp as parameter.
         mvc.perform(get("/")

@@ -6,7 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
- * Supported currency-pair tokens results.
+ * Supported currency-pair tokens result.
+ *
+ * @author straumat
  */
 @SuppressWarnings("magicnumber")
 @JsonInclude(NON_NULL)

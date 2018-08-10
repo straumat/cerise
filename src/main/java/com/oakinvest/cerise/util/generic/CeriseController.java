@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * CeriseController.
+ * Cerise controller.
+ *
+ * @author straumat
  */
 public class CeriseController {
 
@@ -31,7 +33,7 @@ public class CeriseController {
     /**
      * Pass throw a list of locales and raise an exception if one is invalid.
      *
-     * @param localeList locale list.
+     * @param localeList locale list
      */
     protected final void validateLocaleList(final String[] localeList) {
         if (localeList != null) {
@@ -42,7 +44,7 @@ public class CeriseController {
     /**
      * Pass throw a list of locales and raise an exception if one is invalid.
      *
-     * @param localeList locale list.
+     * @param localeList locale list
      */
     protected final void validateLocaleList(final List<String> localeList) {
         List<String> errors = new LinkedList<>();
@@ -57,7 +59,7 @@ public class CeriseController {
                         }
                 );
         if (!errors.isEmpty()) {
-            throw new InvalidLocaleException("Invalid locales", errors);
+            throw new InvalidLocaleException(errors);
         }
     }
 
@@ -75,7 +77,7 @@ public class CeriseController {
     /**
      * Pass throw a list of currency code and raise an exception if one is invalid.
      *
-     * @param currencyCodeList list of currency code.
+     * @param currencyCodeList list of currency code
      */
     protected final void validateCurrencyCodeList(final List<String> currencyCodeList) {
         List<String> errors = new LinkedList<>();
@@ -85,14 +87,14 @@ public class CeriseController {
                 .filter(c -> !EnumUtils.isValidEnum(CurrencyCode.class, c))
                 .forEach(c -> errors.add("Invalid currency code : " + c));
         if (!errors.isEmpty()) {
-            throw new InvalidCurrencyCodeException("Invalid currency codes", errors);
+            throw new InvalidCurrencyCodeException(errors);
         }
     }
 
     /**
      * Pass throw a list of CP and raise an exception if one is invalid.
      *
-     * @param cpList list of cp.
+     * @param cpList list of cp
      */
     protected final void validateCPList(final String[] cpList) {
         if (cpList != null) {
@@ -103,7 +105,7 @@ public class CeriseController {
     /**
      * Pass throw a list of CP and raise an exception if one is invalid.
      *
-     * @param cpList list of cp.
+     * @param cpList list of cp
      */
     protected final void validateCPList(final List<String> cpList) {
         List<String> errors = new LinkedList<>();
@@ -122,8 +124,8 @@ public class CeriseController {
     /**
      * Returns a list of string from an array of string.
      *
-     * @param array array of string.
-     * @return empty list if array is null or a a list of string.
+     * @param array array of string
+     * @return empty list if array is null or a a list of string
      */
     protected final List<String> getListFromArray(final String[] array) {
         if (array == null) {

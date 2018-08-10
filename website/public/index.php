@@ -33,7 +33,7 @@
 
 /**
  * Display API releases.
- * @param $file page to link to.
+ * @param $file String page to link to.
  */
 function displayAPIReleases($file)
 {
@@ -66,7 +66,6 @@ function displayAPIReleases($file)
                         stable release</a>
                 </div>
                 <br>
-                <p class="small text-lighter">Older releases</p>
                 <?php
             } else if (strpos($value, 'SNAPSHOT') === false) {
                 // Older releases.
@@ -90,7 +89,7 @@ function displayAPIReleases($file)
         <!--Logo -->
         <div class="navbar-left mr-4">
             <button class="navbar-toggler" type="button">&#9776;</button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#home">
                 <img class="logo-dark" src="assets/img/logo_small.png" alt="logo">
                 <img class="logo-light" src="assets/img/logo_small.png" alt="logo">
             </a>
@@ -112,6 +111,7 @@ function displayAPIReleases($file)
 <!--================================================================================================================ -->
 <!--Header -->
 <!--================================================================================================================ -->
+<a id="home"></a>
 <header class="header h-fullscreen"
         style="background-image: linear-gradient(135deg, #f9f7ff 0%, #fff 50%, #f6f3ff 100%);">
     <div class="container">
@@ -123,17 +123,28 @@ function displayAPIReleases($file)
                             style="color:#710005">SE</span>rver (<a
                             href="https://github.com/bitcoin/bips/blob/master/bip-0171.mediawiki"
                             target="BIP-0171"><span
-                                style="color:#710005">BIP-0171</span></a>).
-                    <p class="lead mt-5 mb-5">Our aim is to provide the following artifacts : A mocked BIP 171 compliant
-                        server side implementation with unit tests, a template server project allowing you to quickly
-                        implement your own server and clients libraries to
-                        call any BIP-0171 compliant server.</p>
-                    <p class="gap-xy">
-                        <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/docs" target="api">View
-                            & test API</a>
-                        <a class="btn btn-round btn-outline-secondary mw-200" href="mailto:contact@cerise.tech">Contact
-                            US</a>
-                    </p>
+                                style="color:#710005">BIP-0171</span></a>).</h1>
+                <p class="lead mt-5 mb-5">
+                    We provide <a href="#specifications">BIP-0171 specifications</a>, a <a
+                            href="https://github.com/straumat/cerise-server-mock"
+                            target="cerise-server-mock-java">mocked
+                        BIP-0171 compliant server as a Java application</a>, a <a
+                            href="https://hub.docker.com/r/straumat/cerise-server-mock/"
+                            target="cerise-server-mock-docker">mocked BIP-0171 compliant server as a Docker
+                        image</a>, a <a href="https://github.com/straumat/cerise" target="cerise">BIP-0171 library
+                        to
+                        transform your application in a BIP-0171 server</a>,a <a
+                            href="https://github.com/straumat/cerise-server-template"
+                            target="cerise-server-template">server template project to quickly write your
+                        implementation and automatically produce your BIP-0171 server</a>, and a <a href="#clients">collection
+                        of client
+                        libraries to call any BIP-0171 compliant server with your favorite language</a>.</p>
+                <p class="gap-xy">
+                    <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/docs" target="api">View
+                        & test API</a>
+                    <a class="btn btn-round btn-outline-secondary mw-200" href="mailto:contact@cerise.tech">Contact
+                        US</a>
+                </p>
             </div>
             <div class="col-lg-5 ml-auto d-none d-lg-block">
                 <img src="assets/img/logo.png" alt="img">
@@ -155,11 +166,10 @@ function displayAPIReleases($file)
         <div class="container">
             <div class="row gap-y align-items-center">
                 <div class="col-md-9">
-                    <h4 class="mb-0 text-white text-center text-md-left">Wants to see the API in action ?</h4>
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
                 </div>
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="http://api.cerise.tech/docs" target="api">View live
-                        API</a>
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
                 </div>
             </div>
         </div>
@@ -277,22 +287,21 @@ function displayAPIReleases($file)
                     <h2>Cerise mocked server</h2>
                     <p>Cerise mocked server is a mocked implementation of the BIP-0171 specifications. It includes
                         the four methods with mocked responses and unit test. It also provides a web user interface
-                        to explore and run REST calls.</p>
-                    <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise"
-                       target="github">Get cerise server</a><br>
+                        to explore and run REST calls easily.</p>
+                    <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise-server-mock"
+                       target="cerise-server-mock">Get mocked cerise server</a><br>
                     <br>
-                    <p><a href="https://hub.docker.com/r/straumat/cerise/" target="docker"><i>We also provide a docker
-                                image here.</i></a></p>
+                    <p><a href="https://hub.docker.com/r/straumat/cerise-server-mock/"
+                          target="cerise-server-mock-docker"><i>We also provide a docker image here.</i></a></p>
                 </div>
                 <!-- Cerise template server -->
                 <div class="col-md-6">
                     <h2>Cerise template server</h2>
                     <p>Cerise template server is a template project allowing you to quickly develop your own BIP 0171
-                        compliant server. This project is based on Cerise mocked server and thanks to it, you only have
-                        to implement four java services, we take care of the rest (request parameters and results,
-                        documentation, security...).</p>
-                    <a class="btn btn-outline-primary px-7" href="#"
-                       target="cerise">Not released yet</a>
+                        compliant server. You only have to implement four java services, we take care of the rest
+                        (request parameters and results, documentation...).</p>
+                    <a class="btn btn-outline-primary px-7" href="https://github.com/straumat/cerise-server-template"
+                       target="cerise-server-template">Get cerise server template</a>
                 </div>
             </div>
         </div>
@@ -300,17 +309,16 @@ function displayAPIReleases($file)
     <!--============================================================================================================ -->
 
     <!--============================================================================================================ -->
-    <!--Get the sources -->
+    <!--Contact us -->
     <!--============================================================================================================ -->
     <section class="section py-7" style="background-color: #8ea6e6">
         <div class="container">
             <div class="row gap-y align-items-center">
                 <div class="col-md-9">
-                    <h4 class="mb-0 text-white text-center text-md-left">Get the source !</h4>
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
                 </div>
                 <div class="col-md-3 text-center text-md-right">
-                    <a class="btn btn-lg btn-round btn-light" href="https://github.com/straumat/cerise" target="github">view
-                        github</a>
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
                 </div>
             </div>
         </div>
@@ -328,7 +336,7 @@ function displayAPIReleases($file)
                     <h3>Get client libraries for your favorite language</h3>
                 </div>
                 <div class="col-md-auto ml-auto text-center text-md-right">
-                    <select id="releases">
+                    <select title="releases" id="releases">
                         <?php
                         $latestReleaseFound = false;
                         $snapshotFound = false;
@@ -371,7 +379,7 @@ function displayAPIReleases($file)
                                 var originalHref = inputs[i].getAttribute("href").valueOf();
                                 var index = originalHref.indexOf("/cerise-");
                                 // Generate the new value.
-                                var newValue = originalHref.substring(0, 9) + release + originalHref.substring(index, originalHref.length)
+                                var newValue = originalHref.substring(0, 9) + release + originalHref.substring(index, originalHref.length);
                                 inputs[i].setAttribute("href", newValue);
                             }
 
@@ -389,13 +397,12 @@ function displayAPIReleases($file)
                     $language = $value;
                     $language = str_replace("cerise-client-", "", $value);
                     $language = str_replace(".zip", "", $language);
-//                    $language = $language . charAt(0) . toUpperCase() + $language . slice(1);
                     ?>
                     <div class="col-md-4">
                         <h2><?php echo ucfirst($language); ?></h2>
                         <a class="btn btn-outline-primary px-7 client"
                            href=" <?php echo "clients/" . $latestReleaseDirectory . "/" . $value; ?>"
-                           target="cerise">Get client libray</a><br>
+                           target="cerise">Get client library</a><br>
                         <br>
                     </div>
                     <?php
@@ -409,12 +416,30 @@ function displayAPIReleases($file)
 </main>
 <!--================================================================================================================ -->
 
+<!--============================================================================================================ -->
+<!--Contact us -->
+<!--============================================================================================================ -->
+<section class="section py-7" style="background-color: #8ea6e6">
+    <div class="container">
+        <div class="row gap-y align-items-center">
+            <div class="col-md-9">
+                <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
+            </div>
+            <div class="col-md-3 text-center text-md-right">
+                <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--============================================================================================================ -->
+
 <!--================================================================================================================ -->
 <!-- Footer -->
 <!--================================================================================================================ -->
-<footer class="footer bg-gray py-2"
-<p align="center"><img src="assets/img/logo.png"
-                       alt="Currency & Exchange Rate Information SErver (BIP-0171)"></a></p>
+<footer class="footer bg-gray py-2">
+    <p align="center"><a href="#home"><img src="assets/img/logo.png"
+                                           alt="Currency & Exchange Rate Information SErver (BIP-0171)"></a>
+    </p>
 </footer>
 <!--================================================================================================================ -->
 

@@ -15,8 +15,8 @@ public interface HistoricalExchangeRatesService {
     /**
      * Historical exchange rates service.
      *
-     * @param parameters parameters.
-     * @return result.
+     * @param parameters rest parameters
+     * @return rest results
      */
     List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(HistoricalExchangeRatesParameters parameters);
 

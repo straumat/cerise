@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * Enumerating supported currency-pair tokens.
+ * Enumerating supported currency-pair tokens API.
  *
  * @author straumat
  */
@@ -23,12 +23,12 @@ import java.util.List;
 public interface SupportedCurrencyPairTokensAPI {
 
     /**
-     * Enumerating supported currency-pair tokens.
+     * Enumerating supported currency-pair tokens API.
      *
-     * @param mode   Always "list" for this request.
-     * @param quote  If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s).
-     * @param base   If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s).
-     * @param locale If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).
+     * @param mode   Always "list" for this request
+     * @param quote  If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s)
+     * @param base   If provided, the server MAY limit the results to only currency-pairs describing currency rates compared to the given currency code(s)
+     * @param locale If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s)
      * @return results
      */
     @RequestMapping(value = "/",

@@ -20,14 +20,13 @@ public class MockedHistoricalExchangeRatesService implements HistoricalExchangeR
     /**
      * The last parameter received by the service.
      */
-    // TODO Rename to parameters.
-    private HistoricalExchangeRatesParameters lastUsedParameter;
+    private HistoricalExchangeRatesParameters lastReceivedParameter;
 
     @Override
     public final List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(final HistoricalExchangeRatesParameters parameters) {
-        lastUsedParameter = parameters;
+        lastReceivedParameter = parameters;
         List<HistoricalExchangeRatesResult> results = new LinkedList<>();
-        HistoricalExchangeRatesResult result = new HistoricalExchangeRatesResult();
+        HistoricalExchangeRatesResult result;
 
         // Test for long CP maximum size.
         if (parameters.getCp().size() > 0 && "TEST_LONG_CP".equals(parameters.getCp().get(0))) {
@@ -168,12 +167,12 @@ public class MockedHistoricalExchangeRatesService implements HistoricalExchangeR
     }
 
     /**
-     * Getter of lastUsedParameter.
+     * Getter of lastReceivedParameter.
      *
-     * @return lastUsedParameter
+     * @return lastReceivedParameter
      */
-    public final HistoricalExchangeRatesParameters getLastUsedParameter() {
-        return lastUsedParameter;
+    public final HistoricalExchangeRatesParameters getLastReceivedParameter() {
+        return lastReceivedParameter;
     }
 
 }

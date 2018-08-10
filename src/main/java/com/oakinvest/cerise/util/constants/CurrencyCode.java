@@ -3,6 +3,8 @@ package com.oakinvest.cerise.util.constants;
 /**
  * Currency code list.
  * The alphabetic code is based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and where possible the third letter corresponds to the first letter of the currency name.
+ *
+ * @author straumat
  */
 @SuppressWarnings("unused")
 public enum CurrencyCode {

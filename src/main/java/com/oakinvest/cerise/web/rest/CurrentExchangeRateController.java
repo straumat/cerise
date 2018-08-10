@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,12 +28,12 @@ public class CurrentExchangeRateController extends CeriseController implements C
     /**
      * Currency-pair information service.
      */
-    private CurrentExchangeRateService service;
+    private final CurrentExchangeRateService service;
 
     /**
      * Constructor.
      *
-     * @param newService newService
+     * @param newService service
      */
     public CurrentExchangeRateController(final CurrentExchangeRateService newService) {
         this.service = newService;
@@ -45,7 +46,7 @@ public class CurrentExchangeRateController extends CeriseController implements C
                                                                             final Double minrate,
                                                                             final Double maxrate,
                                                                             final String nonce) {
-        log.info("Supported currency-pair tokens called : cp={}, type={}, minrate={}, maxrate={}, nonce={}.", cp, type, minrate, maxrate, nonce);
+        log.info("Current exchange rate called : cp={}, type={}, minrate={}, maxrate={}, nonce={}.", Arrays.toString(cp), Arrays.toString(type), minrate, maxrate, nonce);
 
         // ------------------------------------------------ -------------------------------------------------------------
         // Validating parameters.

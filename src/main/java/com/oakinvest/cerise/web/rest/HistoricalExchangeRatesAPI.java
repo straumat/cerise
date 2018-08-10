@@ -25,14 +25,14 @@ public interface HistoricalExchangeRatesAPI {
     /**
      * Historical exchange rates API.
      *
-     * @param mode      Always "history" for this request.
-     * @param cp        Currency pair(s) for which rate is requested.
-     * @param type      Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate.
-     * @param from      POSIX timestamp the results should begin with.
-     * @param to        POSIX timestamp the results should end with. If omitted, the present time shall be used.
+     * @param mode      Always "history" for this request
+     * @param cp        Currency pair(s) for which rate is requested
+     * @param type      Type of exchange rate data being requested. May be "high", "low", "average", "typical", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate
+     * @param from      POSIX timestamp the results should begin with
+     * @param to        POSIX timestamp the results should end with. If omitted, the present time shall be used
      * @param nearest   If provided and true, indicates that only the nearest timestamp to "from" must be returned, and a range is not desired. ("to" should be omitted in this case.)
-     * @param ratedelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
-     * @param timedelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
+     * @param ratedelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results
+     * @param timedelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results
      * @return results
      */
     @RequestMapping(value = "/",

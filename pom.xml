@@ -5,16 +5,16 @@
 
     <!-- =========================================================================================================== -->
     <!-- Project information -->
-    <groupId>com.oakinvest</groupId>
+    <groupId>com.oakinvest.cerise</groupId>
     <artifactId>cerise</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>jar</packaging>
     <name>cerise</name>
     <description>Currency &amp; Exchange Rate Information SErver for Bitcoin (BIP-0171)</description>
     <licenses>
         <license>
-            <name>GNU General Public License, Version 3.0</name>
-            <url>https://raw.githubusercontent.com/straumat/master/master/LICENSE</url>
+            <name>BSD 2-Clause "Simplified" License</name>
+            <url>https://github.com/straumat/cerise/blob/development/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -66,6 +66,17 @@
     <!-- =========================================================================================================== -->
 
     <!-- =========================================================================================================== -->
+    <!-- Distribution management -->
+    <distributionManagement>
+        <repository>
+            <id>bintray-straumat-cerise</id>
+            <name>straumat-cerise</name>
+            <url>https://api.bintray.com/maven/straumat/cerise/api/;publish=1</url>
+        </repository>
+    </distributionManagement>
+    <!-- =========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
     <!-- Project configuration -->
     <properties>
         <!-- Java project configuration -->
@@ -94,10 +105,6 @@
         <swagger-ui.version>2.9.2</swagger-ui.version>
         <!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
         <swagger-maven-plugin.version>3.1.7</swagger-maven-plugin.version>
-        <!-- Maven -->
-        <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
-        <dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
-        <docker.image.prefix>straumat</docker.image.prefix>
     </properties>
     <!-- =========================================================================================================== -->
 
@@ -107,7 +114,7 @@
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.3.RELEASE</version>
+        <version>2.0.4.RELEASE</version>
         <relativePath/>
     </parent>
     <!-- =========================================================================================================== -->
@@ -209,21 +216,18 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Spring boot -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                    <addResources>true</addResources>
-                </configuration>
-            </plugin>
             <!-- Jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin}</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/MockedCurrencyPairInformationService*</exclude>
+                        <exclude>**/MockedCurrentExchangeRateService*</exclude>
+                        <exclude>**/MockedHistoricalExchangeRatesService*</exclude>
+                        <exclude>**/MockedSupportedCurrencyPairTokensService*</exclude>
+                    </excludes>
                     <archive>
                         <manifestEntries>
                             <Implementation-Version>${project.version}</Implementation-Version>
@@ -249,15 +253,8 @@
                             <host>api.cerise.tech</host>
                             <basePath>/</basePath>
                             <info>
-                                <title>Cerise - Currency &amp; Exchange Rate Information (BIP-0171)
-                                </title>
                                 <version>${project.version}</version>
-                                <description>A common interface for requesting currency exchange rate information from a
-                                    server - BIP171 implementation
-                                </description>
-                                <termsOfService>
-                                    https://github.com/straumat/cerise/blob/master/LICENSE
-                                </termsOfService>
+                                <termsOfService>https://github.com/straumat/cerise/blob/master/LICENSE</termsOfService>
                                 <contact>
                                     <email>stephane.traumat@gmail.com</email>
                                     <name>Stéphane Traumat</name>
@@ -269,9 +266,6 @@
                                 </license>
                             </info>
                             <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs</templatePath>
-                            <outputPath>
-                                ${basedir}/target/specifications/${project.version}/currentExchangeRateAPII.html
-                            </outputPath>
                             <swaggerDirectory>${basedir}/target/swagger-ui</swaggerDirectory>
                             <attachSwaggerArtifact>false</attachSwaggerArtifact>
                         </apiSource>
@@ -292,30 +286,9 @@
                                         <location>com.oakinvest.cerise.web.rest.SupportedCurrencyPairTokensAPI
                                         </location>
                                     </locations>
-                                    <schemes>
-                                        <scheme>http</scheme>
-                                    </schemes>
-                                    <host>api.cerise.tech</host>
-                                    <basePath>/</basePath>
                                     <info>
                                         <title>BIP-0171 - Enumerating supported currency-pair tokens</title>
-                                        <version>${project.version}</version>
-                                        <description>A common interface for requesting currency exchange rate
-                                            information from a
-                                            server - BIP171 implementation
-                                        </description>
-                                        <termsOfService>
-                                            https://github.com/straumat/cerise/blob/master/LICENSE
-                                        </termsOfService>
-                                        <contact>
-                                            <email>stephane.traumat@gmail.com</email>
-                                            <name>Stéphane Traumat</name>
-                                            <url>https://github.com/straumat/cerise</url>
-                                        </contact>
-                                        <license>
-                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
-                                            <name>BSD 2-Clause "Simplified" License</name>
-                                        </license>
+                                        <description>Enumerating supported currency-pair tokens API</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
@@ -343,31 +316,9 @@
                                         <location>com.oakinvest.cerise.web.rest.CurrencyPairInformationAPI
                                         </location>
                                     </locations>
-                                    <schemes>
-                                        <scheme>http</scheme>
-                                    </schemes>
-                                    <host>api.cerise.tech</host>
-                                    <basePath>/</basePath>
                                     <info>
-                                        <title>BIP-0171 - Currency-pair information
-                                        </title>
-                                        <version>${project.version}</version>
-                                        <description>A common interface for requesting currency exchange rate
-                                            information from a
-                                            server - BIP171 implementation
-                                        </description>
-                                        <termsOfService>
-                                            https://github.com/straumat/cerise/blob/master/LICENSE
-                                        </termsOfService>
-                                        <contact>
-                                            <email>stephane.traumat@gmail.com</email>
-                                            <name>Stéphane Traumat</name>
-                                            <url>https://github.com/straumat/cerise</url>
-                                        </contact>
-                                        <license>
-                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
-                                            <name>BSD 2-Clause "Simplified" License</name>
-                                        </license>
+                                        <title>BIP-0171 - Currency-pair information API</title>
+                                        <description>Currency-pair information API</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
@@ -394,30 +345,9 @@
                                         <location>com.oakinvest.cerise.web.rest.CurrentExchangeRateAPI
                                         </location>
                                     </locations>
-                                    <schemes>
-                                        <scheme>http</scheme>
-                                    </schemes>
-                                    <host>api.cerise.tech</host>
-                                    <basePath>/</basePath>
                                     <info>
                                         <title>BIP-0171 - Current exchange rate</title>
-                                        <version>${project.version}</version>
-                                        <description>A common interface for requesting currency exchange rate
-                                            information from a
-                                            server - BIP171 implementation
-                                        </description>
-                                        <termsOfService>
-                                            https://github.com/straumat/cerise/blob/master/LICENSE
-                                        </termsOfService>
-                                        <contact>
-                                            <email>stephane.traumat@gmail.com</email>
-                                            <name>Stéphane Traumat</name>
-                                            <url>https://github.com/straumat/cerise</url>
-                                        </contact>
-                                        <license>
-                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
-                                            <name>BSD 2-Clause "Simplified" License</name>
-                                        </license>
+                                        <description>Current exchange rate API</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
@@ -444,31 +374,9 @@
                                         <location>com.oakinvest.cerise.web.rest.HistoricalExchangeRatesAPI
                                         </location>
                                     </locations>
-                                    <schemes>
-                                        <scheme>http</scheme>
-                                    </schemes>
-                                    <host>api.cerise.tech</host>
-                                    <basePath>/</basePath>
                                     <info>
-                                        <title>BIP-0171 - Historical exchange rates
-                                        </title>
-                                        <version>${project.version}</version>
-                                        <description>A common interface for requesting currency exchange rate
-                                            information from a
-                                            server - BIP171 implementation
-                                        </description>
-                                        <termsOfService>
-                                            https://github.com/straumat/cerise/blob/master/LICENSE
-                                        </termsOfService>
-                                        <contact>
-                                            <email>stephane.traumat@gmail.com</email>
-                                            <name>Stéphane Traumat</name>
-                                            <url>https://github.com/straumat/cerise</url>
-                                        </contact>
-                                        <license>
-                                            <url>https://github.com/straumat/cerise/blob/master/LICENSE</url>
-                                            <name>BSD 2-Clause "Simplified" License</name>
-                                        </license>
+                                        <title>BIP-0171 - Historical exchange rates</title>
+                                        <description>Historical exchange rates API</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
@@ -484,29 +392,6 @@
                 </executions>
                 <dependencies>
                 </dependencies>
-            </plugin>
-            <!-- Docker plugin -->
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
-                    <repository>${docker.image.prefix}/${project.name}</repository>
-                    <tag>${project.version}</tag>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.name}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
             </plugin>
             <!-- Release plugin -->
             <plugin>

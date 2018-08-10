@@ -1,30 +1,32 @@
-package com.oakinvest.cerise.util.exception;
+package com.oakinvest.cerise.util.generic;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
  * API Error.
+ *
+ * @author straumat
  */
-public class ApiError {
+public class CeriseError {
 
     /**
      * The error message associated with exception.
      */
-    private String message;
+    private final String message;
 
     /**
      * List of constructed error messages.
      */
-    private List<String> errors;
+    private final List<String> errors;
 
     /**
      * Constructor (single error).
      *
-     * @param newMessage The error message associated with exception.
-     * @param newError   error messages.
+     * @param newMessage The error message associated with exception
+     * @param newError   error messages
      */
-    public ApiError(final String newMessage, final String newError) {
+    public CeriseError(final String newMessage, final String newError) {
         super();
         this.message = newMessage;
         errors = Collections.singletonList(newError);
@@ -33,10 +35,10 @@ public class ApiError {
     /**
      * Constructor (several errors).
      *
-     * @param newMessage The error message associated with exception.
-     * @param newErrors  List of constructed error messages.
+     * @param newMessage The error message associated with exception
+     * @param newErrors  List of constructed error messages
      */
-    public ApiError(final String newMessage, final List<String> newErrors) {
+    public CeriseError(final String newMessage, final List<String> newErrors) {
         super();
         this.message = newMessage;
         this.errors = newErrors;

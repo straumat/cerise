@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Currency-pair information.
+ * Currency-pair information test.
  *
  * @author straumat
  */
@@ -59,7 +59,6 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[0].symbol[0][1]").value("$"))
                 .andExpect(jsonPath("$[0].symbol[1]").isEmpty())
                 .andExpect(jsonPath("$[0].digits").value("Arabic"))
-                // TODO Review grouping.
                 .andExpect(jsonPath("$[0].grouping[0]").value("3"))
                 .andExpect(jsonPath("$[0].grouping[1]").value(","))
                 .andExpect(jsonPath("$[0].grouping[2]").value("0"))
@@ -97,7 +96,7 @@ public class CurrencyPairInformationTest {
                 .andExpect(jsonPath("$[1].signature").doesNotExist());
 
         // Testing the generated parameters for this call.
-        CurrencyPairInformationParameters p = service.getLastUsedParameter();
+        CurrencyPairInformationParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter value is wrong", Mode.info, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
@@ -105,7 +104,7 @@ public class CurrencyPairInformationTest {
     }
 
     /**
-     * Test for Currency-pair information parameters.
+     * Test for currency-pair information parameters.
      */
     @Test
     public void getCurrencyPairInformationParameters() throws Exception {
@@ -115,18 +114,12 @@ public class CurrencyPairInformationTest {
                 .param("cp", " XBTUSD-ver4,2 ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk());
-        final CurrencyPairInformationParameters p = service.getLastUsedParameter();
+        final CurrencyPairInformationParameters p = service.getLastReceivedParameter();
         assertEquals("Mode parameter value is wrong", Mode.info, p.getMode());
         assertEquals("Wrong CP parameters count", 2, p.getCp().size());
         assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
         assertEquals("CP parameter set", "2", p.getCp().get(1));
-    }
 
-    /**
-     * Test for Currency-pair information CP parameters max size.
-     */
-    @Test
-    public void getCurrencyPairInformationWithLongCP() throws Exception {
         // long cp as parameter.
         mvc.perform(get("/")
                 .param("mode", "info")

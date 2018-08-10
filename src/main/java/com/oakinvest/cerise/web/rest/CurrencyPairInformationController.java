@@ -8,11 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Currency-pair information.
+ * Currency-pair information controller.
  *
  * @author straumat
  */
@@ -27,7 +28,7 @@ public class CurrencyPairInformationController extends CeriseController implemen
     /**
      * Currency-pair information service.
      */
-    private CurrencyPairInformationService service;
+    private final CurrencyPairInformationService service;
 
     /**
      * Constructor.
@@ -40,7 +41,7 @@ public class CurrencyPairInformationController extends CeriseController implemen
 
     @Override
     public final List<CurrencyPairInformationResult> getCurrencyPairInformation(final String mode, final String[] cp) {
-        log.info("Supported currency-pair tokens called : cp={}.", cp);
+        log.info("Currency-pair tokens called : cp={}.", Arrays.toString(cp));
 
         // ------------------------------------------------ -------------------------------------------------------------
         // Validating parameters.

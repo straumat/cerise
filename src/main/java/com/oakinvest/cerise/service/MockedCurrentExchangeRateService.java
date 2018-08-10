@@ -20,14 +20,13 @@ public class MockedCurrentExchangeRateService implements CurrentExchangeRateServ
     /**
      * The last parameter received by the service.
      */
-    // TODO Rename to parameters.
-    private CurrentExchangeRateParameters lastUsedParameter;
+    private CurrentExchangeRateParameters lastReceivedParameter;
 
     @Override
     public final List<CurrentExchangeRateResult> getCurrentExchangeRate(final CurrentExchangeRateParameters parameters) {
-        lastUsedParameter = parameters;
+        lastReceivedParameter = parameters;
         List<CurrentExchangeRateResult> results = new LinkedList<>();
-        CurrentExchangeRateResult result = new CurrentExchangeRateResult();
+        CurrentExchangeRateResult result;
 
         // Test for long CP maximum size.
         if (parameters.getCp().size() > 0 && "TEST_LONG_CP".equals(parameters.getCp().get(0))) {
@@ -59,12 +58,12 @@ public class MockedCurrentExchangeRateService implements CurrentExchangeRateServ
     }
 
     /**
-     * Getter of lastUsedParameter.
+     * Getter of lastReceivedParameter.
      *
-     * @return lastUsedParameter
+     * @return lastReceivedParameter
      */
-    public final CurrentExchangeRateParameters getLastUsedParameter() {
-        return lastUsedParameter;
+    public final CurrentExchangeRateParameters getLastReceivedParameter() {
+        return lastReceivedParameter;
     }
 
 }

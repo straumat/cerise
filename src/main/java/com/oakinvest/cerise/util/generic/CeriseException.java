@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author straumat
  */
-public class CeriseException extends RuntimeException {
+public abstract class CeriseException extends RuntimeException {
 
     /**
      * List of constructed error messages.
@@ -18,7 +18,7 @@ public class CeriseException extends RuntimeException {
     /**
      * Constructor with a simple error message.
      *
-     * @param message message.
+     * @param message message
      */
     public CeriseException(final String message) {
         super(message);
@@ -28,8 +28,8 @@ public class CeriseException extends RuntimeException {
     /**
      * Constructor with a message error and list of errors.
      *
-     * @param message   message.
-     * @param newErrors list of errors.
+     * @param message   message
+     * @param newErrors list of errors
      */
     public CeriseException(final String message, final List<String> newErrors) {
         super(message);

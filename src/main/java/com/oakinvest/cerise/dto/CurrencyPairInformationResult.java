@@ -118,7 +118,7 @@ public class CurrencyPairInformationResult {
             example = "300",
             position = 11)
     @JsonProperty("minpoll")
-    private int minPoll;
+    private Integer minPoll;
 
     /**
      * If provided and true, indicates longpolling is supported by the server.
@@ -127,14 +127,14 @@ public class CurrencyPairInformationResult {
             example = "true",
             position = 12)
     @JsonProperty("longpoll")
-    private boolean longPoll;
+    private Boolean longPoll;
 
     /**
      * If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.
      */
     @ApiModelProperty(value = "If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.",
             position = 13)
-    private double history;
+    private Double history;
 
     /**
      * If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.
@@ -142,7 +142,7 @@ public class CurrencyPairInformationResult {
     @ApiModelProperty(value = "If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.",
             example = "133423244",
             position = 14)
-    private double archive;
+    private Double archive;
 
     /**
      * Optional. May be used for Linked Data Signatures.
@@ -354,7 +354,7 @@ public class CurrencyPairInformationResult {
      *
      * @return minPoll
      */
-    public final int getMinPoll() {
+    public final Integer getMinPoll() {
         return minPoll;
     }
 
@@ -363,7 +363,7 @@ public class CurrencyPairInformationResult {
      *
      * @param newMinPoll the minPoll to set
      */
-    public final void setMinPoll(final int newMinPoll) {
+    public final void setMinPoll(final Integer newMinPoll) {
         minPoll = newMinPoll;
     }
 
@@ -372,7 +372,7 @@ public class CurrencyPairInformationResult {
      *
      * @return longPoll
      */
-    public final boolean isLongPoll() {
+    public final Boolean isLongPoll() {
         return longPoll;
     }
 
@@ -381,7 +381,7 @@ public class CurrencyPairInformationResult {
      *
      * @param newLongPoll the longPoll to set
      */
-    public final void setLongPoll(final boolean newLongPoll) {
+    public final void setLongPoll(final Boolean newLongPoll) {
         longPoll = newLongPoll;
     }
 
@@ -390,7 +390,7 @@ public class CurrencyPairInformationResult {
      *
      * @return history
      */
-    public final double getHistory() {
+    public final Double getHistory() {
         return history;
     }
 
@@ -399,7 +399,7 @@ public class CurrencyPairInformationResult {
      *
      * @param newHistory the history to set
      */
-    public final void setHistory(final double newHistory) {
+    public final void setHistory(final Double newHistory) {
         history = newHistory;
     }
 
@@ -408,7 +408,7 @@ public class CurrencyPairInformationResult {
      *
      * @return archive
      */
-    public final double getArchive() {
+    public final Double getArchive() {
         return archive;
     }
 
@@ -417,7 +417,7 @@ public class CurrencyPairInformationResult {
      *
      * @param newArchive the archive to set
      */
-    public final void setArchive(final double newArchive) {
+    public final void setArchive(final Double newArchive) {
         archive = newArchive;
     }
 

@@ -5,23 +5,25 @@ import java.util.List;
 
 /**
  * Grouping parameter.
+ *
+ * @author straumat
  */
 public class Grouping {
 
     /**
      * First digits.
      */
-    private Integer firstDigits;
+    private final Integer firstDigits;
 
     /**
      * Delimiter.
      */
-    private String delimiter;
+    private final String delimiter;
 
     /**
      * Last digits.
      */
-    private int lastDigits;
+    private final Integer lastDigits;
 
     /**
      * Constructor.
