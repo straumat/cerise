@@ -3,7 +3,9 @@ target/
 
 # Project specific
 website/public/clients/**/*
+!website/public/clients/.empty
 website/public/specifications/**/*
+!website/public/specifications/.empty
 
 # eclipse specific git ignore
 bin/**
