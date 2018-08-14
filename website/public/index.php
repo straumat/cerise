@@ -30,7 +30,6 @@
 
 <body>
 <?php
-
 /**
  * Display API releases.
  * @param $file String page to link to.
@@ -149,7 +148,6 @@ function displayAPIReleases($file)
             <div class="col-lg-5 ml-auto d-none d-lg-block">
                 <img src="assets/img/logo.png" alt="img">
             </div>
-
         </div>
     </div>
 </header>
@@ -409,29 +407,28 @@ function displayAPIReleases($file)
                 }
                 ?>
             </div>
+    </section>
+    <!--============================================================================================================ -->
 
+    <!--============================================================================================================ -->
+    <!--Contact us -->
+    <!--============================================================================================================ -->
+    <section class="section py-7" style="background-color: #8ea6e6">
+        <div class="container">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-9">
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
+                </div>
+                <div class="col-md-3 text-center text-md-right">
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
+                </div>
+            </div>
+        </div>
     </section>
     <!--============================================================================================================ -->
 
 </main>
 <!--================================================================================================================ -->
-
-<!--============================================================================================================ -->
-<!--Contact us -->
-<!--============================================================================================================ -->
-<section class="section py-7" style="background-color: #8ea6e6">
-    <div class="container">
-        <div class="row gap-y align-items-center">
-            <div class="col-md-9">
-                <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
-            </div>
-            <div class="col-md-3 text-center text-md-right">
-                <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!--============================================================================================================ -->
 
 <!--================================================================================================================ -->
 <!-- Footer -->
