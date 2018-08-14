@@ -10,7 +10,7 @@ import com.oakinvest.cerise.dto.Mode;
 public abstract class CeriseParameters {
 
     /**
-     * Always "info" for this request.
+     * Request type.
      */
     private Mode mode;
 
