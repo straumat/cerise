@@ -29,7 +29,6 @@ public class CeriseController {
      */
     private static final int CP_MAX_SIZE = 255;
 
-
     /**
      * Pass throw a list of locales and raise an exception if one is invalid.
      *

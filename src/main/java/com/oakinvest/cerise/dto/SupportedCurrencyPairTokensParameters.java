@@ -1,5 +1,7 @@
 package com.oakinvest.cerise.dto;
 
+import com.oakinvest.cerise.util.generic.CeriseParameters;
+
 import java.util.List;
 
 /**
@@ -7,12 +9,7 @@ import java.util.List;
  *
  * @author straumat
  */
-public class SupportedCurrencyPairTokensParameters {
-
-    /**
-     * Always "list" for this request.
-     */
-    private final Mode mode = Mode.list;
+public class SupportedCurrencyPairTokensParameters extends CeriseParameters {
 
     /**
      * If provided, the server MAY limit the results to only currency-pairs describing a currency with the given currency code(s).
@@ -37,18 +34,10 @@ public class SupportedCurrencyPairTokensParameters {
      * @param newLocales If provided, the server MAY limit the results to only currency-pairs supporting the given Unicode CLDR locale(s).
      */
     public SupportedCurrencyPairTokensParameters(final List<String> newQuote, final List<String> newBase, final List<String> newLocales) {
+        setMode(Mode.list);
         quote = newQuote;
         base = newBase;
         locales = newLocales;
-    }
-
-    /**
-     * Returns mode.
-     *
-     * @return mode
-     */
-    public final Mode getMode() {
-        return mode;
     }
 
     /**

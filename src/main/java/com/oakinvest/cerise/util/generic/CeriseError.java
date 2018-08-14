@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * API Error.
+ * Cerise Error.
  *
  * @author straumat
  */

@@ -1,6 +1,7 @@
 package com.oakinvest.cerise.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.oakinvest.cerise.util.generic.CeriseResult;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.LinkedHashMap;
@@ -15,7 +16,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
  */
 @SuppressWarnings("magicnumber")
 @JsonInclude(NON_NULL)
-public class CurrentExchangeRateResult {
+public class CurrentExchangeRateResult extends CeriseResult {
 
     /**
      * The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols).

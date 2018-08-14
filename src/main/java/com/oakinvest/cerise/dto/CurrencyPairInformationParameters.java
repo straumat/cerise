@@ -1,5 +1,7 @@
 package com.oakinvest.cerise.dto;
 
+import com.oakinvest.cerise.util.generic.CeriseParameters;
+
 import java.util.List;
 
 /**
@@ -7,12 +9,7 @@ import java.util.List;
  *
  * @author straumat
  */
-public class CurrencyPairInformationParameters {
-
-    /**
-     * Always "info" for this request.
-     */
-    private final Mode mode = Mode.info;
+public class CurrencyPairInformationParameters extends CeriseParameters {
 
     /**
      * Currency pair(s) for which information is requested.
@@ -25,16 +22,8 @@ public class CurrencyPairInformationParameters {
      * @param newCp Currency pair(s) for which information is requested
      */
     public CurrencyPairInformationParameters(final List<String> newCp) {
+        setMode(Mode.info);
         this.cp = newCp;
-    }
-
-    /**
-     * Getter of mode.
-     *
-     * @return mode
-     */
-    public final Mode getMode() {
-        return mode;
     }
 
     /**
