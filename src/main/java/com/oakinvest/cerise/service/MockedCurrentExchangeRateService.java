@@ -2,6 +2,7 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.CurrentExchangeRateResult;
+import com.oakinvest.cerise.util.generic.CeriseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Service
 @SuppressWarnings("magicnumber")
-public class MockedCurrentExchangeRateService implements CurrentExchangeRateService {
+public class MockedCurrentExchangeRateService extends CeriseService implements CurrentExchangeRateService {
 
     /**
      * The last parameter received by the service.

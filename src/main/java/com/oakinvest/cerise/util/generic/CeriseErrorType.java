@@ -5,6 +5,7 @@ package com.oakinvest.cerise.util.generic;
  *
  * @author straumat
  */
+@SuppressWarnings("unused")
 public enum CeriseErrorType {
 
     /**

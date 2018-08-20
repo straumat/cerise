@@ -54,8 +54,7 @@ public class CurrentExchangeRateController extends CeriseController implements C
 
         // -------------------------------------------------------------------------------------------------------------
         // Validating parameters.
-        final List<CeriseErrorDetail> errors = new LinkedList<>();
-        errors.addAll(getErrorsForCurrencyValues(cp));
+        final List<CeriseErrorDetail> errors = new LinkedList<>(getErrorsForCurrencyValues(cp));
 
         // -------------------------------------------------------------------------------------------------------------
         // If there is at least one error, raise an exception.

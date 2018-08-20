@@ -2,6 +2,7 @@ package com.oakinvest.cerise.service;
 
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensParameters;
 import com.oakinvest.cerise.dto.SupportedCurrencyPairTokensResult;
+import com.oakinvest.cerise.util.generic.CeriseService;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author straumat
  */
 @Service
-public class MockedSupportedCurrencyPairTokensService implements SupportedCurrencyPairTokensService {
+public class MockedSupportedCurrencyPairTokensService extends CeriseService implements SupportedCurrencyPairTokensService {
 
     /**
      * The last parameter received by the service.

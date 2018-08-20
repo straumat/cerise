@@ -13,7 +13,7 @@ public class CeriseException extends RuntimeException {
     /**
      * The error type.
      */
-    private CeriseErrorType type;
+    private final CeriseErrorType type;
 
     /**
      * List of errors with their code.

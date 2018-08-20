@@ -7,7 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
  *
  * @author straumat
  */
-public class Rate {
+@SuppressWarnings({"magicnumber", "unused"})
+class Rate {
 
     /**
      * Type of exchange rate data.

@@ -11,7 +11,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
  *
  * @author straumat
  */
-@SuppressWarnings("magicnumber")
+@SuppressWarnings({"magicnumber", "unused"})
 @JsonInclude(NON_NULL)
 public class SupportedCurrencyPairTokensResult extends CeriseResult {
 

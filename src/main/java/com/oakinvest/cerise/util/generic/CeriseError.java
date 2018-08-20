@@ -13,7 +13,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
  *
  * @author straumat
  */
-@SuppressWarnings("magicnumber")
+@SuppressWarnings({"magicnumber", "unused"})
 @JsonInclude(NON_NULL)
 public class CeriseError {
 
@@ -24,7 +24,7 @@ public class CeriseError {
             example = "invalid_request_error",
             required = true,
             position = 1)
-    private CeriseErrorType type;
+    private final CeriseErrorType type;
 
     /**
      * A human-readable message providing more details about the error.
