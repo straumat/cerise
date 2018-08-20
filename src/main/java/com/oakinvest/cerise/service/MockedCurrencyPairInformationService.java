@@ -110,4 +110,5 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
     public final CurrencyPairInformationParameters getLastReceivedParameter() {
         return lastReceivedParameter;
     }
+
 }

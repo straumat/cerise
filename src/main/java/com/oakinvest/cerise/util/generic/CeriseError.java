@@ -1,47 +1,80 @@
 package com.oakinvest.cerise.util.generic;
 
-import java.util.Collections;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.util.LinkedList;
 import java.util.List;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
  * Cerise Error.
  *
  * @author straumat
  */
+@SuppressWarnings("magicnumber")
+@JsonInclude(NON_NULL)
 public class CeriseError {
 
     /**
-     * The error message associated with exception.
+     * The error type.
      */
+    @ApiModelProperty(value = "The type of error returned. One of api_connection_error, api_error, authentication_error, invalid_request_error or rate_limit_error.",
+            example = "invalid_request_error",
+            required = true,
+            position = 1)
+    private CeriseErrorType type;
+
+    /**
+     * A human-readable message providing more details about the error.
+     */
+    @ApiModelProperty(value = "A human-readable message providing more details about the error.",
+            example = "Invalid request to currency-pair information",
+            required = true,
+            position = 2)
     private final String message;
 
     /**
-     * List of constructed error messages.
+     * List of errors with their code.
      */
-    private final List<String> errors;
+    @ApiModelProperty(value = "List of errors.",
+            position = 3)
+    private final List<CeriseErrorDetail> errors = new LinkedList<>();
 
     /**
      * Constructor (single error).
      *
+     * @param newType    error type
      * @param newMessage The error message associated with exception
-     * @param newError   error messages
      */
-    public CeriseError(final String newMessage, final String newError) {
+    public CeriseError(final CeriseErrorType newType, final String newMessage) {
         super();
+        this.type = newType;
         this.message = newMessage;
-        errors = Collections.singletonList(newError);
     }
 
     /**
      * Constructor (several errors).
      *
-     * @param newMessage The error message associated with exception
-     * @param newErrors  List of constructed error messages
+     * @param newType    error type
+     * @param newMessage Error message
+     * @param newErrors  List of errors
      */
-    public CeriseError(final String newMessage, final List<String> newErrors) {
+    public CeriseError(final CeriseErrorType newType, final String newMessage, final List<CeriseErrorDetail> newErrors) {
         super();
+        this.type = newType;
         this.message = newMessage;
-        this.errors = newErrors;
+        this.errors.addAll(newErrors);
+    }
+
+    /**
+     * Getter of type.
+     *
+     * @return type
+     */
+    public final CeriseErrorType getType() {
+        return type;
     }
 
     /**
@@ -58,7 +91,7 @@ public class CeriseError {
      *
      * @return errors
      */
-    public final List<String> getErrors() {
+    public final List<CeriseErrorDetail> getErrors() {
         return errors;
     }
 

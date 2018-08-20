@@ -13,6 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static com.oakinvest.cerise.util.generic.CeriseErrorCode.currency_code_invalid;
+import static com.oakinvest.cerise.util.generic.CeriseErrorCode.currency_pair_too_large;
+import static com.oakinvest.cerise.util.generic.CeriseErrorType.invalid_request_error;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -104,52 +107,53 @@ public class CurrencyPairInformationTest {
     }
 
     /**
-     * Test for currency-pair information parameters.
+     * Test parameters validation.
      */
     @Test
-    public void getCurrencyPairInformationParameters() throws Exception {
-        // Testing with all parameters.
-        mvc.perform(get("/")
-                .param("mode", "info")
-                .param("cp", " XBTUSD-ver4,2 ")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isOk());
-        final CurrencyPairInformationParameters p = service.getLastReceivedParameter();
-        assertEquals("Mode parameter value is wrong", Mode.info, p.getMode());
-        assertEquals("Wrong CP parameters count", 2, p.getCp().size());
-        assertEquals("CP parameter set", "XBTUSD-ver4", p.getCp().get(0));
-        assertEquals("CP parameter set", "2", p.getCp().get(1));
-
+    public void testParametersValidation() throws Exception {
         // long cp as parameter.
         mvc.perform(get("/")
                 .param("mode", "info")
                 .param("cp", StringUtils.repeat("!", 256))
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("type").value(invalid_request_error.toString()))
+                .andExpect(jsonPath("message").value("Invalid request to currency-pair information"))
                 .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("!", 256)));
-
-        // long cp as return.
-        mvc.perform(get("/")
-                .param("mode", "info")
-                .param("cp", "TEST_LONG_CP")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
-                .andExpect(jsonPath("errors", hasSize(2)))
-                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)))
-                .andExpect(jsonPath("errors[1]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)));
+                .andExpect(jsonPath("errors[0].code").value(currency_pair_too_large.toString()))
+                .andExpect(jsonPath("errors[0].message").value("Currency-pair parameter is too long : " + StringUtils.repeat("!", 256)));
 
         // Wrong currency code.
         mvc.perform(get("/")
                 .param("mode", "info")
                 .param("cp", " XBTUSD-ver4,2, AAA, BBB, USD ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(jsonPath("message").value("Invalid currency codes"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("type").value(invalid_request_error.toString()))
+                .andExpect(jsonPath("message").value("Invalid request to currency-pair information"))
                 .andExpect(jsonPath("errors", hasSize(2)))
-                .andExpect(jsonPath("errors[0]").value("Invalid currency code : AAA"))
-                .andExpect(jsonPath("errors[1]").value("Invalid currency code : BBB"));
+                .andExpect(jsonPath("errors[0].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[0].message").value("Invalid currency code : AAA"))
+                .andExpect(jsonPath("errors[1].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[1].message").value("Invalid currency code : BBB"));
+
+        // Several errors.
+        mvc.perform(get("/")
+                .param("mode", "info")
+                .param("cp", StringUtils.repeat("!", 256) + ",XBTUSD-ver4,2, AAA, BBB, DDD, USD ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("type").value(invalid_request_error.toString()))
+                .andExpect(jsonPath("message").value("Invalid request to currency-pair information"))
+                .andExpect(jsonPath("errors", hasSize(4)))
+                .andExpect(jsonPath("errors[0].code").value(currency_pair_too_large.toString()))
+                .andExpect(jsonPath("errors[0].message").value("Currency-pair parameter is too long : " + StringUtils.repeat("!", 256)))
+                .andExpect(jsonPath("errors[1].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[1].message").value("Invalid currency code : AAA"))
+                .andExpect(jsonPath("errors[2].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[2].message").value("Invalid currency code : BBB"))
+                .andExpect(jsonPath("errors[3].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[3].message").value("Invalid currency code : DDD"));
     }
 
 }

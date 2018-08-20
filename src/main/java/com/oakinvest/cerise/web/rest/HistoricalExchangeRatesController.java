@@ -4,6 +4,8 @@ import com.oakinvest.cerise.dto.HistoricalExchangeRatesParameters;
 import com.oakinvest.cerise.dto.HistoricalExchangeRatesResult;
 import com.oakinvest.cerise.service.HistoricalExchangeRatesService;
 import com.oakinvest.cerise.util.generic.CeriseController;
+import com.oakinvest.cerise.util.generic.CeriseErrorDetail;
+import com.oakinvest.cerise.util.generic.CeriseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.oakinvest.cerise.util.generic.CeriseErrorType.invalid_request_error;
 
 /**
  * Historical exchange rates controller.
@@ -44,12 +48,16 @@ public class HistoricalExchangeRatesController extends CeriseController implemen
     public final List<HistoricalExchangeRatesResult> getHistoricalExchangeRates(final String mode, final String[] cp, final String[] type, final Double from, final Double to, final Boolean nearest, final Float ratedelta, final Float timedelta) {
         log.info("Historical exchange rates called : cp={}, type={}, from={}, to={}, nearest={}, ratedelta={}, timedelta = {}.", Arrays.toString(cp), Arrays.toString(type), from, to, nearest, ratedelta, timedelta);
 
-        // ------------------------------------------------ -------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------
         // Validating parameters.
+        final List<CeriseErrorDetail> errors = new LinkedList<>();
+        errors.addAll(getErrorsForCurrencyValues(cp));
 
-        // Validating CP
-        validateCPList(cp);
-        validateCurrencyCodeList(cp);
+        // -------------------------------------------------------------------------------------------------------------
+        // If there is at least one error, raise an exception.
+        if (!errors.isEmpty()) {
+            throw new CeriseException(invalid_request_error, "Invalid request to historical exchange rates", errors);
+        }
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
@@ -63,18 +71,8 @@ public class HistoricalExchangeRatesController extends CeriseController implemen
         );
 
         // -------------------------------------------------------------------------------------------------------------
-        // Calling the service.
-        final List<HistoricalExchangeRatesResult> results = service.getHistoricalExchangeRates(p);
-
-        // ------------------------------------------------ -------------------------------------------------------------
-        // Validating results.
-
-        // Validating CP.
-        final List<String> cpList = new LinkedList<>();
-        results.forEach(data -> cpList.add(data.getCp()));
-        validateCPList(cpList);
-
-        return results;
+        // Calling the service & returning the value.
+        return service.getHistoricalExchangeRates(p);
     }
 
 }
