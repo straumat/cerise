@@ -86,10 +86,10 @@
         <java.version>1.8</java.version>
         <!-- gitflow -->
         <!-- https://mvnrepository.com/artifact/com.amashchenko.maven.plugin/gitflow-maven-plugin -->
-        <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
+        <gitflow-maven-plugin.version>1.10.0</gitflow-maven-plugin.version>
         <!-- Maven plugins -->
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
@@ -97,7 +97,7 @@
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
         <!-- Java -->
-        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <commons-lang.version>3.7</commons-lang.version>
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
         <swagger.version>2.9.2</swagger.version>
