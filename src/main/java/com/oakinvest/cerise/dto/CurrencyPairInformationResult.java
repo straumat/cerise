@@ -91,7 +91,7 @@ public class CurrencyPairInformationResult extends CeriseResult {
      */
     @ApiModelProperty(value = "An Array alternating between Numbers representing a series of digits, and Strings used as delimiters. If terminated by a zero, the final grouping is to be repeated continually. For example, the common US locale thousands grouping would be [3, \",\", 0]",
             example = "[3, \",\", 0]",
-            position = 9)
+            position = 10)
     private Grouping grouping;
 
     /**
@@ -99,7 +99,7 @@ public class CurrencyPairInformationResult extends CeriseResult {
      */
     @ApiModelProperty(value = "A String to be placed between whole numbers and a fractional amount.",
             example = "?",
-            position = 8)
+            position = 11)
     @JsonProperty("fraction_sep")
     private String fractionSeparator;
 
@@ -108,7 +108,7 @@ public class CurrencyPairInformationResult extends CeriseResult {
      */
     @ApiModelProperty(value = "Array of absolute minimum (even for whole numbers) number of fractional digits, minimum fractional digits when a fraction exists, and maximum number of fractional digits when absolute precision is not demanded (below which is to be rounded in an implementation-dependent manner).",
             example = "[0, 2, 2]",
-            position = 10)
+            position = 12)
     @JsonProperty("fraction_digits")
     private List<Integer> fractionDigits;
 
@@ -117,7 +117,7 @@ public class CurrencyPairInformationResult extends CeriseResult {
      */
     @ApiModelProperty(value = "A Number of seconds indicating a minimum time between polls to the server. Clients should be prudent about not polling too often, even if this number is low.\n",
             example = "300",
-            position = 11)
+            position = 13)
     @JsonProperty("minpoll")
     private Integer minPoll;
 
@@ -126,7 +126,7 @@ public class CurrencyPairInformationResult extends CeriseResult {
      */
     @ApiModelProperty(value = "If provided and true, indicates long polling is supported by the server.",
             example = "true",
-            position = 12)
+            position = 14)
     @JsonProperty("longpoll")
     private Boolean longPoll;
 
@@ -134,7 +134,7 @@ public class CurrencyPairInformationResult extends CeriseResult {
      * If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.
      */
     @ApiModelProperty(value = "If provided, indicates the server has historical records going back no earlier than the POSIX timestamp provided as a value.",
-            position = 13)
+            position = 15)
     private Double history;
 
     /**
@@ -142,14 +142,14 @@ public class CurrencyPairInformationResult extends CeriseResult {
      */
     @ApiModelProperty(value = "If provided, indicates the server no longer has current rates, and has no historical rates more recent than the POSIX timestamp provided as a value.",
             example = "133423244",
-            position = 14)
+            position = 16)
     private Double archive;
 
     /**
      * Optional. May be used for Linked Data Signatures.
      */
     @ApiModelProperty(value = "May be used for Linked Data Signatures",
-            position = 15)
+            position = 17)
     private String signature;
 
     /**
