@@ -4,6 +4,8 @@ import com.oakinvest.cerise.dto.CurrentExchangeRateParameters;
 import com.oakinvest.cerise.dto.CurrentExchangeRateResult;
 import com.oakinvest.cerise.service.CurrentExchangeRateService;
 import com.oakinvest.cerise.util.generic.CeriseController;
+import com.oakinvest.cerise.util.generic.CeriseErrorDetail;
+import com.oakinvest.cerise.util.generic.CeriseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.oakinvest.cerise.util.generic.CeriseErrorType.invalid_request_error;
 
 /**
  * Current exchange rate controller.
@@ -48,10 +52,15 @@ public class CurrentExchangeRateController extends CeriseController implements C
                                                                             final String nonce) {
         log.info("Current exchange rate called : cp={}, type={}, minrate={}, maxrate={}, nonce={}.", Arrays.toString(cp), Arrays.toString(type), minrate, maxrate, nonce);
 
-        // ------------------------------------------------ -------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------
         // Validating parameters.
-        validateCPList(cp);
-        validateCurrencyCodeList(cp);
+        final List<CeriseErrorDetail> errors = new LinkedList<>(getErrorsForCurrencyValues(cp));
+
+        // -------------------------------------------------------------------------------------------------------------
+        // If there is at least one error, raise an exception.
+        if (!errors.isEmpty()) {
+            throw new CeriseException(invalid_request_error, "Invalid request to current exchange rate controller", errors);
+        }
 
         // -------------------------------------------------------------------------------------------------------------
         // Building the parameters.
@@ -62,18 +71,9 @@ public class CurrentExchangeRateController extends CeriseController implements C
                 nonce
         );
 
-
         // -------------------------------------------------------------------------------------------------------------
-        // Calling the service.
-        final List<CurrentExchangeRateResult> results = service.getCurrentExchangeRate(p);
-
-        // ------------------------------------------------ -------------------------------------------------------------
-        // Validating results.
-        final List<String> cpList = new LinkedList<>();
-        results.forEach(data -> cpList.add(data.getCp()));
-        validateCPList(cpList);
-
-        return results;
+        // Calling the service & returning the value.
+        return service.getCurrentExchangeRate(p);
     }
 
 }

@@ -1,16 +1,26 @@
 package com.oakinvest.cerise.web.rest;
 
 import com.oakinvest.cerise.dto.CurrentExchangeRateResult;
+import com.oakinvest.cerise.util.generic.CeriseError;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+
+import static com.oakinvest.cerise.web.rest.CeriseHttpStatus.STATUS_BAD_REQUEST;
+import static com.oakinvest.cerise.web.rest.CeriseHttpStatus.STATUS_INTERNAL_SERVER_ERROR;
+import static com.oakinvest.cerise.web.rest.CeriseHttpStatus.STATUS_NOT_FOUND;
+import static com.oakinvest.cerise.web.rest.CeriseHttpStatus.STATUS_OK;
+import static com.oakinvest.cerise.web.rest.CeriseHttpStatus.STATUS_REQUEST_FAILED;
+import static com.oakinvest.cerise.web.rest.CeriseHttpStatus.STATUS_UNAUTHORIZED;
 
 /**
  * Current exchange rate API.
@@ -64,6 +74,14 @@ public interface CurrentExchangeRateAPI {
                     dataType = "string",
                     example = "AAAAAAAAAAA",
                     value = "If specified, the server SHOULD return it in each result.")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(code = STATUS_OK, message = "Everything worked as expected."),
+            @ApiResponse(code = STATUS_BAD_REQUEST, message = "The request was unacceptable, often due to missing a required parameter.", response = CeriseError.class),
+            @ApiResponse(code = STATUS_UNAUTHORIZED, message = "No valid authorization was provided.", response = CeriseError.class),
+            @ApiResponse(code = STATUS_REQUEST_FAILED, message = "The parameters were valid but the request failed.", response = CeriseError.class),
+            @ApiResponse(code = STATUS_NOT_FOUND, message = "The requested resource doesn't exist.", response = CeriseError.class),
+            @ApiResponse(code = STATUS_INTERNAL_SERVER_ERROR, message = "Something went wrong on the server.", response = CeriseError.class)
     })
     List<CurrentExchangeRateResult> getCurrencyPairInformation(@ApiParam(value = "Always \"rate\" for this request.")
                                                                @RequestParam String mode,

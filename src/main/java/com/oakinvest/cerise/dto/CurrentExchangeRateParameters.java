@@ -1,5 +1,7 @@
 package com.oakinvest.cerise.dto;
 
+import com.oakinvest.cerise.util.generic.CeriseParameters;
+
 import java.util.List;
 
 /**
@@ -7,12 +9,7 @@ import java.util.List;
  *
  * @author straumat
  */
-public class CurrentExchangeRateParameters {
-
-    /**
-     * Always "rate" for this request.
-     */
-    private final Mode mode = Mode.rate;
+public class CurrentExchangeRateParameters extends CeriseParameters {
 
     /**
      * Currency pair(s) for which information is requested.
@@ -49,20 +46,12 @@ public class CurrentExchangeRateParameters {
      * @param newNonce   If specified, the server SHOULD return it in each result.
      */
     public CurrentExchangeRateParameters(final List<String> newCp, final List<String> newTypes, final Double newMinrate, final Double newMaxrate, final String newNonce) {
+        setMode(Mode.rate);
         this.cp = newCp;
         this.types = newTypes;
         this.minrate = newMinrate;
         this.maxrate = newMaxrate;
         this.nonce = newNonce;
-    }
-
-    /**
-     * Getter of mode.
-     *
-     * @return mode
-     */
-    public final Mode getMode() {
-        return mode;
     }
 
     /**

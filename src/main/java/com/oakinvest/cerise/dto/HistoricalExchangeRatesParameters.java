@@ -1,5 +1,7 @@
 package com.oakinvest.cerise.dto;
 
+import com.oakinvest.cerise.util.generic.CeriseParameters;
+
 import java.util.List;
 
 /**
@@ -7,12 +9,7 @@ import java.util.List;
  *
  * @author straumat
  */
-public class HistoricalExchangeRatesParameters {
-
-    /**
-     * Always "history" for this request.
-     */
-    private final Mode mode = Mode.history;
+public class HistoricalExchangeRatesParameters extends CeriseParameters {
 
     /**
      * Currency pair(s) for which information is requested.
@@ -61,6 +58,7 @@ public class HistoricalExchangeRatesParameters {
      * @param newTimeDelta If specified, the server may omit data where the rate or time has not changed since the last provided rate and time. If both are provided, either a significant rate change OR time change should trigger a new record in the results.
      */
     public HistoricalExchangeRatesParameters(final List<String> newCp, final List<String> newTypes, final Double newFrom, final Double newTo, final Boolean newNearest, final Float newRateDelta, final Float newTimeDelta) {
+        setMode(Mode.history);
         this.cp = newCp;
         this.types = newTypes;
         this.from = newFrom;
@@ -68,15 +66,6 @@ public class HistoricalExchangeRatesParameters {
         this.nearest = newNearest;
         this.rateDelta = newRateDelta;
         this.timeDelta = newTimeDelta;
-    }
-
-    /**
-     * Getter of mode.
-     *
-     * @return mode
-     */
-    public final Mode getMode() {
-        return mode;
     }
 
     /**

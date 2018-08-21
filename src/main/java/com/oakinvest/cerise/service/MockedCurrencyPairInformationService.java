@@ -3,6 +3,7 @@ package com.oakinvest.cerise.service;
 import com.oakinvest.cerise.dto.CurrencyPairInformationParameters;
 import com.oakinvest.cerise.dto.CurrencyPairInformationResult;
 import com.oakinvest.cerise.dto.Grouping;
+import com.oakinvest.cerise.util.generic.CeriseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * @author straumat
  */
 @Service
-public class MockedCurrencyPairInformationService implements CurrencyPairInformationService {
+public class MockedCurrencyPairInformationService extends CeriseService implements CurrencyPairInformationService {
 
     /**
      * The last parameter received by the service.
@@ -110,4 +111,5 @@ public class MockedCurrencyPairInformationService implements CurrencyPairInforma
     public final CurrencyPairInformationParameters getLastReceivedParameter() {
         return lastReceivedParameter;
     }
+
 }

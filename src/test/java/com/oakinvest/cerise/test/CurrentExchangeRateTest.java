@@ -13,12 +13,19 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.*;
+import static com.oakinvest.cerise.util.generic.CeriseErrorCode.currency_code_invalid;
+import static com.oakinvest.cerise.util.generic.CeriseErrorCode.currency_pair_too_large;
+import static com.oakinvest.cerise.util.generic.CeriseErrorType.invalid_request_error;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Current exchange rate test.
@@ -161,29 +168,25 @@ public class CurrentExchangeRateTest {
         assertEquals("Minrate", p.getMinrate(), 1350.111332);
         assertEquals("Maxrate", p.getMaxrate(), 1351.111332);
         assertEquals("Nonce", p.getNonce(), "JGT");
+    }
 
-        // Testing with long cp as parameter.
+    /**
+     * Test parameters validation.
+     */
+    @Test
+    public void testParametersValidation() throws Exception {
+        // Long cp as parameter.
         mvc.perform(get("/")
                 .param("mode", "rate")
                 .param("cp", "TEST, " + StringUtils.repeat("A", 256))
                 .param("type", " typical , high ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("type").value(invalid_request_error.toString()))
+                .andExpect(jsonPath("message").value("Invalid request to current exchange rate controller"))
                 .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("A", 256)));
-
-        // Testing with long cp as return.
-        mvc.perform(get("/")
-                .param("mode", "rate")
-                .param("cp", "TEST_LONG_CP")
-                .param("type", " typical , high ")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("message").value("Currency-pair should be no longer than 255 characters"))
-                .andExpect(jsonPath("errors", hasSize(2)))
-                .andExpect(jsonPath("errors[0]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)))
-                .andExpect(jsonPath("errors[1]").value("Currency-pair too long : " + StringUtils.repeat("*", 256)));
+                .andExpect(jsonPath("errors[0].code").value(currency_pair_too_large.toString()))
+                .andExpect(jsonPath("errors[0].message").value("Currency-pair parameter is too long : " + StringUtils.repeat("A", 256)));
 
         // Wrong currency code.
         mvc.perform(get("/")
@@ -191,10 +194,33 @@ public class CurrentExchangeRateTest {
                 .param("cp", "AAAAAAA, USD, EUR, CCC, DDD")
                 .param("type", " typical , high ")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(jsonPath("message").value("Invalid currency codes"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("type").value(invalid_request_error.toString()))
+                .andExpect(jsonPath("message").value("Invalid request to current exchange rate controller"))
                 .andExpect(jsonPath("errors", hasSize(2)))
-                .andExpect(jsonPath("errors[0]").value("Invalid currency code : CCC"))
-                .andExpect(jsonPath("errors[1]").value("Invalid currency code : DDD"));
+                .andExpect(jsonPath("errors[0].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[0].message").value("Invalid currency code : CCC"))
+                .andExpect(jsonPath("errors[1].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[1].message").value("Invalid currency code : DDD"));
+
+        // Several errors.
+        mvc.perform(get("/")
+                .param("mode", "rate")
+                .param("cp", "TEST, " + StringUtils.repeat("A", 256) + ", AAAAAAA, USD, EUR, CCC, EEE, DDD")
+                .param("type", " typical , high ")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("type").value(invalid_request_error.toString()))
+                .andExpect(jsonPath("message").value("Invalid request to current exchange rate controller"))
+                .andExpect(jsonPath("errors", hasSize(4)))
+                .andExpect(jsonPath("errors[0].code").value(currency_pair_too_large.toString()))
+                .andExpect(jsonPath("errors[0].message").value("Currency-pair parameter is too long : " + StringUtils.repeat("A", 256)))
+                .andExpect(jsonPath("errors[1].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[1].message").value("Invalid currency code : CCC"))
+                .andExpect(jsonPath("errors[2].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[2].message").value("Invalid currency code : EEE"))
+                .andExpect(jsonPath("errors[3].code").value(currency_code_invalid.toString()))
+                .andExpect(jsonPath("errors[3].message").value("Invalid currency code : DDD"));
     }
 
 }

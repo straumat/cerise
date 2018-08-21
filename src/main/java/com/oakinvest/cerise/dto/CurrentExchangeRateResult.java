@@ -1,6 +1,7 @@
 package com.oakinvest.cerise.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.oakinvest.cerise.util.generic.CeriseResult;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.LinkedHashMap;
@@ -13,9 +14,9 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
  *
  * @author straumat
  */
-@SuppressWarnings("magicnumber")
+@SuppressWarnings({"magicnumber", "unused"})
 @JsonInclude(NON_NULL)
-public class CurrentExchangeRateResult {
+public class CurrentExchangeRateResult extends CeriseResult {
 
     /**
      * The currency-pair token. Currency-pair tokens are arbitrary Strings no longer than 255 characters, which may include any ASCII RFC 3986 unreserved characters (ie, alphanumerics and the hyphen, underscore, period, and tilde symbols).
@@ -42,14 +43,13 @@ public class CurrentExchangeRateResult {
             example = "{\"typical\": 1349.332215, \"high\": 1351.2}",
             required = true,
             position = 3)
-    private Map<String, Object> rates = new LinkedHashMap<>();
+    private Map<String, Double> rates = new LinkedHashMap<>();
 
     /**
      * Only if the request specified a nonce, the server SHOULD include it here as a JSON String.
      */
     @ApiModelProperty(value = "Only if the request specified a nonce, the server SHOULD include it here as a JSON String.",
             example = "ERAGDYEJAGD",
-            required = true,
             position = 4)
     private String nonce;
 
@@ -101,7 +101,7 @@ public class CurrentExchangeRateResult {
      *
      * @return rates
      */
-    public final Map<String, Object> getRates() {
+    public final Map<String, Double> getRates() {
         return rates;
     }
 
@@ -110,7 +110,7 @@ public class CurrentExchangeRateResult {
      *
      * @param newRates the rates to set
      */
-    public final void setRates(final Map<String, Object> newRates) {
+    public final void setRates(final Map<String, Double> newRates) {
         rates = newRates;
     }
 

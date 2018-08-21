@@ -30,7 +30,6 @@
 
 <body>
 <?php
-
 /**
  * Display API releases.
  * @param $file String page to link to.
@@ -125,15 +124,13 @@ function displayAPIReleases($file)
                             target="BIP-0171"><span
                                 style="color:#710005">BIP-0171</span></a>).</h1>
                 <p class="lead mt-5 mb-5">
-                    We provide <a href="#specifications">BIP-0171 specifications</a>, a <a
+                    We provide <a href="#specifications">BIP-0171 specifications</a>, a mocked BIP-0171
+                    compliant server (available <a href="http://api.cerise.tech/swagger-ui.html"
+                                                   target="cerise-server-online">online</a>, <a
                             href="https://github.com/straumat/cerise-server-mock"
-                            target="cerise-server-mock-java">mocked
-                        BIP-0171 compliant server as a Java application</a>, a <a
+                            target="cerise-server-mock-java">as a java application</a> or <a
                             href="https://hub.docker.com/r/straumat/cerise-server-mock/"
-                            target="cerise-server-mock-docker">mocked BIP-0171 compliant server as a Docker
-                        image</a>, a <a href="https://github.com/straumat/cerise" target="cerise">BIP-0171 library
-                        to
-                        transform your application in a BIP-0171 server</a>,a <a
+                            target="cerise-server-mock-docker">as a docker image</a>), a <a
                             href="https://github.com/straumat/cerise-server-template"
                             target="cerise-server-template">server template project to quickly write your
                         implementation and automatically produce your BIP-0171 server</a>, and a <a href="#clients">collection
@@ -149,7 +146,6 @@ function displayAPIReleases($file)
             <div class="col-lg-5 ml-auto d-none d-lg-block">
                 <img src="assets/img/logo.png" alt="img">
             </div>
-
         </div>
     </div>
 </header>
@@ -246,7 +242,7 @@ function displayAPIReleases($file)
                     <p>Cerise provides a web interface allowing you to explore the API, view documentation and make rest
                         calls directly from your browser.</p>
                     <br>
-                    <a class="btn btn-lg btn-round btn-primary shadow-3" href="http://api.cerise.tech/docs"
+                    <a class="btn btn-lg btn-round btn-primary shadow-3" href="http://api.cerise.tech/swagger-ui.html"
                        target="api">View live API</a>
                 </div>
                 <!-- Live API screenshots -->
@@ -409,29 +405,28 @@ function displayAPIReleases($file)
                 }
                 ?>
             </div>
+    </section>
+    <!--============================================================================================================ -->
 
+    <!--============================================================================================================ -->
+    <!--Contact us -->
+    <!--============================================================================================================ -->
+    <section class="section py-7" style="background-color: #8ea6e6">
+        <div class="container">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-9">
+                    <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
+                </div>
+                <div class="col-md-3 text-center text-md-right">
+                    <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
+                </div>
+            </div>
+        </div>
     </section>
     <!--============================================================================================================ -->
 
 </main>
 <!--================================================================================================================ -->
-
-<!--============================================================================================================ -->
-<!--Contact us -->
-<!--============================================================================================================ -->
-<section class="section py-7" style="background-color: #8ea6e6">
-    <div class="container">
-        <div class="row gap-y align-items-center">
-            <div class="col-md-9">
-                <h4 class="mb-0 text-white text-center text-md-left">Any question ? Any suggestion ?</h4>
-            </div>
-            <div class="col-md-3 text-center text-md-right">
-                <a class="btn btn-lg btn-round btn-light" href="mailto:contact@cerise.tech">Contact us</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!--============================================================================================================ -->
 
 <!--================================================================================================================ -->
 <!-- Footer -->
