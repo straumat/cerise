@@ -63,7 +63,7 @@ public interface CurrencyPairInformationAPI {
             @ApiResponse(code = STATUS_NOT_FOUND, message = "The requested resource doesn't exist.", response = CeriseError.class),
             @ApiResponse(code = STATUS_INTERNAL_SERVER_ERROR, message = "Something went wrong on the server.", response = CeriseError.class)
     })
-    List<CurrencyPairInformationResult> getCurrencyPairInformation(@ApiParam(value = "Always \"info\" for this request!")
+    List<CurrencyPairInformationResult> getCurrencyPairInformation(@ApiParam(value = "Always \"info\" for this request.")
                                                                    @RequestParam String mode,
                                                                    @ApiParam(value = "Currency pair(s) for which information is requested.")
                                                                    @RequestParam String[] cp);

@@ -296,7 +296,7 @@
                                 <version>${project.version}</version>
                                 <termsOfService>https://github.com/straumat/cerise/blob/master/LICENSE</termsOfService>
                                 <contact>
-                                    <email>stephane.traumat@gmail.com</email>
+                                    <email>contact@cerise.tech</email>
                                     <name>Stéphane Traumat</name>
                                     <url>https://github.com/straumat/cerise</url>
                                 </contact>
@@ -328,7 +328,7 @@
                                     </locations>
                                     <info>
                                         <title>BIP-0171 - Enumerating supported currency-pair tokens</title>
-                                        <description>Enumerating supported currency-pair tokens API</description>
+                                        <description>Enumerating supported currency-pair tokens</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
@@ -357,8 +357,8 @@
                                         </location>
                                     </locations>
                                     <info>
-                                        <title>BIP-0171 - Currency-pair information API</title>
-                                        <description>Currency-pair information API</description>
+                                        <title>BIP-0171 - Currency-pair information</title>
+                                        <description>Currency-pair information</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
@@ -387,7 +387,7 @@
                                     </locations>
                                     <info>
                                         <title>BIP-0171 - Current exchange rate</title>
-                                        <description>Current exchange rate API</description>
+                                        <description>Current exchange rate</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
@@ -416,7 +416,7 @@
                                     </locations>
                                     <info>
                                         <title>BIP-0171 - Historical exchange rates</title>
-                                        <description>Historical exchange rates API</description>
+                                        <description>Historical exchange rates</description>
                                     </info>
                                     <templatePath>${basedir}/website/templates/specification/strapdown.html.hbs
                                     </templatePath>
