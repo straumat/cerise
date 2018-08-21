@@ -43,14 +43,13 @@ public class CurrentExchangeRateResult extends CeriseResult {
             example = "{\"typical\": 1349.332215, \"high\": 1351.2}",
             required = true,
             position = 3)
-    private Map<String, Object> rates = new LinkedHashMap<>();
+    private Map<String, Double> rates = new LinkedHashMap<>();
 
     /**
      * Only if the request specified a nonce, the server SHOULD include it here as a JSON String.
      */
     @ApiModelProperty(value = "Only if the request specified a nonce, the server SHOULD include it here as a JSON String.",
             example = "ERAGDYEJAGD",
-            required = true,
             position = 4)
     private String nonce;
 
@@ -102,7 +101,7 @@ public class CurrentExchangeRateResult extends CeriseResult {
      *
      * @return rates
      */
-    public final Map<String, Object> getRates() {
+    public final Map<String, Double> getRates() {
         return rates;
     }
 
@@ -111,7 +110,7 @@ public class CurrentExchangeRateResult extends CeriseResult {
      *
      * @param newRates the rates to set
      */
-    public final void setRates(final Map<String, Object> newRates) {
+    public final void setRates(final Map<String, Double> newRates) {
         rates = newRates;
     }
 

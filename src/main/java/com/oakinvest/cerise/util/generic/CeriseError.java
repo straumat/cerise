@@ -1,12 +1,9 @@
 package com.oakinvest.cerise.util.generic;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
  * Cerise Error.
@@ -14,7 +11,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
  * @author straumat
  */
 @SuppressWarnings({"magicnumber", "unused"})
-@JsonInclude(NON_NULL)
 public class CeriseError {
 
     /**

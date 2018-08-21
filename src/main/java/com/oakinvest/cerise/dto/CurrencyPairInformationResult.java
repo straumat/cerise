@@ -98,7 +98,7 @@ public class CurrencyPairInformationResult extends CeriseResult {
      * A String to be placed between whole numbers and a fractional amount.
      */
     @ApiModelProperty(value = "A String to be placed between whole numbers and a fractional amount.",
-            example = "?",
+            example = ".",
             position = 11)
     @JsonProperty("fraction_sep")
     private String fractionSeparator;

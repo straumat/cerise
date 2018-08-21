@@ -64,7 +64,6 @@ public interface HistoricalExchangeRatesAPI {
                     value = "Currency pair(s) for which information is requested."),
             @ApiImplicitParam(name = "type",
                     dataType = "string",
-                    required = true,
                     example = "typical,high",
                     value = "Type of exchange rate data being requested. May be \"high\", \"low\", \"average\", \"typical\", or any other arbitrary name. If omitted, the server may provide any rates it deems appropriate."),
             @ApiImplicitParam(name = "from",
