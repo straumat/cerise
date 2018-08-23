@@ -98,7 +98,7 @@ function displayAPIReleases($file)
             <nav class="nav nav-navbar nav-text-normal mr-auto">
                 <a class="nav-link" href="#specifications">Specifications</a>
                 <a class="nav-link" href="#api">API (live)</a>
-                <a class="nav-link" href="#server">Server</a>
+                <a class="nav-link" href="#servers">Servers</a>
                 <a class="nav-link" href="#clients">Clients</a>
                 <a class="nav-link" href="https://github.com/straumat/cerise" target="github-cerise">Github</a>
             </nav>
@@ -274,7 +274,7 @@ function displayAPIReleases($file)
     <!--============================================================================================================ -->
     <!--Server -->
     <!--============================================================================================================ -->
-    <a id="server"></a>
+    <a id="servers"></a>
     <section class="section">
         <div class="container">
             <div class="row gap-y text-center">
