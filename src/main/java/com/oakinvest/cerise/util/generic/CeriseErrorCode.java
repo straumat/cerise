@@ -14,6 +14,11 @@ public enum CeriseErrorCode {
     mode_missing,
 
     /**
+     * Invalid mode.
+     */
+    mode_invalid,
+
+    /**
      * Currency-pair tokens are longer than 255 characters.
      */
     currency_pair_too_large,
