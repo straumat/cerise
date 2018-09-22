@@ -32,6 +32,19 @@ public class CeriseException extends RuntimeException {
     }
 
     /**
+     * Constructor with a message error and an error.
+     *
+     * @param newType  error type
+     * @param message  message
+     * @param newError error
+     */
+    public CeriseException(final CeriseErrorType newType, final String message, final CeriseErrorDetail newError) {
+        super(message);
+        this.type = newType;
+        this.errors.add(newError);
+    }
+
+    /**
      * Constructor with a message error and list of errors.
      *
      * @param newType   error type

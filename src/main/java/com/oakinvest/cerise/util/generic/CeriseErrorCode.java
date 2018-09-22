@@ -9,6 +9,11 @@ package com.oakinvest.cerise.util.generic;
 public enum CeriseErrorCode {
 
     /**
+     * mode not set.
+     */
+    mode_missing,
+
+    /**
      * Currency-pair tokens are longer than 255 characters.
      */
     currency_pair_too_large,
