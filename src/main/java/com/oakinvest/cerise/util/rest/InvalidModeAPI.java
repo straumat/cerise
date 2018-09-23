@@ -1,4 +1,4 @@
-package com.oakinvest.cerise.web.rest;
+package com.oakinvest.cerise.util.rest;
 
 import com.oakinvest.cerise.util.generic.CeriseError;
 import io.swagger.annotations.ApiParam;

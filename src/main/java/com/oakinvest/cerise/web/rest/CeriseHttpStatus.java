@@ -5,7 +5,7 @@ package com.oakinvest.cerise.web.rest;
  *
  * @author straumat
  */
-final class CeriseHttpStatus {
+public final class CeriseHttpStatus {
 
     /**
      * Constructor.
@@ -21,7 +21,7 @@ final class CeriseHttpStatus {
     /**
      * The request was unacceptable, often due to missing a required parameter.
      */
-    static final int STATUS_BAD_REQUEST = 400;
+    public static final int STATUS_BAD_REQUEST = 400;
 
     /**
      * No valid authorization was provided.

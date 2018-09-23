@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.oakinvest.cerise.util.generic.CeriseErrorCode.mode_invalid;
-import static com.oakinvest.cerise.util.generic.CeriseErrorCode.mode_missing;
+import static com.oakinvest.cerise.util.generic.CeriseErrorCode.mode_required;
 import static com.oakinvest.cerise.util.generic.CeriseErrorType.invalid_request_error;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,7 +42,7 @@ public class InvalidModeTest {
                 .andExpect(jsonPath("type").value(invalid_request_error.toString()))
                 .andExpect(jsonPath("message").value("Mode not set (list, info, rate & history)"))
                 .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].code").value(mode_missing.toString()))
+                .andExpect(jsonPath("errors[0].code").value(mode_required.toString()))
                 .andExpect(jsonPath("errors[0].message").value("Mode not set (list, info, rate & history)"));
 
         // Wrong mode value.

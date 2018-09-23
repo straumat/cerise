@@ -3,8 +3,6 @@ install: true
 addons:
   apt:
     packages:
-      - libssl1.0.0
-      - sshpass
       - lftp
       - libssl-dev
 cache:
@@ -76,15 +74,6 @@ after_success:
   - cd ~/dist/
   - lftp -e "mirror -R ./ /home/cerisetefc/www/clients ; quit" -u $FTP_USERNAME,$FTP_PASSWORD sftp://$FTP_HOST
   - cd $TRAVIS_BUILD_DIR
-  # Update official "cerise" image.
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push $DOCKER_USERNAME/cerise
-  # Run "cerise" image on reference server.
-  - RELEASE=`cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'`
-  - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker stop $(docker ps -aq --filter "label=cerise")'
-  - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 'docker rm -f $(docker ps -aq --filter "label=cerise")'
-  - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "docker pull straumat/cerise:$RELEASE"
-  - sshpass -p $SSH_PASSWORD ssh ci@5.196.65.205 "nohup docker run -l cerise -p 80:8080 straumat/cerise:$RELEASE > /home/ci/cerise.logs &"
 deploy:
   provider: script
   script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
