@@ -137,7 +137,8 @@ function displayAPIReleases($file)
                         of client
                         libraries to call any BIP-0171 compliant server with your favorite language</a>.</p>
                 <p class="gap-xy">
-                    <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/docs" target="api">View
+                    <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/swagger-ui.html"
+                       target="api">View
                         & test API</a>
                     <a class="btn btn-round btn-outline-secondary mw-200" href="mailto:contact@cerise.tech">Contact
                         US</a>
