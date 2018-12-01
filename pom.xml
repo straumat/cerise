@@ -95,7 +95,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
         <maven-jar-plugin>3.1.0</maven-jar-plugin>
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
-        <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <!-- Java -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <commons-lang.version>3.8.1</commons-lang.version>
