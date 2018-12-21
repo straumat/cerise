@@ -24,12 +24,12 @@ public interface InvalidModeAPI {
      * @param mode mode
      */
     @RequestMapping(value = "/",
-            params = {"mode!=list", "mode!=info", "mode!=rate", "mode!=history"},
+            params = {"mode!=list and mode!=info and mode!=rate and mode!=history"},
             method = RequestMethod.GET)
     @ApiResponses(value = {
             @ApiResponse(code = STATUS_BAD_REQUEST, message = "The request was unacceptable, often due to missing a required parameter.", response = CeriseError.class),
     })
     void invalidMode(@ApiParam(value = "Mode required.")
-                     @RequestParam String mode);
+                     @RequestParam(required = false) String mode);
 
 }
