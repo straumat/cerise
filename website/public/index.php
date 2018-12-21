@@ -98,7 +98,7 @@ function displayAPIReleases($file)
             <nav class="nav nav-navbar nav-text-normal mr-auto">
                 <a class="nav-link" href="#specifications">Specifications</a>
                 <a class="nav-link" href="#api">API (live)</a>
-                <a class="nav-link" href="#server">Server</a>
+                <a class="nav-link" href="#servers">Servers</a>
                 <a class="nav-link" href="#clients">Clients</a>
                 <a class="nav-link" href="https://github.com/straumat/cerise" target="github-cerise">Github</a>
             </nav>
@@ -137,7 +137,8 @@ function displayAPIReleases($file)
                         of client
                         libraries to call any BIP-0171 compliant server with your favorite language</a>.</p>
                 <p class="gap-xy">
-                    <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/docs" target="api">View
+                    <a class="btn btn-round btn-primary mw-200" href="http://api.cerise.tech/swagger-ui.html"
+                       target="api">View
                         & test API</a>
                     <a class="btn btn-round btn-outline-secondary mw-200" href="mailto:contact@cerise.tech">Contact
                         US</a>
@@ -274,7 +275,7 @@ function displayAPIReleases($file)
     <!--============================================================================================================ -->
     <!--Server -->
     <!--============================================================================================================ -->
-    <a id="server"></a>
+    <a id="servers"></a>
     <section class="section">
         <div class="container">
             <div class="row gap-y text-center">
