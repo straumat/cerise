@@ -104,7 +104,7 @@
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <swagger-ui.version>2.9.2</swagger-ui.version>
         <!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
-        <swagger-maven-plugin.version>3.1.7</swagger-maven-plugin.version>
+        <swagger-maven-plugin.version>3.1.8</swagger-maven-plugin.version>
     </properties>
     <!-- =========================================================================================================== -->
 
@@ -283,6 +283,7 @@
                 <configuration>
                     <apiSources>
                         <apiSource>
+                            <outputFormats>json</outputFormats>
                             <springmvc>true</springmvc>
                             <locations>
                                 <location>com.oakinvest.cerise.web.rest.CurrentExchangeRateAPII</location>
@@ -322,6 +323,7 @@
                         <configuration>
                             <apiSources>
                                 <apiSource>
+                                    <outputFormats>json</outputFormats>
                                     <locations>
                                         <location>com.oakinvest.cerise.web.rest.SupportedCurrencyPairTokensAPI
                                         </location>
@@ -352,6 +354,7 @@
                         <configuration>
                             <apiSources>
                                 <apiSource>
+                                    <outputFormats>json</outputFormats>
                                     <locations>
                                         <location>com.oakinvest.cerise.web.rest.CurrencyPairInformationAPI
                                         </location>
@@ -381,6 +384,7 @@
                         <configuration>
                             <apiSources>
                                 <apiSource>
+                                    <outputFormats>json</outputFormats>
                                     <locations>
                                         <location>com.oakinvest.cerise.web.rest.CurrentExchangeRateAPI
                                         </location>
@@ -410,6 +414,7 @@
                         <configuration>
                             <apiSources>
                                 <apiSource>
+                                    <outputFormats>json</outputFormats>
                                     <locations>
                                         <location>com.oakinvest.cerise.web.rest.HistoricalExchangeRatesAPI
                                         </location>
